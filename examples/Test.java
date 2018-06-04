@@ -1,6 +1,8 @@
+import java.io.IOException;
+
 class Test
 {
-	public static int fib(int n)
+	public static int fib (int n) throws IOException
 	{	
 		int prev = 0, curr = 1;
 		for (int i = 1; i < n; i++) {
@@ -13,6 +15,10 @@ class Test
 	
 	public static void main(String[] args)
 	{
-		System.out.println(fib(42));
+		try {
+			System.out.println(fib(42));
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 	}
 }

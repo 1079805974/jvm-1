@@ -13,7 +13,7 @@
 
 using namespace std;
 
-FILE *out; // variável global para armazenar o local de saída.
+FILE *out; // variável global para armazenar o local de saída.全局变量存储输出位置。
 
 void printClassFile (ClassFile *classFile, FILE *output) {
 	
@@ -434,7 +434,7 @@ void print_AttributeInfo(attribute_info attributeInfo, uint32_t index, cp_info *
         // vazio
     } else {
         cerr << "Arquivo .class possui uma um atributo invalido." << endl;
-        exit(6);
+        //exit(6);
     }
     fprintf(out, "\n");
 }

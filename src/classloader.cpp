@@ -127,7 +127,8 @@ void ClassLoader::setVersion(FILE *fp, ClassFile *classFile) {
 }
 
 bool ClassLoader::isVersionValid(ClassFile *classFile, uint16_t major) {
-    return classFile->major_version <= major;
+    //return classFile->major_version <= major;
+    return true;
 }
 
 void ClassLoader::setConstantPoolSize(FILE *fp, ClassFile *classFile) {
@@ -468,7 +469,7 @@ attribute_info ClassLoader::getAttributeInfo(FILE *fp, ClassFile *classFile) {
         result.info.deprecated_info = getAttributeDeprecated(fp);
     } else {
         cerr << "Arquivo .class possui uma um atributo invalido." << endl;
-        exit(6);
+        //exit(6);
     }
     
     return result;
