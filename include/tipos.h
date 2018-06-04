@@ -140,7 +140,10 @@ typedef enum CONSTANT_Type {
     CONSTANT_Double = 6,
     CONSTANT_NameAndType = 12,
     CONSTANT_Utf8 = 1,
-    CONSTANT_NULL = 0
+    CONSTANT_NULL = 0,
+    CONSTANT_MethodHandle_info = 15,
+    CONSTANT_MethodType_info = 16,
+    CONSTANT_InvokeDynamic_info = 18
 } CONSTANT_Type;
 
 struct CONSTANT_Class_info {
