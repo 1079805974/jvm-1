@@ -1,0 +1,21 @@
+﻿  executionengine.cpp
+c:\ideaprojects\jvm-1\src\executionengine.cpp(392): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+c:\ideaprojects\jvm-1\src\executionengine.cpp(442): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+c:\ideaprojects\jvm-1\src\executionengine.cpp(931): warning C4018: “>”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(957): warning C4018: “>”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(987): warning C4018: “>”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1013): warning C4018: “>”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1043): warning C4018: “>”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1069): warning C4018: “>”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1107): warning C4018: “>”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1138): warning C4018: “>”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1556): warning C4018: “>=”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1590): warning C4018: “>=”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1620): warning C4018: “>=”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1652): warning C4018: “>=”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1682): warning C4018: “>=”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1712): warning C4018: “>”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1751): warning C4018: “>”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(1783): warning C4018: “>”: 有符号/无符号不匹配
+c:\ideaprojects\jvm-1\src\executionengine.cpp(3382): warning C4018: “<”: 有符号/无符号不匹配
+  jvm-1.vcxproj -> C:\IdeaProjects\jvm-1\Debug\jvm-1.exe

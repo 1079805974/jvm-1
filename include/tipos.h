@@ -9,44 +9,44 @@ typedef uint16_t u2;
 typedef uint32_t u4;
 
 enum ObjectType {
-    CLASS_INSTANCE,
-    STRING_INSTANCE,
-    ARRAY
+	CLASS_INSTANCE,
+	STRING_INSTANCE,
+	ARRAY
 };
 typedef enum ObjectType ObjectType;
 
 enum ValueType {
-    BOOLEAN,
-    BYTE,
-    CHAR,
-    SHORT,
-    INT,
-    FLOAT,
-    LONG,
-    DOUBLE,
-    RETURN_ADDR,
-    REFERENCE,
-    PADDING // usado quando o Value anterior (em uma lista) ou o Value abaixo (em uma pilha) é um long/double
+	BOOLEAN,
+	BYTE,
+	CHAR,
+	SHORT,
+	INT,
+	FLOAT,
+	LONG,
+	DOUBLE,
+	RETURN_ADDR,
+	REFERENCE,
+	PADDING // usado quando o Value anterior (em uma lista) ou o Value abaixo (em uma pilha) é um long/double
 };
 typedef enum ValueType ValueType;
 
 class Object;
 
 struct Value {
-    ValueType printType; // usado para printar o valor de maneira correta (somente para int, short, byte, boolean)
-    ValueType type;
-    union {
-        bool booleanValue;
-        int8_t byteValue;
-        uint8_t charValue;
-        int16_t shortValue;
-        int32_t intValue;
-        float floatValue;
-        int64_t longValue;
-        double doubleValue;
-        u4 returnAddress;
-        Object *object;
-    } data;
+	ValueType printType; // usado para printar o valor de maneira correta (somente para int, short, byte, boolean)
+	ValueType type;
+	union {
+		bool booleanValue;
+		int8_t byteValue;
+		uint8_t charValue;
+		int16_t shortValue;
+		int32_t intValue;
+		float floatValue;
+		int64_t longValue;
+		double doubleValue;
+		u4 returnAddress;
+		Object *object;
+	} data;
 };
 typedef struct Value Value;
 
@@ -94,56 +94,56 @@ typedef struct method_info method_info;
 // Definição das estruturas de classe
 
 struct ClassFile {
-    u4 magic;
-    u2 minor_version;
-    u2 major_version;
-    u2 constant_pool_count;
-    cp_info *constant_pool;
-    u2 access_flags;
-    u2 this_class;
-    u2 super_class;
-    u2 interfaces_count;
-    u2 *interfaces;
-    u2 fields_count;
-    field_info *fields;
-    u2 methods_count;
-    method_info *methods;
-    u2 attributes_count; 
-    attribute_info *attributes;
+	u4 magic;
+	u2 minor_version;
+	u2 major_version;
+	u2 constant_pool_count;
+	cp_info *constant_pool;
+	u2 access_flags;
+	u2 this_class;
+	u2 super_class;
+	u2 interfaces_count;
+	u2 *interfaces;
+	u2 fields_count;
+	field_info *fields;
+	u2 methods_count;
+	method_info *methods;
+	u2 attributes_count;
+	attribute_info *attributes;
 };
 
 struct field_info {
-    u2 access_flags;
-    u2 name_index;
-    u2 descriptor_index;
-    u2 attributes_count;
-    attribute_info *attributes;
+	u2 access_flags;
+	u2 name_index;
+	u2 descriptor_index;
+	u2 attributes_count;
+	attribute_info *attributes;
 };
 
 struct method_info {
-    u2 access_flags;
-    u2 name_index;
-    u2 descriptor_index;
-    u2 attributes_count;
-    attribute_info *attributes;
+	u2 access_flags;
+	u2 name_index;
+	u2 descriptor_index;
+	u2 attributes_count;
+	attribute_info *attributes;
 };
 
 typedef enum CONSTANT_Type {
-    CONSTANT_Class = 7,
-    CONSTANT_Fieldref = 9,
-    CONSTANT_Methodref = 10,
-    CONSTANT_InterfaceMethodref = 11,
-    CONSTANT_String = 8,
-    CONSTANT_Integer = 3,
-    CONSTANT_Float = 4,
-    CONSTANT_Long = 5,
-    CONSTANT_Double = 6,
-    CONSTANT_NameAndType = 12,
-    CONSTANT_Utf8 = 1,
-    CONSTANT_NULL = 0,
-    CONSTANT_MethodHandle_info = 15,
-    CONSTANT_MethodType_info = 16,
-    CONSTANT_InvokeDynamic_info = 18
+	CONSTANT_Class = 7,
+	CONSTANT_Fieldref = 9,
+	CONSTANT_Methodref = 10,
+	CONSTANT_InterfaceMethodref = 11,
+	CONSTANT_String = 8,
+	CONSTANT_Integer = 3,
+	CONSTANT_Float = 4,
+	CONSTANT_Long = 5,
+	CONSTANT_Double = 6,
+	CONSTANT_NameAndType = 12,
+	CONSTANT_Utf8 = 1,
+	CONSTANT_NULL = 0,
+	CONSTANT_MethodHandle = 15,
+	CONSTANT_MethodType = 16,
+	CONSTANT_InvokeDynamic = 18
 } CONSTANT_Type;
 
 struct CONSTANT_Class_info {
@@ -151,40 +151,40 @@ struct CONSTANT_Class_info {
 };
 
 struct CONSTANT_Fieldref_info {
-    u2 class_index;
-    u2 name_and_type_index;
+	u2 class_index;
+	u2 name_and_type_index;
 };
 
 struct CONSTANT_Methodref_info {
-    u2 class_index;
-    u2 name_and_type_index;
+	u2 class_index;
+	u2 name_and_type_index;
 };
 
 struct CONSTANT_InterfaceMethodref_info {
-    u2 class_index;
-    u2 name_and_type_index;
+	u2 class_index;
+	u2 name_and_type_index;
 };
 
 struct CONSTANT_String_info {
-    u2 string_index;
+	u2 string_index;
 };
 
 struct CONSTANT_Integer_info {
-    u4 bytes;
+	u4 bytes;
 };
 
 struct CONSTANT_Float_info {
-    u4 bytes;
+	u4 bytes;
 };
 
 struct CONSTANT_Long_info {
-    u4 high_bytes;
-    u4 low_bytes;
+	u4 high_bytes;
+	u4 low_bytes;
 };
 
 struct CONSTANT_Double_info {
-    u4 high_bytes;
-    u4 low_bytes;
+	u4 high_bytes;
+	u4 low_bytes;
 };
 
 struct CONSTANT_NameAndType_info {
@@ -193,8 +193,22 @@ struct CONSTANT_NameAndType_info {
 };
 
 struct CONSTANT_Utf8_info {
-    u2 length;
-    u1 *bytes;
+	u2 length;
+	u1 *bytes;
+};
+
+struct CONSTANT_MethodHandle_info {
+	u1 reference_kind;
+	u2 reference_index;
+};
+
+struct CONSTANT_MethodType_info {
+	u1 descriptor_index;
+};
+
+struct CONSTANT_InvokeDynamic_info {
+	u2 bootstrap_method_attr_index;
+	u2 name_and_type_index;
 };
 
 struct CONSTANT_MethodHandle_info {
@@ -212,31 +226,34 @@ struct CONSTANT_InvokeDynamic_info {
 };
 
 struct cp_info {
-    u1 tag;
-    union {
-        CONSTANT_Class_info class_info;
-        CONSTANT_Fieldref_info fieldref_info;
-        CONSTANT_Methodref_info methodref_info;
-        CONSTANT_InterfaceMethodref_info interfaceMethodref_info;
-        CONSTANT_String_info string_info;
-        CONSTANT_Integer_info integer_info;
-        CONSTANT_Float_info float_info;
-        CONSTANT_Long_info long_info;
-        CONSTANT_Double_info double_info;
-        CONSTANT_NameAndType_info nameAndType_info;
-        CONSTANT_Utf8_info utf8_info;
-    } info;
+	u1 tag;
+	union {
+		CONSTANT_Class_info class_info;
+		CONSTANT_Fieldref_info fieldref_info;
+		CONSTANT_Methodref_info methodref_info;
+		CONSTANT_InterfaceMethodref_info interfaceMethodref_info;
+		CONSTANT_String_info string_info;
+		CONSTANT_Integer_info integer_info;
+		CONSTANT_Float_info float_info;
+		CONSTANT_Long_info long_info;
+		CONSTANT_Double_info double_info;
+		CONSTANT_NameAndType_info nameAndType_info;
+		CONSTANT_Utf8_info utf8_info;
+		CONSTANT_MethodHandle_info methodHandle_info;
+		CONSTANT_MethodType_info methodType_info;
+		CONSTANT_InvokeDynamic_info invokeDynamic_info;
+	} info;
 };
 
 struct ConstantValue_attribute {
-    u2 constantvalue_index;
+	u2 constantvalue_index;
 };
 
 struct ExceptionTable {
-    u2 start_pc;
-    u2 end_pc;
-    u2 handler_pc;
-    u2 catch_type;
+	u2 start_pc;
+	u2 end_pc;
+	u2 handler_pc;
+	u2 catch_type;
 };
 
 struct Code_attribute {
@@ -245,7 +262,7 @@ struct Code_attribute {
 	u4 code_length;
 	u1 *code;
 	u2 exception_table_length;
-    ExceptionTable *exception_table;
+	ExceptionTable *exception_table;
 	u2 attributes_count;
 	attribute_info *attributes;
 };
@@ -256,10 +273,10 @@ struct Exceptions_attribute {
 };
 
 struct Class {
-    u2 inner_class_info_index;	     
-    u2 outer_class_info_index;	     
-    u2 inner_name_index;	     
-    u2 inner_class_access_flags;	
+	u2 inner_class_info_index;
+	u2 outer_class_info_index;
+	u2 inner_name_index;
+	u2 inner_class_access_flags;
 };
 
 struct InnerClasses_attribute {
@@ -272,12 +289,12 @@ struct Synthetic_attribute {
 };
 
 struct SourceFile_attribute {
-  	u2 sourcefile_index;
+	u2 sourcefile_index;
 };
 
 struct LineNumberTable {
-    u2 start_pc;	     
-    u2 line_number;
+	u2 start_pc;
+	u2 line_number;
 };
 
 struct LineNumberTable_attribute {
@@ -286,36 +303,37 @@ struct LineNumberTable_attribute {
 };
 
 struct LocalVariableTable {
-    u2 start_pc;
-    u2 length;
-    u2 name_index;
-    u2 descriptor_index;
-    u2 index;
+	u2 start_pc;
+	u2 length;
+	u2 name_index;
+	u2 descriptor_index;
+	u2 index;
 };
 
 struct LocalVariableTable_attribute {
-    u2 local_variable_table_length;
-    LocalVariableTable *localVariableTable;
+	u2 local_variable_table_length;
+	LocalVariableTable *localVariableTable;
 };
 
 struct Deprecated_attribute {
-    // vazio
+	// vazio
 };
 
 struct attribute_info {
-    u2 attribute_name_index;
-    u4 attribute_length;
-    union {
-        ConstantValue_attribute constantValue_info;
-        Code_attribute code_info;
-        Exceptions_attribute exceptions_info;
-        InnerClasses_attribute innerClasses_info;
-        Synthetic_attribute synthetic_info;
-        SourceFile_attribute sourceFile_info;
-        LineNumberTable_attribute lineNumberTable_info;
-        LocalVariableTable_attribute localVariableTable_info;
-        Deprecated_attribute deprecated_info;
-    } info;
+	u2 attribute_name_index;
+	u4 attribute_length;
+	union {
+		ConstantValue_attribute constantValue_info;
+		Code_attribute code_info;
+		Exceptions_attribute exceptions_info;
+		InnerClasses_attribute innerClasses_info;
+		Synthetic_attribute synthetic_info;
+		SourceFile_attribute sourceFile_info;
+		LineNumberTable_attribute lineNumberTable_info;
+		LocalVariableTable_attribute localVariableTable_info;
+		Deprecated_attribute deprecated_info;
+		CONSTANT_Utf8_info unknownName;
+	} info;
 };
 
 #endif

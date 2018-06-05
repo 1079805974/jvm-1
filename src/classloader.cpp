@@ -180,11 +180,40 @@ void ClassLoader::setConstantPool(FILE *fp, ClassFile *classFile) {
             case CONSTANT_Utf8:
                 constant_pool[i].info.utf8_info = getConstantUtf8Info(fp);
             break;
+			case CONSTANT_MethodHandle:
+				constant_pool[i].info.methodHandle_info = getMethodHandleInfo(fp);
+			break;
+			case CONSTANT_MethodType:
+				constant_pool[i].info.methodType_info = getMethodTypeInfo(fp);
+			break;
+			case CONSTANT_InvokeDynamic:
+				constant_pool[i].info.invokeDynamic_info = getInvokeDynamicInfo(fp);
+			break;
             default:
                 cerr << "Arquivo .class possui uma tag invalida no pool de constantes";
                 exit(5);
         }
     }
+}
+
+CONSTANT_MethodHandle_info ClassLoader::getMethodHandleInfo(FILE *fp) {
+	CONSTANT_MethodHandle_info result;
+	result.reference_kind = readU1(fp);
+	result.reference_index = readU2(fp);
+	return result;
+}
+
+CONSTANT_InvokeDynamic_info ClassLoader::getInvokeDynamicInfo(FILE *fp){
+	CONSTANT_InvokeDynamic_info result;
+	result.bootstrap_method_attr_index = readU2(fp);
+	result.name_and_type_index = readU2(fp);
+	return result;
+}
+
+CONSTANT_MethodType_info ClassLoader::getMethodTypeInfo(FILE *fp) {
+	CONSTANT_MethodType_info result;
+	result.descriptor_index = readU1(fp);
+	return result;
 }
 
 CONSTANT_Class_info ClassLoader::getConstantClassInfo(FILE *fp) {
@@ -446,7 +475,8 @@ Deprecated_attribute ClassLoader::getAttributeDeprecated(FILE *fp) {
 attribute_info ClassLoader::getAttributeInfo(FILE *fp, ClassFile *classFile) {
     attribute_info result;
     result.attribute_name_index = readU2(fp);
-    result.attribute_length = readU4(fp);
+	u4 length = readU4(fp);
+    result.attribute_length = length;
     
     CONSTANT_Utf8_info name = getUtf8FromConstantPool(result.attribute_name_index, classFile);
     if (Utils::compareUtf8WithString(name, "ConstantValue")) {
@@ -468,10 +498,15 @@ attribute_info ClassLoader::getAttributeInfo(FILE *fp, ClassFile *classFile) {
     } else if(Utils::compareUtf8WithString(name, "Deprecated")) {
         result.info.deprecated_info = getAttributeDeprecated(fp);
     } else {
-        cerr << "Arquivo .class possui uma um atributo invalido." << endl;
-        //exit(6);
+		result.info.unknownName = name;
+		cerr << "There is a unknown attribute in attributes info: ";
+		cout<< Utils::Utf8ToCString(name) << endl;
+		//skip this unknown attribute body
+		for (u4 i = 0; i < length; i++) {
+			readU1(fp);
+		}
     }
-    
+
     return result;
 }
 

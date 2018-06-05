@@ -118,6 +118,12 @@ private:
      */
     void setConstantPool(FILE *fp, ClassFile *classFile);
 
+	CONSTANT_MethodHandle_info getMethodHandleInfo(FILE * fp);
+
+	CONSTANT_InvokeDynamic_info getInvokeDynamicInfo(FILE * fp);
+
+	CONSTANT_MethodType_info getMethodTypeInfo(FILE * fp);
+
     /**
      * Lê 2 bytes de um arquivo .class e os atribui a uma estrutura CONSTANT_Class_info.
      * @param *fp Ponteiro para o arquivo .class a ser carregado.
