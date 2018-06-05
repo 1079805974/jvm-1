@@ -30,6 +30,16 @@ bool Utils::compareUtf8WithString(CONSTANT_Utf8_info constant, const char *str) 
     return true;
 }
 
+char* Utils::Utf8ToCString(CONSTANT_Utf8_info constant){
+	int i = 0;
+	char *result = (char*) malloc(sizeof(char) * constant.length + 1);
+	for (i = 0; i < constant.length; i++) {
+		result[i] = constant.bytes[i];
+	}
+	result[i] = '\0';
+	return result;
+}
+
 void Utils::printTabs(FILE *out, uint8_t n) {
     for (uint8_t i = 0; i < n; i++) fprintf(out, "\t");
 }

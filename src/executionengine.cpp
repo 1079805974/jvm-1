@@ -370,7 +370,7 @@ void ExecutionEngine::i_ldc() {
         assert(utf8Entry.tag == CONSTANT_Utf8);
         
         u1* bytes = utf8Entry.info.utf8_info.bytes;
-        char utf8String[utf8Entry.info.utf8_info.length+1];
+        char* utf8String = new char[utf8Entry.info.utf8_info.length+1];
         int i;
         for (i = 0; i < utf8Entry.info.utf8_info.length; i++) {
             utf8String[i] = bytes[i];
@@ -420,7 +420,7 @@ void ExecutionEngine::i_ldc_w() {
         assert(utf8Entry.tag == CONSTANT_Utf8);
         
         u1* bytes = utf8Entry.info.utf8_info.bytes;
-        char utf8String[utf8Entry.info.utf8_info.length+1];
+        char* utf8String = new char[utf8Entry.info.utf8_info.length+1];
         int i;
         for (i = 0; i < utf8Entry.info.utf8_info.length; i++) {
             utf8String[i] = bytes[i];

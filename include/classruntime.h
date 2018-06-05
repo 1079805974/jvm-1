@@ -9,7 +9,7 @@
 using namespace std;
 
 /**
- * Representação de uma classe carregada durante o runtime.
+ * Representação de uma classe carregada durante o runtime.在运行时加载的类的表示。
  */
 class ClassRuntime {
 
@@ -26,7 +26,7 @@ public:
     ClassFile* getClassFile();
     
     /**
-     * @brief Insere um valor no field estático informado.
+     * @brief Insere um valor no field estático informado.简单插入一个有消息的字段值。
      * @param value O valor que será inserido.
      * @param fieldName O nome do field estático.
      */

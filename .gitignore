@@ -16,7 +16,7 @@ docs/*
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
-
+.vs/
 # Folder config file
 Desktop.ini
 

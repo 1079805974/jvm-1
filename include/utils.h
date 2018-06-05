@@ -40,6 +40,8 @@ public:
      */
     static bool compareUtf8WithString(CONSTANT_Utf8_info constant, const char *str);
 
+	static char * Utf8ToCString(CONSTANT_Utf8_info constant);
+
     /**
      * Imprime uma dada quantidade de tabs.
      * @param n Quantidade de tabs desejada.

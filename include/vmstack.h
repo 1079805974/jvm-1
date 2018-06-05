@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#define FRAME_MAX_SIZE 50
+#define FRAME_MAX_SIZE 1024
 
 /**
  * Classe para representar a pilha da JVM. Uma pilha é responsável por conter frames. O seu limite é dado por \c FRAME_MAX_SIZE
@@ -55,12 +55,10 @@ public:
      */
     uint32_t size();
     
-private:
-    /**
-     * @brief Construtor padrão.
-     */
+    
     VMStack();
     
+private:
     VMStack(VMStack const&); // não permitir implementação do construtor de cópia
     void operator=(VMStack const&); // não permitir implementação do operador de igual
     
