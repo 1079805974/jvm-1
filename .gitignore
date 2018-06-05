@@ -8,7 +8,10 @@ docs/*
 
 # KDE directory preferences
 .directory
-
+*.sln
+*.vcxproj
+*.filters
+*.user
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
@@ -19,7 +22,8 @@ ehthumbs.db
 .vs/
 # Folder config file
 Desktop.ini
-
+build/*
+Debug/*
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
