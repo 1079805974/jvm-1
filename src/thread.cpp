@@ -1,4 +1,4 @@
-#include "..\include\thread.h"
+#include "thread.h"
 
 Thread::Thread(int stackSize)
 {
@@ -41,3 +41,6 @@ uint32_t Thread::size()
 {
 	return stack.size();
 }
+//language
+//lib
+//base

@@ -15,6 +15,7 @@ ClassInstance::ClassInstance(ClassRuntime *classRuntime) : _classRuntime(classRu
     
     if ((classFile->access_flags & abstractFlag) != 0) {
         // Não pode instanciar se for classe abstrata (i.e., interface)
+        //不能实例化一个抽象类
         cerr << "InstantiationError" << endl;
         exit(1);
     }

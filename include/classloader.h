@@ -1,6 +1,8 @@
 #ifndef CLASSLOADER_H
 #define CLASSLOADER_H
 
+#include <stdio.h>
+
 #include "tipos.h"
 
 using namespace std;

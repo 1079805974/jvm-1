@@ -211,20 +211,6 @@ struct CONSTANT_InvokeDynamic_info {
 	u2 name_and_type_index;
 };
 
-struct CONSTANT_MethodHandle_info {
-    u1 reference_kind;
-    u2 reference_index;
-};
-
-struct CONSTANT_MethodType_info {
-    u1 descriptor_index;
-};
-
-struct CONSTANT_InvokeDynamic_info {
-    u2 bootstrap_method_attr_index;
-    u2 name_and_type_index;
-};
-
 struct cp_info {
 	u1 tag;
 	union {

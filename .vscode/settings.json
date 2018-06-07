@@ -1,6 +1,25 @@
 {
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
-        "algorithm": "c"
+        "algorithm": "c",
+        "system_error": "cpp",
+        "__bit_reference": "cpp",
+        "__functional_base": "cpp",
+        "atomic": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "deque": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "limits": "cpp",
+        "memory": "cpp",
+        "ratio": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "vector": "cpp",
+        "locale": "cpp",
+        "iosfwd": "cpp",
+        "typeinfo": "cpp",
+        "cstdlib": "cpp"
     }
 }

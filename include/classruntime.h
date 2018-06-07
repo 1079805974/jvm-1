@@ -2,6 +2,7 @@
 #define classruntime_h
 
 #include "tipos.h"
+#include "classloader.h"
 
 #include <map>
 #include <string>
@@ -51,10 +52,17 @@ private:
      * A \c ClassFile correspondente à classe.
      */
     ClassFile *_classFile;
+    string name;
     
+    uint16_t accessFlags;
+    string superClassName;
+    method_info* methods;
+    //ClassLoader loader;
+    ClassRuntime* superClass;
     /**
      * Os fields estáticos da classe.
      */
+    map<string, ClassRuntime*> interfaces;
     map<string, Value> _staticFields;
     
 };

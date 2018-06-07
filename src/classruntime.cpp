@@ -1,17 +1,42 @@
 #include "classruntime.h"
+#include "methodarea.h"
 #include "classviewer.h"
 
 #include <iostream>
 #include <cstdlib>
 
+using namespace std;
+
 ClassRuntime::ClassRuntime(ClassFile *classFile) : _classFile(classFile) {
+    MethodArea &methodArea = MethodArea::getInstance();
+
+    name = getFormattedConstant(classFile->constant_pool, classFile->this_class);
+
+    if(classFile->super_class!=0){
+        superClassName = getFormattedConstant(classFile->constant_pool, classFile->super_class);
+        superClass = methodArea.loadClassNamed(superClassName);
+    }else{
+        superClassName = nullptr;
+        superClass = nullptr;
+    }
+
+    accessFlags = classFile->access_flags;
+
+    for(int i=0; i < classFile->interfaces_count; i++){
+        string interfaceName = getFormattedConstant(classFile->constant_pool, (classFile->interfaces)[i]);
+        ClassRuntime* interfaceRuntime = methodArea.loadClassNamed(interfaceName);
+        interfaces[interfaceName] = interfaceRuntime;
+    }
+
     field_info *fields = classFile->fields;
+
     for (int i = 0; i < classFile->fields_count; i++) {
         field_info field = fields[i];
         u2 staticFlag = 0x0008;
         u2 finalFlag = 0x0010;
         
-        if ((field.access_flags & staticFlag) != 0 && (field.access_flags & finalFlag) == 0) { // estática e não final
+        if ((field.access_flags & staticFlag) != 0 && (field.access_flags & finalFlag) == 0) { 
+            // estática e não final
             string fieldName = getFormattedConstant(classFile->constant_pool, field.name_index);
             string fieldDescriptor = getFormattedConstant(classFile->constant_pool, field.descriptor_index);
             
