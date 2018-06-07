@@ -9,6 +9,7 @@ include_directories("${PROJECT_SOURCE_DIR}/src" "${PROJECT_SOURCE_DIR}/include")
 
 add_executable(jvm WIN32
     src/main.cpp
+    src/thread.cpp
     src/classloader.cpp
     src/classviewer.cpp
     src/utils.cpp
@@ -21,6 +22,7 @@ add_executable(jvm WIN32
     src/arrayobject.cpp
     src/classinstance.cpp
     src/classruntime.cpp
+    include/thread.h
     include/utils.h
     include/classloader.h
     include/classviewer.h

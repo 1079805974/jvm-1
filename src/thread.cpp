@@ -1,45 +1,48 @@
 #include "thread.h"
 
-Thread::Thread(int stackSize)
+Thread::Thread(int pid)
 {
-	this.pc = 0;
-	this.stack = new VMStack(stackSize);
+	this->pc = 0;
+	this->pid = pid;
 }
 
 Thread::Thread()
 {
-	this.pc = 0;
-	this.stack = new VMStack(1024);
+	this->pc = 0;
 }
 
 int Thread::PC()
 {
-	return this.pc;
+	return this->pc;
 }
 
 void Thread::setPC(int pc)
 {
-	this.pc = pc;
+	this->pc = pc;
 }
 
-void Thread::pushFrame(Frame* frame)
+void Thread::addFrame(Frame* frame)
 {
-	stack.addFrame(frame);
+	vmstack.addFrame(frame);
 }
 
-Frame* Thread::popFrame()
+VMStack& Thread::getVMStack(){
+	return this->vmstack;
+} 
+
+bool Thread::destroyTopFrame()
 {
-	return stack.popFrame();
+	return vmstack.destroyTopFrame();
 }
 
-Frame * Thread::currentFrame()
+Frame * Thread::getTopFrame()
 {
-	return stack.getTopFrame();
+	return vmstack.getTopFrame();
 }
 
-uint32_t Thread::size()
+int Thread::size()
 {
-	return stack.size();
+	return vmstack.size();
 }
 //language
 //lib

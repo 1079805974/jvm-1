@@ -29,6 +29,8 @@ Frame::Frame(ClassRuntime *classRuntime, string methodName, string methodDescrip
         _localVariables[i] = arguments[i];
     }
     
+    cout << "load method: "<< methodName << endl;
+
     method_info *method = getMethodNamed(classRuntime, methodName, methodDescriptor);
     assert(method != NULL);
     _method = *method;

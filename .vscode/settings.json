@@ -20,6 +20,15 @@
         "locale": "cpp",
         "iosfwd": "cpp",
         "typeinfo": "cpp",
-        "cstdlib": "cpp"
+        "cstdlib": "cpp",
+        "stack": "cpp",
+        "__split_buffer": "cpp",
+        "__tree": "cpp",
+        "initializer_list": "cpp",
+        "map": "cpp",
+        "queue": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "utility": "cpp"
     }
 }

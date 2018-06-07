@@ -7,6 +7,7 @@
 #include "stringobject.h"
 #include "classruntime.h"
 #include "methodarea.h"
+#include "thread.h"
 
 #include <iostream>
 #include <cassert>
@@ -27,7 +28,8 @@ ExecutionEngine::~ExecutionEngine() {
 
 void ExecutionEngine::startExecutionEngine(ClassRuntime *classRuntime) {
     VMStack &stackFrame = VMStack::getInstance();
-
+    // Thread thread(0);
+    // Thread::mainThread = &thread;
     vector<Value> arguments;
     Value commandLineArgs;
     commandLineArgs.type = ValueType::REFERENCE;
@@ -42,7 +44,10 @@ void ExecutionEngine::startExecutionEngine(ClassRuntime *classRuntime) {
 
     while (stackFrame.size() > 0) {
         Frame *topFrame = stackFrame.getTopFrame();
-        u1 *code = topFrame->getCode(topFrame->pc);
+        u1 *code = topFrame->getCode(stackFrame.pc);
+
+        cout<< "执行" <<instructions[code[0]] <<endl;
+
         (*this.*_instructionFunctions[code[0]])();
     }
 }
@@ -96,7 +101,7 @@ void ExecutionEngine::populateMultiarray(ArrayObject *array, ValueType valueType
 void ExecutionEngine::i_nop() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_aconst_null() {
@@ -109,7 +114,7 @@ void ExecutionEngine::i_aconst_null() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iconst_m1() {
@@ -123,7 +128,7 @@ void ExecutionEngine::i_iconst_m1() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iconst_0() {
@@ -137,7 +142,7 @@ void ExecutionEngine::i_iconst_0() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iconst_1() {
@@ -151,7 +156,7 @@ void ExecutionEngine::i_iconst_1() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iconst_2() {
@@ -165,7 +170,7 @@ void ExecutionEngine::i_iconst_2() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iconst_3() {
@@ -179,7 +184,7 @@ void ExecutionEngine::i_iconst_3() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iconst_4() {
@@ -193,7 +198,7 @@ void ExecutionEngine::i_iconst_4() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iconst_5() {
@@ -207,7 +212,7 @@ void ExecutionEngine::i_iconst_5() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lconst_0() {
@@ -224,7 +229,7 @@ void ExecutionEngine::i_lconst_0() {
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lconst_1() {
@@ -241,7 +246,7 @@ void ExecutionEngine::i_lconst_1() {
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fconst_0() {
@@ -254,7 +259,7 @@ void ExecutionEngine::i_fconst_0() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fconst_1() {
@@ -267,7 +272,7 @@ void ExecutionEngine::i_fconst_1() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fconst_2() {
@@ -280,7 +285,7 @@ void ExecutionEngine::i_fconst_2() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dconst_0() {
@@ -297,7 +302,7 @@ void ExecutionEngine::i_dconst_0() {
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dconst_1() {
@@ -314,13 +319,13 @@ void ExecutionEngine::i_dconst_1() {
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_bipush() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
 
     u1 byte = code[1];
 
@@ -331,13 +336,13 @@ void ExecutionEngine::i_bipush() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 2;
+    stackFrame.pc += 2;
 }
 
 void ExecutionEngine::i_sipush() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -350,14 +355,14 @@ void ExecutionEngine::i_sipush() {
 
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_ldc() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
     
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
     u1 index = code[1];
     
     cp_info *constantPool = *(topFrame->getConstantPool());
@@ -398,14 +403,14 @@ void ExecutionEngine::i_ldc() {
     }
     
     topFrame->pushIntoOperandStack(value);
-    topFrame->pc += 2;
+    stackFrame.pc += 2;
 }
 
 void ExecutionEngine::i_ldc_w() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
     
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
     u2 index = (byte1 << 8) | byte2;
@@ -448,14 +453,14 @@ void ExecutionEngine::i_ldc_w() {
     }
     
     topFrame->pushIntoOperandStack(value);
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_ldc2_w() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
     
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
     u2 index = (byte1 << 8) | byte2;
@@ -501,7 +506,7 @@ void ExecutionEngine::i_ldc2_w() {
     }
     
     topFrame->pushIntoOperandStack(value);
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 // Pode ser modificado pelo wide
@@ -509,18 +514,18 @@ void ExecutionEngine::i_iload() {
 	VMStack &stackFrame = VMStack::getInstance();
 	Frame *topFrame = stackFrame.getTopFrame();
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
 		_isWide = false;
 	}
 	else {
-		topFrame->pc += 2;
+		stackFrame.pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -535,18 +540,18 @@ void ExecutionEngine::i_lload() {
 	VMStack &stackFrame = VMStack::getInstance();
 	Frame *topFrame = stackFrame.getTopFrame();
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
 		_isWide = false;
 	}
 	else {
-		topFrame->pc += 2;
+		stackFrame.pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > (index + 1)));
@@ -566,18 +571,18 @@ void ExecutionEngine::i_fload() {
 	VMStack &stackFrame = VMStack::getInstance();
 	Frame *topFrame = stackFrame.getTopFrame();
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
 		_isWide = false;
 	}
 	else {
-		topFrame->pc += 2;
+		stackFrame.pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -592,18 +597,18 @@ void ExecutionEngine::i_dload() {
 	VMStack &stackFrame = VMStack::getInstance();
 	Frame *topFrame = stackFrame.getTopFrame();
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1]; // índice do vetor de variáveis locais
 	int16_t index = (int16_t) byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
 		_isWide = false;
 	}
 	else {
-		topFrame->pc += 2;
+		stackFrame.pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > (index + 1)));
@@ -623,18 +628,18 @@ void ExecutionEngine::i_aload() {
 	VMStack &stackFrame = VMStack::getInstance();
 	Frame *topFrame = stackFrame.getTopFrame();
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1]; // índice do vetor de variáveis locais
 	int16_t index = (int16_t) byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
 		_isWide = false;
 	}
 	else {
-		topFrame->pc += 2;
+		stackFrame.pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -651,7 +656,7 @@ void ExecutionEngine::i_iload_0() {
     assert(value.type == ValueType::INT);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iload_1() {
@@ -662,7 +667,7 @@ void ExecutionEngine::i_iload_1() {
     assert(value.type == ValueType::INT);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iload_2() {
@@ -673,7 +678,7 @@ void ExecutionEngine::i_iload_2() {
     assert(value.type == ValueType::INT);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iload_3() {
@@ -684,7 +689,7 @@ void ExecutionEngine::i_iload_3() {
     assert(value.type == ValueType::INT);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lload_0() {
@@ -701,7 +706,7 @@ void ExecutionEngine::i_lload_0() {
     assert(value.type == ValueType::LONG);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lload_1() {
@@ -718,7 +723,7 @@ void ExecutionEngine::i_lload_1() {
     assert(value.type == ValueType::LONG);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lload_2() {
@@ -735,7 +740,7 @@ void ExecutionEngine::i_lload_2() {
     assert(value.type == ValueType::LONG);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lload_3() {
@@ -752,7 +757,7 @@ void ExecutionEngine::i_lload_3() {
     assert(value.type == ValueType::LONG);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fload_0() {
@@ -763,7 +768,7 @@ void ExecutionEngine::i_fload_0() {
     assert(value.type == ValueType::FLOAT);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fload_1() {
@@ -774,7 +779,7 @@ void ExecutionEngine::i_fload_1() {
     assert(value.type == ValueType::FLOAT);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fload_2() {
@@ -785,7 +790,7 @@ void ExecutionEngine::i_fload_2() {
     assert(value.type == ValueType::FLOAT);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fload_3() {
@@ -796,7 +801,7 @@ void ExecutionEngine::i_fload_3() {
     assert(value.type == ValueType::FLOAT);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dload_0() {
@@ -813,7 +818,7 @@ void ExecutionEngine::i_dload_0() {
     assert(value.type == ValueType::DOUBLE);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dload_1() {
@@ -830,7 +835,7 @@ void ExecutionEngine::i_dload_1() {
     assert(value.type == ValueType::DOUBLE);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dload_2() {
@@ -847,7 +852,7 @@ void ExecutionEngine::i_dload_2() {
     assert(value.type == ValueType::DOUBLE);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dload_3() {
@@ -864,7 +869,7 @@ void ExecutionEngine::i_dload_3() {
     assert(value.type == ValueType::DOUBLE);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_aload_0() {
@@ -875,7 +880,7 @@ void ExecutionEngine::i_aload_0() {
     assert(value.type == ValueType::REFERENCE);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_aload_1() {
@@ -886,7 +891,7 @@ void ExecutionEngine::i_aload_1() {
     assert(value.type == ValueType::REFERENCE);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_aload_2() {
@@ -897,7 +902,7 @@ void ExecutionEngine::i_aload_2() {
     assert(value.type == ValueType::REFERENCE);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_aload_3() {
@@ -908,7 +913,7 @@ void ExecutionEngine::i_aload_3() {
     assert(value.type == ValueType::REFERENCE);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iaload() {
@@ -934,7 +939,7 @@ void ExecutionEngine::i_iaload() {
     }
 
     topFrame->pushIntoOperandStack(array->getValue(index.data.intValue));
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_laload() {
@@ -964,7 +969,7 @@ void ExecutionEngine::i_laload() {
     
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(array->getValue(index.data.intValue));
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_faload() {
@@ -990,7 +995,7 @@ void ExecutionEngine::i_faload() {
     }
 
     topFrame->pushIntoOperandStack(array->getValue(index.data.intValue));
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_daload() {
@@ -1020,7 +1025,7 @@ void ExecutionEngine::i_daload() {
     
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(array->getValue(index.data.intValue));
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_aaload() {
@@ -1046,7 +1051,7 @@ void ExecutionEngine::i_aaload() {
     }
 
     topFrame->pushIntoOperandStack(array->getValue(index.data.intValue));
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_baload() {
@@ -1084,7 +1089,7 @@ void ExecutionEngine::i_baload() {
     value.type = ValueType::INT;
 
     topFrame->pushIntoOperandStack(value);
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_caload() {
@@ -1115,7 +1120,7 @@ void ExecutionEngine::i_caload() {
     charValue.type = ValueType::INT;
     
     topFrame->pushIntoOperandStack(charValue);
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_saload() {
@@ -1146,7 +1151,7 @@ void ExecutionEngine::i_saload() {
     shortValue.type = ValueType::INT;
     
     topFrame->pushIntoOperandStack(shortValue);
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 // Pode ser modificado pelo wide
@@ -1157,17 +1162,17 @@ void ExecutionEngine::i_istore() {
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::INT);
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t) byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
 		_isWide = false;
 	} else {
-		topFrame->pc += 2;
+		stackFrame.pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -1183,17 +1188,17 @@ void ExecutionEngine::i_lstore() {
 	assert(value.type == ValueType::LONG);
 	topFrame->popTopOfOperandStack(); //padding
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
 		_isWide = false;
 	} else {
-		topFrame->pc += 2;
+		stackFrame.pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > (index + 1)));
@@ -1211,17 +1216,17 @@ void ExecutionEngine::i_fstore() {
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::FLOAT);
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
 		_isWide = false;
 	} else {
-		topFrame->pc += 2;
+		stackFrame.pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -1237,17 +1242,17 @@ void ExecutionEngine::i_dstore() {
 	assert(value.type == ValueType::DOUBLE);
 	topFrame->popTopOfOperandStack(); //padding
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
 		_isWide = false;
 	} else {
-		topFrame->pc += 2;
+		stackFrame.pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > (index + 1)));
@@ -1265,17 +1270,17 @@ void ExecutionEngine::i_astore() {
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::REFERENCE);
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
 		_isWide = false;
 	} else {
-		topFrame->pc += 2;
+		stackFrame.pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -1290,7 +1295,7 @@ void ExecutionEngine::i_istore_0() {
     assert(value.type == ValueType::INT);
     topFrame->changeLocalVariable(value, 0);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_istore_1() {
@@ -1301,7 +1306,7 @@ void ExecutionEngine::i_istore_1() {
     assert(value.type == ValueType::INT);
     topFrame->changeLocalVariable(value, 1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_istore_2() {
@@ -1312,7 +1317,7 @@ void ExecutionEngine::i_istore_2() {
     assert(value.type == ValueType::INT);
     topFrame->changeLocalVariable(value, 2);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_istore_3() {
@@ -1323,7 +1328,7 @@ void ExecutionEngine::i_istore_3() {
     assert(value.type == ValueType::INT);
     topFrame->changeLocalVariable(value, 3);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lstore_0() {
@@ -1338,7 +1343,7 @@ void ExecutionEngine::i_lstore_0() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lstore_1() {
@@ -1353,7 +1358,7 @@ void ExecutionEngine::i_lstore_1() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 2);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lstore_2() {
@@ -1368,7 +1373,7 @@ void ExecutionEngine::i_lstore_2() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 3);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lstore_3() {
@@ -1383,7 +1388,7 @@ void ExecutionEngine::i_lstore_3() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 4);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fstore_0() {
@@ -1394,7 +1399,7 @@ void ExecutionEngine::i_fstore_0() {
     assert(value.type == ValueType::FLOAT);
     topFrame->changeLocalVariable(value, 0);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fstore_1() {
@@ -1405,7 +1410,7 @@ void ExecutionEngine::i_fstore_1() {
     assert(value.type == ValueType::FLOAT);
     topFrame->changeLocalVariable(value, 1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fstore_2() {
@@ -1416,7 +1421,7 @@ void ExecutionEngine::i_fstore_2() {
     assert(value.type == ValueType::FLOAT);
     topFrame->changeLocalVariable(value, 2);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fstore_3() {
@@ -1427,7 +1432,7 @@ void ExecutionEngine::i_fstore_3() {
     assert(value.type == ValueType::FLOAT);
     topFrame->changeLocalVariable(value, 3);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dstore_0() {
@@ -1442,7 +1447,7 @@ void ExecutionEngine::i_dstore_0() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dstore_1() {
@@ -1457,7 +1462,7 @@ void ExecutionEngine::i_dstore_1() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 2);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dstore_2() {
@@ -1472,7 +1477,7 @@ void ExecutionEngine::i_dstore_2() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 3);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dstore_3() {
@@ -1487,7 +1492,7 @@ void ExecutionEngine::i_dstore_3() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 4);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_astore_0() {
@@ -1498,7 +1503,7 @@ void ExecutionEngine::i_astore_0() {
     assert(value.type == ValueType::REFERENCE);
     topFrame->changeLocalVariable(value, 0);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_astore_1() {
@@ -1509,7 +1514,7 @@ void ExecutionEngine::i_astore_1() {
     assert(value.type == ValueType::REFERENCE);
     topFrame->changeLocalVariable(value, 1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_astore_2() {
@@ -1520,7 +1525,7 @@ void ExecutionEngine::i_astore_2() {
     assert(value.type == ValueType::REFERENCE);
     topFrame->changeLocalVariable(value, 2);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_astore_3() {
@@ -1531,7 +1536,7 @@ void ExecutionEngine::i_astore_3() {
     assert(value.type == ValueType::REFERENCE);
     topFrame->changeLocalVariable(value, 3);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iastore() {
@@ -1563,7 +1568,7 @@ void ExecutionEngine::i_iastore() {
     assert(value.type == array->arrayContentType());
     array->changeValueAt(index.data.intValue, value);
     
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lastore() {
@@ -1595,7 +1600,7 @@ void ExecutionEngine::i_lastore() {
     assert(value.type == array->arrayContentType());
     array->changeValueAt(index.data.intValue, value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fastore() {
@@ -1625,7 +1630,7 @@ void ExecutionEngine::i_fastore() {
     assert(value.type == array->arrayContentType());
     array->changeValueAt(index.data.intValue, value);
 	
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dastore() {
@@ -1657,7 +1662,7 @@ void ExecutionEngine::i_dastore() {
     assert(value.type == array->arrayContentType());
     array->changeValueAt(index.data.intValue, value);
 	
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_aastore() {
@@ -1686,7 +1691,7 @@ void ExecutionEngine::i_aastore() {
 
 	array->changeValueAt(index.data.intValue, value);
     
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_bastore() {
@@ -1726,7 +1731,7 @@ void ExecutionEngine::i_bastore() {
     
     array->changeValueAt(index.data.intValue, value);
 	
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_castore() {
@@ -1758,7 +1763,7 @@ void ExecutionEngine::i_castore() {
     value.type = ValueType::CHAR;
     array->changeValueAt(index.data.intValue, value);
 	
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_sastore() {
@@ -1790,7 +1795,7 @@ void ExecutionEngine::i_sastore() {
     value.type = ValueType::SHORT;
     array->changeValueAt(index.data.intValue, value);
 	
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_pop() {
@@ -1800,7 +1805,7 @@ void ExecutionEngine::i_pop() {
     assert(value.type != ValueType::LONG);
     assert(value.type != ValueType::DOUBLE);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_pop2() {
@@ -1809,7 +1814,7 @@ void ExecutionEngine::i_pop2() {
     topFrame->popTopOfOperandStack();
     topFrame->popTopOfOperandStack();
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dup() {
@@ -1823,7 +1828,7 @@ void ExecutionEngine::i_dup() {
     topFrame->pushIntoOperandStack(value);
     topFrame->pushIntoOperandStack(value);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dup_x1() {
@@ -1841,7 +1846,7 @@ void ExecutionEngine::i_dup_x1() {
     topFrame->pushIntoOperandStack(value_2);
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dup_x2() {
@@ -1862,7 +1867,7 @@ void ExecutionEngine::i_dup_x2() {
     topFrame->pushIntoOperandStack(value_2);
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dup2() {
@@ -1879,7 +1884,7 @@ void ExecutionEngine::i_dup2() {
     topFrame->pushIntoOperandStack(value_2);
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dup2_x1() {
@@ -1901,7 +1906,7 @@ void ExecutionEngine::i_dup2_x1() {
     topFrame->pushIntoOperandStack(value_2);
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dup2_x2() {
@@ -1925,7 +1930,7 @@ void ExecutionEngine::i_dup2_x2() {
     topFrame->pushIntoOperandStack(value_2);
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_swap() {
@@ -1943,7 +1948,7 @@ void ExecutionEngine::i_swap() {
     topFrame->pushIntoOperandStack(value_1);
     topFrame->pushIntoOperandStack(value_2);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iadd() {
@@ -1961,7 +1966,7 @@ void ExecutionEngine::i_iadd() {
     
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_ladd() {
@@ -1978,7 +1983,7 @@ void ExecutionEngine::i_ladd() {
 	value_1.data.longValue = value_1.data.longValue + (value_2.data.longValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fadd() {
@@ -1994,7 +1999,7 @@ void ExecutionEngine::i_fadd() {
 	value_1.data.floatValue = value_1.data.floatValue + (value_2.data.floatValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dadd() {
@@ -2011,7 +2016,7 @@ void ExecutionEngine::i_dadd() {
 	value_1.data.doubleValue = value_1.data.doubleValue + (value_2.data.doubleValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_isub() {
@@ -2028,7 +2033,7 @@ void ExecutionEngine::i_isub() {
 	value_1.data.intValue = value_1.data.intValue - (value_2.data.intValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lsub() {
@@ -2045,7 +2050,7 @@ void ExecutionEngine::i_lsub() {
 	value_1.data.longValue = value_1.data.longValue - (value_2.data.longValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fsub() {
@@ -2061,7 +2066,7 @@ void ExecutionEngine::i_fsub() {
 	value_1.data.floatValue = value_1.data.floatValue - (value_2.data.floatValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dsub() {
@@ -2078,7 +2083,7 @@ void ExecutionEngine::i_dsub() {
 	value_1.data.doubleValue = value_1.data.doubleValue - (value_2.data.doubleValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_imul() {
@@ -2095,7 +2100,7 @@ void ExecutionEngine::i_imul() {
 	value_1.data.intValue = value_1.data.intValue * (value_2.data.intValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lmul() {
@@ -2112,7 +2117,7 @@ void ExecutionEngine::i_lmul() {
 	value_1.data.longValue = value_1.data.longValue * (value_2.data.longValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fmul() {
@@ -2128,7 +2133,7 @@ void ExecutionEngine::i_fmul() {
 	value_1.data.floatValue = value_1.data.floatValue * (value_2.data.floatValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dmul() {
@@ -2145,7 +2150,7 @@ void ExecutionEngine::i_dmul() {
 	value_1.data.doubleValue = value_1.data.doubleValue * (value_2.data.doubleValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_idiv() {
@@ -2166,7 +2171,7 @@ void ExecutionEngine::i_idiv() {
 	value_1.data.intValue = value_1.data.intValue / (value_2.data.intValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_ldiv() {
@@ -2187,7 +2192,7 @@ void ExecutionEngine::i_ldiv() {
 	value_1.data.longValue = value_1.data.longValue / (value_2.data.longValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fdiv() {
@@ -2206,7 +2211,7 @@ void ExecutionEngine::i_fdiv() {
 	value_1.data.floatValue = value_1.data.floatValue / (value_2.data.floatValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_ddiv() {
@@ -2226,7 +2231,7 @@ void ExecutionEngine::i_ddiv() {
 	value_1.data.doubleValue = value_1.data.doubleValue / (value_2.data.doubleValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_irem() {
@@ -2247,7 +2252,7 @@ void ExecutionEngine::i_irem() {
 	value_1.data.intValue = value_1.data.intValue - (value_1.data.intValue / value_2.data.intValue)*value_2.data.intValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lrem() {
@@ -2269,7 +2274,7 @@ void ExecutionEngine::i_lrem() {
 	value_1.data.longValue = value_1.data.longValue - (value_1.data.longValue / value_2.data.longValue)*value_2.data.longValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_frem() {
@@ -2289,7 +2294,7 @@ void ExecutionEngine::i_frem() {
 	value_1.data.floatValue = value_1.data.floatValue - ((uint32_t)(value_1.data.floatValue / value_2.data.floatValue))*value_2.data.floatValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_drem() {
@@ -2311,7 +2316,7 @@ void ExecutionEngine::i_drem() {
 	value_1.data.doubleValue = value_1.data.doubleValue - ((uint64_t)(value_1.data.doubleValue / value_2.data.doubleValue))*value_2.data.doubleValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_ineg() {
@@ -2325,7 +2330,7 @@ void ExecutionEngine::i_ineg() {
 	value_1.data.intValue = -value_1.data.intValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lneg() {
@@ -2339,7 +2344,7 @@ void ExecutionEngine::i_lneg() {
 	value_1.data.longValue = -value_1.data.longValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fneg() {
@@ -2352,7 +2357,7 @@ void ExecutionEngine::i_fneg() {
 	value_1.data.floatValue = -value_1.data.floatValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dneg() {
@@ -2366,7 +2371,7 @@ void ExecutionEngine::i_dneg() {
 	value_1.data.doubleValue = -value_1.data.doubleValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_ishl() {
@@ -2384,7 +2389,7 @@ void ExecutionEngine::i_ishl() {
     value_1.printType = ValueType::INT;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lshl() {
@@ -2402,7 +2407,7 @@ void ExecutionEngine::i_lshl() {
     value_1.data.longValue = (value_1.data.longValue) << value_2.data.intValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_ishr() {
@@ -2420,7 +2425,7 @@ void ExecutionEngine::i_ishr() {
     value_1.printType = ValueType::INT;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lshr() {
@@ -2439,7 +2444,7 @@ void ExecutionEngine::i_lshr() {
 	value_1.data.longValue = value_1.data.longValue >> value_2.data.longValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iushr() {
@@ -2460,7 +2465,7 @@ void ExecutionEngine::i_iushr() {
     value_1.printType = ValueType::INT;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lushr() {
@@ -2480,7 +2485,7 @@ void ExecutionEngine::i_lushr() {
 	}
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iand() {
@@ -2497,7 +2502,7 @@ void ExecutionEngine::i_iand() {
 	value_1.data.intValue = value_1.data.intValue & value_2.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_land() {
@@ -2516,7 +2521,7 @@ void ExecutionEngine::i_land() {
 	value_1.data.longValue = value_1.data.longValue & value_2.data.longValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_ior() {
@@ -2533,7 +2538,7 @@ void ExecutionEngine::i_ior() {
 	value_1.data.intValue = value_1.data.intValue | value_2.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lor() {
@@ -2551,7 +2556,7 @@ void ExecutionEngine::i_lor() {
 	value_1.data.longValue = value_1.data.longValue | value_2.data.longValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_ixor() {
@@ -2568,7 +2573,7 @@ void ExecutionEngine::i_ixor() {
 	value_1.data.intValue = value_1.data.intValue ^ value_2.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lxor() {
@@ -2586,14 +2591,14 @@ void ExecutionEngine::i_lxor() {
 	value_1.data.longValue = value_1.data.longValue ^ value_2.data.longValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_iinc() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
     
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
     
     u2 index = 0;
     if (_isWide) {
@@ -2616,7 +2621,7 @@ void ExecutionEngine::i_iinc() {
     localVariable.data.intValue += inc;
     topFrame->changeLocalVariable(localVariable, index);
     
-    topFrame->pc += _isWide ? 5 : 3;
+    stackFrame.pc += _isWide ? 5 : 3;
     _isWide = false;
 }
 
@@ -2638,7 +2643,7 @@ void ExecutionEngine::i_i2l() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_i2f() {
@@ -2654,7 +2659,7 @@ void ExecutionEngine::i_i2f() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_i2d() {
@@ -2674,7 +2679,7 @@ void ExecutionEngine::i_i2d() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_l2i() {
@@ -2692,7 +2697,7 @@ void ExecutionEngine::i_l2i() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_l2f() {
@@ -2709,7 +2714,7 @@ void ExecutionEngine::i_l2f() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_l2d() {
@@ -2726,7 +2731,7 @@ void ExecutionEngine::i_l2d() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_f2i() {
@@ -2743,7 +2748,7 @@ void ExecutionEngine::i_f2i() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_f2l() {
@@ -2762,7 +2767,7 @@ void ExecutionEngine::i_f2l() {
 	value_1.data.longValue = (uint64_t) value_1.data.floatValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_f2d() {
@@ -2781,7 +2786,7 @@ void ExecutionEngine::i_f2d() {
 	value_1.data.doubleValue = (double) value_1.data.floatValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_d2i() {
@@ -2798,7 +2803,7 @@ void ExecutionEngine::i_d2i() {
 	value_1.data.intValue = (int32_t) value_1.data.doubleValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_d2l() {
@@ -2814,7 +2819,7 @@ void ExecutionEngine::i_d2l() {
 	value_1.data.longValue = (int64_t) value_1.data.doubleValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_d2f() {
@@ -2830,7 +2835,7 @@ void ExecutionEngine::i_d2f() {
 	value_1.data.floatValue = (float) value_1.data.doubleValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_i2b() {
@@ -2846,7 +2851,7 @@ void ExecutionEngine::i_i2b() {
     value_1.data.intValue = (int32_t) (int8_t) value_1.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_i2c() {
@@ -2862,7 +2867,7 @@ void ExecutionEngine::i_i2c() {
     value_1.data.charValue = (uint32_t) (uint8_t) value_1.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_i2s() {
@@ -2878,7 +2883,7 @@ void ExecutionEngine::i_i2s() {
     value_1.data.intValue = (int32_t) (int16_t) value_1.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_lcmp() {
@@ -2906,7 +2911,7 @@ void ExecutionEngine::i_lcmp() {
 
 	topFrame->pushIntoOperandStack(resultado);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fcmpl() {
@@ -2934,7 +2939,7 @@ void ExecutionEngine::i_fcmpl() {
 
 	topFrame->pushIntoOperandStack(resultado);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_fcmpg() {
@@ -2962,7 +2967,7 @@ void ExecutionEngine::i_fcmpg() {
 
 	topFrame->pushIntoOperandStack(resultado);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dcmpl() {
@@ -2992,7 +2997,7 @@ void ExecutionEngine::i_dcmpl() {
 
 	topFrame->pushIntoOperandStack(resultado);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_dcmpg() {
@@ -3022,7 +3027,7 @@ void ExecutionEngine::i_dcmpg() {
 
 	topFrame->pushIntoOperandStack(resultado);
 
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_ifeq() {
@@ -3033,13 +3038,13 @@ void ExecutionEngine::i_ifeq() {
     assert(value.type == ValueType::INT);
     
     if (value.data.intValue == 0) {
-        u1 *code = topFrame->getCode(topFrame->pc);
+        u1 *code = topFrame->getCode(stackFrame.pc);
         u1 byte1 = code[1];
         u1 byte2 = code[2];
         int16_t branchOffset = (byte1 << 8) | byte2;
-        topFrame->pc += branchOffset;
+        stackFrame.pc += branchOffset;
     } else {
-        topFrame->pc += 3;
+        stackFrame.pc += 3;
     }
 }
 
@@ -3051,13 +3056,13 @@ void ExecutionEngine::i_ifne() {
 	assert(value.type == ValueType::INT);
 	
 	if (value.data.intValue != 0) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3069,13 +3074,13 @@ void ExecutionEngine::i_iflt() {
 	assert(value.type == ValueType::INT);
 	
 	if (value.data.intValue < 0) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3087,13 +3092,13 @@ void ExecutionEngine::i_ifge() {
 	assert(value.type == ValueType::INT);
 	
 	if (value.data.intValue >= 0) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3105,13 +3110,13 @@ void ExecutionEngine::i_ifgt() {
 	assert(value.type == ValueType::INT);
 	
 	if (value.data.intValue > 0) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3123,13 +3128,13 @@ void ExecutionEngine::i_ifle() {
 	assert(value.type == ValueType::INT);
 	
 	if (value.data.intValue <= 0) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3143,13 +3148,13 @@ void ExecutionEngine::i_if_icmpeq() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue == value2.data.intValue) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3163,13 +3168,13 @@ void ExecutionEngine::i_if_icmpne() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue != value2.data.intValue) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
 	} else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3183,13 +3188,13 @@ void ExecutionEngine::i_if_icmplt() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue < value2.data.intValue) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3203,13 +3208,13 @@ void ExecutionEngine::i_if_icmpge() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue >= value2.data.intValue) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3223,13 +3228,13 @@ void ExecutionEngine::i_if_icmpgt() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue > value2.data.intValue) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3243,13 +3248,13 @@ void ExecutionEngine::i_if_icmple() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue <= value2.data.intValue) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3263,13 +3268,13 @@ void ExecutionEngine::i_if_acmpeq() {
 	assert(value2.type == ValueType::REFERENCE);
 	
 	if (value1.data.object == value2.data.object) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3283,13 +3288,13 @@ void ExecutionEngine::i_if_acmpne() {
 	assert(value2.type == ValueType::REFERENCE);
 
 	if (value1.data.object != value2.data.object) {
-		u1 *code = topFrame->getCode(topFrame->pc);
+		u1 *code = topFrame->getCode(stackFrame.pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		topFrame->pc += branchOffset;
+		stackFrame.pc += branchOffset;
     } else {
-		topFrame->pc += 3;
+		stackFrame.pc += 3;
     }
 }
 
@@ -3297,28 +3302,28 @@ void ExecutionEngine::i_goto() {
 	VMStack &stackFrame = VMStack::getInstance();
 	Frame *topFrame = stackFrame.getTopFrame();
 	
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1];
 	u1 byte2 = code[2];
 	int16_t branchOffset = (byte1 << 8) | byte2;
-	topFrame->pc += branchOffset;
+	stackFrame.pc += branchOffset;
 }
 
 void ExecutionEngine::i_jsr() {
 	VMStack &stackFrame = VMStack::getInstance();
 	Frame *topFrame = stackFrame.getTopFrame();
 	
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1];
 	u1 byte2 = code[2];
 	int16_t branchOffset = (byte1 << 8) | byte2;
 	
 	Value returnAddr;
 	returnAddr.type = ValueType::RETURN_ADDR;
-	returnAddr.data.returnAddress = topFrame->pc + 3; 
+	returnAddr.data.returnAddress = stackFrame.pc + 3; 
 	topFrame->pushIntoOperandStack(returnAddr);
 	
-	topFrame->pc += branchOffset;
+	stackFrame.pc += branchOffset;
 }
 
 // Pode ser modificado pelo wide
@@ -3326,7 +3331,7 @@ void ExecutionEngine::i_ret() {
 	VMStack &stackFrame = VMStack::getInstance();
 	Frame *topFrame = stackFrame.getTopFrame();
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1]; // índice do vetor de variáveis locais
 	uint16_t index = (uint16_t) byte1;
 
@@ -3341,7 +3346,7 @@ void ExecutionEngine::i_ret() {
 	assert(value.type == ValueType::RETURN_ADDR);
 	topFrame->changeLocalVariable(value, index);
 
-	topFrame->pc = value.data.returnAddress;
+	stackFrame.pc = value.data.returnAddress;
 	_isWide = false;
 }
 
@@ -3349,8 +3354,8 @@ void ExecutionEngine::i_tableswitch() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
     
-    u1* code = topFrame->getCode(topFrame->pc);
-    u1 padding = 4 - (topFrame->pc + 1) % 4;
+    u1* code = topFrame->getCode(stackFrame.pc);
+    u1 padding = 4 - (stackFrame.pc + 1) % 4;
     padding = (padding == 4) ? 0 : padding;
     
     u1 defaultbyte1 = code[padding + 1];
@@ -3382,7 +3387,7 @@ void ExecutionEngine::i_tableswitch() {
     for (i = 0; i < offsets; i++) {
         if (key == lowbytes) {
             int32_t offset = (code[baseIndex] << 24) | (code[baseIndex+1] << 16) | (code[baseIndex+2] << 8) | code[baseIndex+3];
-            topFrame->pc += offset;
+            stackFrame.pc += offset;
             matched = true;
             break;
         }
@@ -3391,7 +3396,7 @@ void ExecutionEngine::i_tableswitch() {
     }
     
     if (!matched) {
-        topFrame->pc += defaultBytes; // salto default
+        stackFrame.pc += defaultBytes; // salto default
     }
 }
 
@@ -3399,8 +3404,8 @@ void ExecutionEngine::i_lookupswitch() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
     
-    u1* code = topFrame->getCode(topFrame->pc);
-    u1 padding = 4 - (topFrame->pc + 1) % 4;
+    u1* code = topFrame->getCode(stackFrame.pc);
+    u1 padding = 4 - (stackFrame.pc + 1) % 4;
     padding = (padding == 4) ? 0 : padding;
     
     u1 defaultbyte1 = code[padding + 1];
@@ -3427,7 +3432,7 @@ void ExecutionEngine::i_lookupswitch() {
         
         if (key == match) {
             int32_t offset = (code[baseIndex+4] << 24) | (code[baseIndex+5] << 16) | (code[baseIndex+6] << 8) | code[baseIndex+7];
-            topFrame->pc += offset;
+            stackFrame.pc += offset;
             matched = true;
             break;
         }
@@ -3435,7 +3440,7 @@ void ExecutionEngine::i_lookupswitch() {
     }
     
     if (!matched) {
-        topFrame->pc += defaultBytes; // salto default
+        stackFrame.pc += defaultBytes; // salto default
     }
 }
 
@@ -3522,7 +3527,7 @@ void ExecutionEngine::i_getstatic() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -3545,7 +3550,7 @@ void ExecutionEngine::i_getstatic() {
 
     // caso especial
     if (className == "java/lang/System" && fieldDescriptor == "Ljava/io/PrintStream;" ) {
-        topFrame->pc += 3;
+        stackFrame.pc += 3;
         return;
     }
     // fim do caso especial
@@ -3604,14 +3609,14 @@ void ExecutionEngine::i_getstatic() {
 
     topFrame->pushIntoOperandStack(staticValue);
 
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_putstatic() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -3682,14 +3687,14 @@ void ExecutionEngine::i_putstatic() {
 
     classRuntime->putValueIntoField(topValue, fieldName);
 
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_getfield() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -3751,14 +3756,14 @@ void ExecutionEngine::i_getfield() {
 
     topFrame->pushIntoOperandStack(fieldValue);
 
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_putfield() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -3811,7 +3816,7 @@ void ExecutionEngine::i_putfield() {
 
     classInstance->putValueIntoField(valueToBeInserted, fieldName);
 
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_invokevirtual() {
@@ -3821,7 +3826,7 @@ void ExecutionEngine::i_invokevirtual() {
     stack<Value> operandStackBackup = topFrame->backupOperandStack();
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -3993,7 +3998,7 @@ void ExecutionEngine::i_invokevirtual() {
         stackFrame.addFrame(newFrame);
     }
 
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_invokespecial() {
@@ -4003,7 +4008,7 @@ void ExecutionEngine::i_invokespecial() {
     stack<Value> operandStackBackup = topFrame->backupOperandStack();
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -4030,7 +4035,7 @@ void ExecutionEngine::i_invokespecial() {
             topFrame->popTopOfOperandStack();
         }
         
-        topFrame->pc += 3;
+        stackFrame.pc += 3;
         return;
     }
     // fim dos casos especiais
@@ -4091,7 +4096,7 @@ void ExecutionEngine::i_invokespecial() {
         stackFrame.addFrame(newFrame);
     }
 
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_invokestatic() {
@@ -4101,7 +4106,7 @@ void ExecutionEngine::i_invokestatic() {
     stack<Value> operandStackBackup = topFrame->backupOperandStack();
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -4123,7 +4128,7 @@ void ExecutionEngine::i_invokestatic() {
     string methodDescriptor = getFormattedConstant(constantPool, methodNameAndType.descriptor_index);
 
     if (className == "java/lang/Object" && methodName == "registerNatives") {
-        topFrame->pc += 3;
+        stackFrame.pc += 3;
         return;
     }
     
@@ -4174,7 +4179,7 @@ void ExecutionEngine::i_invokestatic() {
         stackFrame.addFrame(newFrame);
     }
 
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_invokeinterface() {
@@ -4184,7 +4189,7 @@ void ExecutionEngine::i_invokeinterface() {
     stack<Value> operandStackBackup = topFrame->backupOperandStack();
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -4261,14 +4266,14 @@ void ExecutionEngine::i_invokeinterface() {
         stackFrame.addFrame(newFrame);
     }
 
-    topFrame->pc += 5;
+    stackFrame.pc += 5;
 }
 
 void ExecutionEngine::i_new() {
     VMStack &stackFrame = VMStack::getInstance();       
     Frame *topFrame = stackFrame.getTopFrame();     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -4295,7 +4300,7 @@ void ExecutionEngine::i_new() {
     objectref.type = ValueType::REFERENCE;
     topFrame->pushIntoOperandStack(objectref);
     
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_newarray() {
@@ -4317,7 +4322,7 @@ void ExecutionEngine::i_newarray() {
     Value padding; // padding poderá ser usado
     padding.type = ValueType::PADDING;
     
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
     switch (code[1]) { // argumento representa tipo do array
         case 4:
             array = new ArrayObject(ValueType::BOOLEAN);
@@ -4387,7 +4392,7 @@ void ExecutionEngine::i_newarray() {
     arrayref.data.object = array;
     
     topFrame->pushIntoOperandStack(arrayref);
-    topFrame->pc += 2;
+    stackFrame.pc += 2;
 }
 
 void ExecutionEngine::i_anewarray() {
@@ -4402,7 +4407,7 @@ void ExecutionEngine::i_anewarray() {
     }
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
 
@@ -4437,7 +4442,7 @@ void ExecutionEngine::i_anewarray() {
 
     topFrame->pushIntoOperandStack(objectref);
     
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_arraylength() {
@@ -4456,13 +4461,13 @@ void ExecutionEngine::i_arraylength() {
     length.data.intValue = ((ArrayObject *) arrayref.data.object)->getSize();
     
     topFrame->pushIntoOperandStack(length);
-    topFrame->pc += 1 ;
+    stackFrame.pc += 1 ;
 }
 
 void ExecutionEngine::i_athrow() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_checkcast() {
@@ -4471,7 +4476,7 @@ void ExecutionEngine::i_checkcast() {
     
     MethodArea &methodArea = MethodArea::getInstance();
     
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
     
@@ -4528,7 +4533,7 @@ void ExecutionEngine::i_checkcast() {
     
     topFrame->pushIntoOperandStack(resultValue);
     
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_instanceof() {
@@ -4537,7 +4542,7 @@ void ExecutionEngine::i_instanceof() {
     
     MethodArea &methodArea = MethodArea::getInstance();
 
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
     
@@ -4593,26 +4598,26 @@ void ExecutionEngine::i_instanceof() {
     
     topFrame->pushIntoOperandStack(resultValue);
     
-    topFrame->pc += 3;
+    stackFrame.pc += 3;
 }
 
 void ExecutionEngine::i_monitorenter() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_monitorexit() {
     VMStack &stackFrame = VMStack::getInstance();
     Frame *topFrame = stackFrame.getTopFrame();
-    topFrame->pc += 1;
+    stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_wide() {
 	VMStack &stackFrame = VMStack::getInstance();       
     Frame *topFrame = stackFrame.getTopFrame();
 	_isWide = true;
-	topFrame->pc += 1;
+	stackFrame.pc += 1;
 }
 
 void ExecutionEngine::i_multianewarray() {
@@ -4620,7 +4625,7 @@ void ExecutionEngine::i_multianewarray() {
     Frame *topFrame = stackFrame.getTopFrame();
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(topFrame->pc);
+    u1 *code = topFrame->getCode(stackFrame.pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
     u1 dimensions = code[3];
@@ -4693,7 +4698,7 @@ void ExecutionEngine::i_multianewarray() {
     
     topFrame->pushIntoOperandStack(arrayValue);
     
-    topFrame->pc += 4;
+    stackFrame.pc += 4;
 }
 
 void ExecutionEngine::i_ifnull() {
@@ -4704,13 +4709,13 @@ void ExecutionEngine::i_ifnull() {
     assert(referenceValue.type == ValueType::REFERENCE);
     
     if (referenceValue.data.object == NULL) {
-        u1 *code = topFrame->getCode(topFrame->pc);
+        u1 *code = topFrame->getCode(stackFrame.pc);
         u1 byte1 = code[1];
         u1 byte2 = code[2];
         int16_t branch =  (byte1 << 8) | byte2;
-        topFrame->pc += branch;
+        stackFrame.pc += branch;
     } else {
-        topFrame->pc += 3;
+        stackFrame.pc += 3;
     }
 }
 
@@ -4722,13 +4727,13 @@ void ExecutionEngine::i_ifnonnull() {
     assert(referenceValue.type == ValueType::REFERENCE);
     
     if (referenceValue.data.object != NULL) {
-        u1 *code = topFrame->getCode(topFrame->pc);
+        u1 *code = topFrame->getCode(stackFrame.pc);
         u1 byte1 = code[1];
         u1 byte2 = code[2];
         int16_t branch =  (byte1 << 8) | byte2;
-        topFrame->pc += branch;
+        stackFrame.pc += branch;
     } else {
-        topFrame->pc += 3;
+        stackFrame.pc += 3;
     }
 }
 
@@ -4736,22 +4741,22 @@ void ExecutionEngine::i_goto_w() {
 	VMStack &stackFrame = VMStack::getInstance();
 	Frame *topFrame = stackFrame.getTopFrame();
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1];
 	u1 byte2 = code[2];
 	u1 byte3 = code[3];
 	u1 byte4 = code[4];
 	int32_t branchOffset = (byte1 << 24) | (byte2 << 16) | (byte3 << 8) | byte4;
 
-	topFrame->pc += branchOffset;
-	assert(topFrame->pc < (int32_t)topFrame->sizeCode());
+	stackFrame.pc += branchOffset;
+	assert(stackFrame.pc < (int32_t)topFrame->sizeCode());
 }
 
 void ExecutionEngine::i_jsr_w() {
 	VMStack &stackFrame = VMStack::getInstance();
 	Frame *topFrame = stackFrame.getTopFrame();
 
-	u1 *code = topFrame->getCode(topFrame->pc);
+	u1 *code = topFrame->getCode(stackFrame.pc);
 	u1 byte1 = code[1];
 	u1 byte2 = code[2];
 	u1 byte3 = code[3];
@@ -4760,11 +4765,11 @@ void ExecutionEngine::i_jsr_w() {
 
 	Value returnAddr;
 	returnAddr.type = ValueType::RETURN_ADDR;
-	returnAddr.data.returnAddress = topFrame->pc + 5;
+	returnAddr.data.returnAddress = stackFrame.pc + 5;
 	topFrame->pushIntoOperandStack(returnAddr);
 
-	topFrame->pc += branchOffset;
-	assert(topFrame->pc < (int32_t)topFrame->sizeCode());
+	stackFrame.pc += branchOffset;
+	assert(stackFrame.pc < (int32_t)topFrame->sizeCode());
 }
 
 void ExecutionEngine::initInstructions() {

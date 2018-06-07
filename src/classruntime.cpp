@@ -16,7 +16,7 @@ ClassRuntime::ClassRuntime(ClassFile *classFile) : _classFile(classFile) {
         superClassName = getFormattedConstant(classFile->constant_pool, classFile->super_class);
         superClass = methodArea.loadClassNamed(superClassName);
     }else{
-        superClassName = nullptr;
+        superClassName = "";
         superClass = nullptr;
     }
 

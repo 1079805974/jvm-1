@@ -57,7 +57,7 @@ public:
     
     
     VMStack();
-    
+    int pc;
 private:
     VMStack(VMStack const&); // não permitir implementação do construtor de cópia
     void operator=(VMStack const&); // não permitir implementação do operador de igual
