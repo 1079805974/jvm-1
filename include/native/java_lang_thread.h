@@ -15,7 +15,7 @@ enum ThreadPriority {        // JLS 20.20.1-3
 	NearMaxPriority = 9,     // High priority, used for VMThread
 	MaxPriority = 10,     // Highest priority, used for WatcherThread
 						  // ensures that VMThread doesn't starve profiler
-						  CriticalPriority = 11      // Critical thread priority
+	CriticalPriority = 11      // Critical thread priority
 };
 
 void JVM_StartThread(list<ClassInstance *> & _stack);

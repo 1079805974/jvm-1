@@ -35,7 +35,10 @@ public:
      * @brief Destrutor padrão.
      */
     ~ExecutionEngine();
-    
+
+    bool paused;
+
+    void run();
     /**
      * @brief Inicia a Execution Engine com a classe passada.
      *
@@ -52,7 +55,8 @@ public:
      * @return Retorna \c true caso o método exista, ou \c false caso contrário.
      */
     bool doesMethodExist(ClassRuntime *classRuntime, string name, string descriptor);
-
+    
+    void switchThread();
     /**
      * @brief Popula os vetores de um multiarray
      * @param array Cada array que representa uma dimansão

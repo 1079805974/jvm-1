@@ -18,7 +18,7 @@
 #include <cstdlib>
 #include <cstdlib>
 
-ExecutionEngine::ExecutionEngine() : _isWide(false) {
+ExecutionEngine::ExecutionEngine() : paused(false), _isWide(false) {
     initInstructions();
 }
 
@@ -30,6 +30,8 @@ void ExecutionEngine::startExecutionEngine(ClassRuntime *classRuntime) {
     //Thread* thread = Thread::currentThread();
     Thread thread0(0);
 	Thread* thread = &thread0;
+    thread->nextThread = thread;
+    thread->prevThread = thread;
     Thread::mainThread = thread;
 	Thread::setCurrentThread(thread);
     vector<Value> arguments;
@@ -44,14 +46,34 @@ void ExecutionEngine::startExecutionEngine(ClassRuntime *classRuntime) {
         thread->addFrame(new Frame(classRuntime, "<clinit>", "()V", arguments));
     }
 
-    while (thread->size() > 0) {
-        Frame *topFrame = thread->getTopFrame();
-        u1 *code = topFrame->getCode(topFrame->pc);
+    run();
+}
 
-        cout<< "执行" <<instructions[code[0]] <<endl;
+void ExecutionEngine::run(){
+    int count =  0;
+    while (!paused) {
+        Thread* thread = Thread::currentThread();
+        if(thread -> size() > 0){
+            Frame *topFrame = thread->getTopFrame();
+            u1 *code = topFrame->getCode(topFrame->pc);
 
-        (*this.*_instructionFunctions[code[0]])();
-		
+            cout<< "执行" <<instructions[code[0]] <<endl;
+            
+            (*this.*_instructionFunctions[code[0]])();
+            count++;
+            if(count == 3){
+                switchThread();
+            }
+        }else{
+            break;
+        }
+    }
+}
+
+void ExecutionEngine::switchThread(){
+    Thread* thread = Thread::currentThread();
+    if(thread->nextThread != NULL){
+        Thread::setCurrentThread(thread->nextThread);
     }
 }
 

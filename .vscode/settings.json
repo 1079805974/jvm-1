@@ -29,6 +29,9 @@
         "queue": "cpp",
         "string": "cpp",
         "string_view": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "__hash_table": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp"
     }
 }
