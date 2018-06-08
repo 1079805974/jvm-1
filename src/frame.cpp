@@ -8,6 +8,7 @@
 #include "utils.h"
 #include "classviewer.h"
 #include "methodarea.h"
+#include "vmstack.h"
 
 Frame::Frame(ClassInstance *object, ClassRuntime *classRuntime, string methodName, string methodDescriptor, vector<Value> arguments) : pc(0), _object(object) {
     
@@ -87,10 +88,15 @@ Value Frame::popTopOfOperandStack() {
 }
 
 stack<Value> Frame::backupOperandStack() {
+	VMStack &stackFrame = VMStack::getInstance();
+	//this->pc = stackFrame.pc;
+	stackFrame.pc = 0;
     return _operandStack;
 }
 
 void Frame::setOperandStackFromBackup(stack<Value> backup) {
+	VMStack &stackFrame = VMStack::getInstance();
+	stackFrame.pc = this->pc;
     _operandStack = backup;
 }
 

@@ -17,6 +17,7 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
+	argc = 2;
     if (argc < 2 || argc > 3) {
         printf("Uso:\n");
         printf("\t./JVM arquivo_class.class \t ou,\n");
@@ -26,7 +27,7 @@ int main(int argc, char *argv[]) {
     
 	const char *file_className = argv[1];
 	const char *file_output = (argc < 3) ? NULL : argv[2];
-    
+	file_className = "Test";
     // Carregamento da classe de entrada.
     MethodArea &methodArea = MethodArea::getInstance();
     ClassRuntime *classRuntime = methodArea.loadClassNamed(file_className);

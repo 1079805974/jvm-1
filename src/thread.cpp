@@ -26,6 +26,16 @@ void Thread::addFrame(Frame* frame)
 	vmstack.addFrame(frame);
 }
 
+Thread* Thread::currentThread()
+{
+	return _currentThread;
+}
+
+void Thread::setCurrentThread(Thread * t)
+{
+	_currentThread = t;
+}
+
 VMStack& Thread::getVMStack(){
 	return this->vmstack;
 } 
@@ -44,6 +54,10 @@ int Thread::size()
 {
 	return vmstack.size();
 }
+
+Thread* Thread::mainThread;
+Thread* Thread::_currentThread;
+
 //language
 //lib
 //base

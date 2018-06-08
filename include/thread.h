@@ -12,6 +12,8 @@ public:
 	static const int TIMEDWAITING = 3;
 	static const int BLOCKED = 4;
 	static const int TERMINATED = 5;
+	static Thread* currentThread();
+	static void setCurrentThread(Thread*);
 	static Thread* mainThread;
 	Thread(int pid);
 	Thread();
@@ -19,6 +21,7 @@ public:
 	volatile long state;
 	long nice;
 	Thread *nextThread, *prevThread;
+	
 	int pid;
 	VMStack& getVMStack();
 	void setPC(int pc);
@@ -26,7 +29,9 @@ public:
 	bool destroyTopFrame();
 	Frame* getTopFrame();
 	int size();
+	
 private:
+	static Thread * _currentThread;
 	int pc;
 	VMStack vmstack;
 };

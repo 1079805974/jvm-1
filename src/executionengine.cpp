@@ -27,28 +27,31 @@ ExecutionEngine::~ExecutionEngine() {
 }
 
 void ExecutionEngine::startExecutionEngine(ClassRuntime *classRuntime) {
-    VMStack &stackFrame = VMStack::getInstance();
-    // Thread thread(0);
-    // Thread::mainThread = &thread;
+    //Thread* thread = Thread::currentThread();
+    Thread thread0(0);
+	Thread* thread = &thread0;
+    Thread::mainThread = thread;
+	Thread::setCurrentThread(thread);
     vector<Value> arguments;
     Value commandLineArgs;
     commandLineArgs.type = ValueType::REFERENCE;
     commandLineArgs.data.object = new ArrayObject(ValueType::REFERENCE);
     arguments.push_back(commandLineArgs);
 
-    stackFrame.addFrame(new Frame(classRuntime, "main", "([Ljava/lang/String;)V", arguments));
+    thread->addFrame(new Frame(classRuntime, "main", "([Ljava/lang/String;)V", arguments));
 
     if (doesMethodExist(classRuntime, "<clinit>", "()V")) {
-        stackFrame.addFrame(new Frame(classRuntime, "<clinit>", "()V", arguments));
+        thread->addFrame(new Frame(classRuntime, "<clinit>", "()V", arguments));
     }
 
-    while (stackFrame.size() > 0) {
-        Frame *topFrame = stackFrame.getTopFrame();
-        u1 *code = topFrame->getCode(stackFrame.pc);
+    while (thread->size() > 0) {
+        Frame *topFrame = thread->getTopFrame();
+        u1 *code = topFrame->getCode(topFrame->pc);
 
         cout<< "执行" <<instructions[code[0]] <<endl;
 
         (*this.*_instructionFunctions[code[0]])();
+		
     }
 }
 
@@ -99,14 +102,14 @@ void ExecutionEngine::populateMultiarray(ArrayObject *array, ValueType valueType
 }
 
 void ExecutionEngine::i_nop() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
-    stackFrame.pc += 1;
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_aconst_null() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
     value.type = ValueType::REFERENCE;
@@ -114,12 +117,12 @@ void ExecutionEngine::i_aconst_null() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iconst_m1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
     value.printType = ValueType::INT;
@@ -128,12 +131,12 @@ void ExecutionEngine::i_iconst_m1() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iconst_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
     value.printType = ValueType::INT;
@@ -142,12 +145,12 @@ void ExecutionEngine::i_iconst_0() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iconst_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
     value.printType = ValueType::INT;
@@ -156,12 +159,12 @@ void ExecutionEngine::i_iconst_1() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iconst_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
     value.printType = ValueType::INT;
@@ -170,12 +173,12 @@ void ExecutionEngine::i_iconst_2() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iconst_3() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
     value.printType = ValueType::INT;
@@ -184,12 +187,12 @@ void ExecutionEngine::i_iconst_3() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iconst_4() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
     value.printType = ValueType::INT;
@@ -198,12 +201,12 @@ void ExecutionEngine::i_iconst_4() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iconst_5() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
     value.printType = ValueType::INT;
@@ -212,12 +215,12 @@ void ExecutionEngine::i_iconst_5() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lconst_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value padding;
     padding.type = ValueType::PADDING;
@@ -229,12 +232,12 @@ void ExecutionEngine::i_lconst_0() {
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lconst_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value padding;
     padding.type = ValueType::PADDING;
@@ -246,12 +249,12 @@ void ExecutionEngine::i_lconst_1() {
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fconst_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
     value.type = ValueType::FLOAT;
@@ -259,12 +262,12 @@ void ExecutionEngine::i_fconst_0() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fconst_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
     value.type = ValueType::FLOAT;
@@ -272,12 +275,12 @@ void ExecutionEngine::i_fconst_1() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fconst_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
     value.type = ValueType::FLOAT;
@@ -285,12 +288,12 @@ void ExecutionEngine::i_fconst_2() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dconst_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value padding;
     padding.type = ValueType::PADDING;
@@ -302,12 +305,12 @@ void ExecutionEngine::i_dconst_0() {
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dconst_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value padding;
     padding.type = ValueType::PADDING;
@@ -319,13 +322,13 @@ void ExecutionEngine::i_dconst_1() {
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_bipush() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
+    u1 *code = topFrame->getCode(topFrame->pc);
 
     u1 byte = code[1];
 
@@ -336,13 +339,13 @@ void ExecutionEngine::i_bipush() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 2;
+    topFrame->pc += 2;
 }
 
 void ExecutionEngine::i_sipush() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
+    u1 *code = topFrame->getCode(topFrame->pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -355,14 +358,14 @@ void ExecutionEngine::i_sipush() {
 
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_ldc() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
     u1 index = code[1];
     
     cp_info *constantPool = *(topFrame->getConstantPool());
@@ -403,14 +406,14 @@ void ExecutionEngine::i_ldc() {
     }
     
     topFrame->pushIntoOperandStack(value);
-    stackFrame.pc += 2;
+    topFrame->pc += 2;
 }
 
 void ExecutionEngine::i_ldc_w() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
     u2 index = (byte1 << 8) | byte2;
@@ -453,14 +456,14 @@ void ExecutionEngine::i_ldc_w() {
     }
     
     topFrame->pushIntoOperandStack(value);
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_ldc2_w() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
     u2 index = (byte1 << 8) | byte2;
@@ -506,26 +509,26 @@ void ExecutionEngine::i_ldc2_w() {
     }
     
     topFrame->pushIntoOperandStack(value);
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 // Pode ser modificado pelo wide
 void ExecutionEngine::i_iload() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
 		_isWide = false;
 	}
 	else {
-		stackFrame.pc += 2;
+		topFrame->pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -537,21 +540,21 @@ void ExecutionEngine::i_iload() {
 
 // Pode ser modificado pelo wide
 void ExecutionEngine::i_lload() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
 		_isWide = false;
 	}
 	else {
-		stackFrame.pc += 2;
+		topFrame->pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > (index + 1)));
@@ -568,21 +571,21 @@ void ExecutionEngine::i_lload() {
 
 // Pode ser modificado pelo wide
 void ExecutionEngine::i_fload() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
 		_isWide = false;
 	}
 	else {
-		stackFrame.pc += 2;
+		topFrame->pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -594,21 +597,21 @@ void ExecutionEngine::i_fload() {
 
 // Pode ser modificado pelo wide
 void ExecutionEngine::i_dload() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1]; // índice do vetor de variáveis locais
 	int16_t index = (int16_t) byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
 		_isWide = false;
 	}
 	else {
-		stackFrame.pc += 2;
+		topFrame->pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > (index + 1)));
@@ -625,21 +628,21 @@ void ExecutionEngine::i_dload() {
 
 // Pode ser modificado pelo wide
 void ExecutionEngine::i_aload() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1]; // índice do vetor de variáveis locais
 	int16_t index = (int16_t) byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
 		_isWide = false;
 	}
 	else {
-		stackFrame.pc += 2;
+		topFrame->pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -649,52 +652,52 @@ void ExecutionEngine::i_aload() {
 }
 
 void ExecutionEngine::i_iload_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(0);
     assert(value.type == ValueType::INT);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iload_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(1);
     assert(value.type == ValueType::INT);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iload_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(2);
     assert(value.type == ValueType::INT);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iload_3() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(3);
     assert(value.type == ValueType::INT);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lload_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
 
@@ -706,12 +709,12 @@ void ExecutionEngine::i_lload_0() {
     assert(value.type == ValueType::LONG);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lload_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
 
@@ -723,12 +726,12 @@ void ExecutionEngine::i_lload_1() {
     assert(value.type == ValueType::LONG);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lload_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
 
@@ -740,12 +743,12 @@ void ExecutionEngine::i_lload_2() {
     assert(value.type == ValueType::LONG);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lload_3() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
 
@@ -757,56 +760,56 @@ void ExecutionEngine::i_lload_3() {
     assert(value.type == ValueType::LONG);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fload_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(0);
     assert(value.type == ValueType::FLOAT);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fload_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(1);
     assert(value.type == ValueType::FLOAT);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fload_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(2);
     assert(value.type == ValueType::FLOAT);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fload_3() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(3);
     assert(value.type == ValueType::FLOAT);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dload_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
 
@@ -818,12 +821,12 @@ void ExecutionEngine::i_dload_0() {
     assert(value.type == ValueType::DOUBLE);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dload_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
 
@@ -835,12 +838,12 @@ void ExecutionEngine::i_dload_1() {
     assert(value.type == ValueType::DOUBLE);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dload_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
 
@@ -852,12 +855,12 @@ void ExecutionEngine::i_dload_2() {
     assert(value.type == ValueType::DOUBLE);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dload_3() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value;
 
@@ -869,56 +872,56 @@ void ExecutionEngine::i_dload_3() {
     assert(value.type == ValueType::DOUBLE);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_aload_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(0);
     assert(value.type == ValueType::REFERENCE);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_aload_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(1);
     assert(value.type == ValueType::REFERENCE);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_aload_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(2);
     assert(value.type == ValueType::REFERENCE);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_aload_3() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->getLocalVariableValue(3);
     assert(value.type == ValueType::REFERENCE);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iaload() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value index = topFrame->popTopOfOperandStack();
@@ -939,12 +942,12 @@ void ExecutionEngine::i_iaload() {
     }
 
     topFrame->pushIntoOperandStack(array->getValue(index.data.intValue));
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_laload() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value index = topFrame->popTopOfOperandStack();
@@ -969,12 +972,12 @@ void ExecutionEngine::i_laload() {
     
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(array->getValue(index.data.intValue));
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_faload() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value index = topFrame->popTopOfOperandStack();
@@ -995,12 +998,12 @@ void ExecutionEngine::i_faload() {
     }
 
     topFrame->pushIntoOperandStack(array->getValue(index.data.intValue));
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_daload() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value index = topFrame->popTopOfOperandStack();
@@ -1025,12 +1028,12 @@ void ExecutionEngine::i_daload() {
     
     topFrame->pushIntoOperandStack(padding);
     topFrame->pushIntoOperandStack(array->getValue(index.data.intValue));
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_aaload() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value index = topFrame->popTopOfOperandStack();
@@ -1051,12 +1054,12 @@ void ExecutionEngine::i_aaload() {
     }
 
     topFrame->pushIntoOperandStack(array->getValue(index.data.intValue));
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_baload() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value index = topFrame->popTopOfOperandStack();
@@ -1089,12 +1092,12 @@ void ExecutionEngine::i_baload() {
     value.type = ValueType::INT;
 
     topFrame->pushIntoOperandStack(value);
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_caload() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value index = topFrame->popTopOfOperandStack();
@@ -1120,12 +1123,12 @@ void ExecutionEngine::i_caload() {
     charValue.type = ValueType::INT;
     
     topFrame->pushIntoOperandStack(charValue);
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_saload() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value index = topFrame->popTopOfOperandStack();
@@ -1151,28 +1154,28 @@ void ExecutionEngine::i_saload() {
     shortValue.type = ValueType::INT;
     
     topFrame->pushIntoOperandStack(shortValue);
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 // Pode ser modificado pelo wide
 void ExecutionEngine::i_istore() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::INT);
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t) byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
 		_isWide = false;
 	} else {
-		stackFrame.pc += 2;
+		topFrame->pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -1181,24 +1184,24 @@ void ExecutionEngine::i_istore() {
 
 // Pode ser modificado pelo wide
 void ExecutionEngine::i_lstore() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::LONG);
 	topFrame->popTopOfOperandStack(); //padding
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
 		_isWide = false;
 	} else {
-		stackFrame.pc += 2;
+		topFrame->pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > (index + 1)));
@@ -1210,23 +1213,23 @@ void ExecutionEngine::i_lstore() {
 
 // Pode ser modificado pelo wide
 void ExecutionEngine::i_fstore() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::FLOAT);
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
 		_isWide = false;
 	} else {
-		stackFrame.pc += 2;
+		topFrame->pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -1235,24 +1238,24 @@ void ExecutionEngine::i_fstore() {
 
 // Pode ser modificado pelo wide
 void ExecutionEngine::i_dstore() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::DOUBLE);
 	topFrame->popTopOfOperandStack(); //padding
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
 		_isWide = false;
 	} else {
-		stackFrame.pc += 2;
+		topFrame->pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > (index + 1)));
@@ -1264,23 +1267,23 @@ void ExecutionEngine::i_dstore() {
 
 // Pode ser modificado pelo wide
 void ExecutionEngine::i_astore() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::REFERENCE);
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1]; //índice do vetor de variáveis locais
 	int16_t index = (int16_t)byte1;
 
 	if (_isWide) {
 		u1 byte2 = code[2];
 		index = (byte1 << 8) | byte2;
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
 		_isWide = false;
 	} else {
-		stackFrame.pc += 2;
+		topFrame->pc += 2;
 	}
 
 	assert(((int16_t)(topFrame->sizeLocalVariables()) > index));
@@ -1288,52 +1291,52 @@ void ExecutionEngine::i_astore() {
 }
 
 void ExecutionEngine::i_istore_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::INT);
     topFrame->changeLocalVariable(value, 0);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_istore_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::INT);
     topFrame->changeLocalVariable(value, 1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_istore_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::INT);
     topFrame->changeLocalVariable(value, 2);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_istore_3() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::INT);
     topFrame->changeLocalVariable(value, 3);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lstore_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::LONG);
@@ -1343,12 +1346,12 @@ void ExecutionEngine::i_lstore_0() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lstore_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::LONG);
@@ -1358,12 +1361,12 @@ void ExecutionEngine::i_lstore_1() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 2);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lstore_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::LONG);
@@ -1373,12 +1376,12 @@ void ExecutionEngine::i_lstore_2() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 3);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lstore_3() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::LONG);
@@ -1388,56 +1391,56 @@ void ExecutionEngine::i_lstore_3() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 4);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fstore_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::FLOAT);
     topFrame->changeLocalVariable(value, 0);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fstore_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::FLOAT);
     topFrame->changeLocalVariable(value, 1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fstore_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::FLOAT);
     topFrame->changeLocalVariable(value, 2);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fstore_3() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::FLOAT);
     topFrame->changeLocalVariable(value, 3);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dstore_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::DOUBLE);
@@ -1447,12 +1450,12 @@ void ExecutionEngine::i_dstore_0() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dstore_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::DOUBLE);
@@ -1462,12 +1465,12 @@ void ExecutionEngine::i_dstore_1() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 2);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dstore_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::DOUBLE);
@@ -1477,12 +1480,12 @@ void ExecutionEngine::i_dstore_2() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 3);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dstore_3() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::DOUBLE);
@@ -1492,56 +1495,56 @@ void ExecutionEngine::i_dstore_3() {
     assert(value.type == ValueType::PADDING);
     topFrame->changeLocalVariable(value, 4);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_astore_0() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::REFERENCE);
     topFrame->changeLocalVariable(value, 0);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_astore_1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::REFERENCE);
     topFrame->changeLocalVariable(value, 1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_astore_2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::REFERENCE);
     topFrame->changeLocalVariable(value, 2);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_astore_3() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::REFERENCE);
     topFrame->changeLocalVariable(value, 3);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iastore() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value value = topFrame->popTopOfOperandStack();
@@ -1568,12 +1571,12 @@ void ExecutionEngine::i_iastore() {
     assert(value.type == array->arrayContentType());
     array->changeValueAt(index.data.intValue, value);
     
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lastore() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value value = topFrame->popTopOfOperandStack();
@@ -1600,12 +1603,12 @@ void ExecutionEngine::i_lastore() {
     assert(value.type == array->arrayContentType());
     array->changeValueAt(index.data.intValue, value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fastore() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value value = topFrame->popTopOfOperandStack();
@@ -1630,12 +1633,12 @@ void ExecutionEngine::i_fastore() {
     assert(value.type == array->arrayContentType());
     array->changeValueAt(index.data.intValue, value);
 	
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dastore() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value value = topFrame->popTopOfOperandStack();
@@ -1662,12 +1665,12 @@ void ExecutionEngine::i_dastore() {
     assert(value.type == array->arrayContentType());
     array->changeValueAt(index.data.intValue, value);
 	
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_aastore() {
-	VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
 	Value value = topFrame->popTopOfOperandStack(); // Valor armazenado no index do array
@@ -1691,12 +1694,12 @@ void ExecutionEngine::i_aastore() {
 
 	array->changeValueAt(index.data.intValue, value);
     
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_bastore() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value value = topFrame->popTopOfOperandStack();
@@ -1731,12 +1734,12 @@ void ExecutionEngine::i_bastore() {
     
     array->changeValueAt(index.data.intValue, value);
 	
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_castore() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value value = topFrame->popTopOfOperandStack();
@@ -1763,12 +1766,12 @@ void ExecutionEngine::i_castore() {
     value.type = ValueType::CHAR;
     array->changeValueAt(index.data.intValue, value);
 	
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_sastore() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 	ArrayObject *array;
 
     Value value = topFrame->popTopOfOperandStack();
@@ -1795,31 +1798,31 @@ void ExecutionEngine::i_sastore() {
     value.type = ValueType::SHORT;
     array->changeValueAt(index.data.intValue, value);
 	
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_pop() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type != ValueType::LONG);
     assert(value.type != ValueType::DOUBLE);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_pop2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     topFrame->popTopOfOperandStack();
     topFrame->popTopOfOperandStack();
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dup() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type != ValueType::LONG);
@@ -1828,12 +1831,12 @@ void ExecutionEngine::i_dup() {
     topFrame->pushIntoOperandStack(value);
     topFrame->pushIntoOperandStack(value);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dup_x1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_1 = topFrame->popTopOfOperandStack();
     assert(value_1.type != ValueType::LONG);
@@ -1846,12 +1849,12 @@ void ExecutionEngine::i_dup_x1() {
     topFrame->pushIntoOperandStack(value_2);
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dup_x2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_1 = topFrame->popTopOfOperandStack();
     Value value_2 = topFrame->popTopOfOperandStack();
@@ -1867,12 +1870,12 @@ void ExecutionEngine::i_dup_x2() {
     topFrame->pushIntoOperandStack(value_2);
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dup2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_1 = topFrame->popTopOfOperandStack();
     Value value_2 = topFrame->popTopOfOperandStack();
@@ -1884,12 +1887,12 @@ void ExecutionEngine::i_dup2() {
     topFrame->pushIntoOperandStack(value_2);
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dup2_x1() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_1 = topFrame->popTopOfOperandStack();
     Value value_2 = topFrame->popTopOfOperandStack();
@@ -1906,12 +1909,12 @@ void ExecutionEngine::i_dup2_x1() {
     topFrame->pushIntoOperandStack(value_2);
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dup2_x2() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_1 = topFrame->popTopOfOperandStack();
     Value value_2 = topFrame->popTopOfOperandStack();
@@ -1930,12 +1933,12 @@ void ExecutionEngine::i_dup2_x2() {
     topFrame->pushIntoOperandStack(value_2);
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_swap() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_1 = topFrame->popTopOfOperandStack();
     Value value_2 = topFrame->popTopOfOperandStack();
@@ -1948,12 +1951,12 @@ void ExecutionEngine::i_swap() {
     topFrame->pushIntoOperandStack(value_1);
     topFrame->pushIntoOperandStack(value_2);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iadd() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -1966,12 +1969,12 @@ void ExecutionEngine::i_iadd() {
     
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_ladd() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack(); //padding
@@ -1983,12 +1986,12 @@ void ExecutionEngine::i_ladd() {
 	value_1.data.longValue = value_1.data.longValue + (value_2.data.longValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fadd() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -1999,12 +2002,12 @@ void ExecutionEngine::i_fadd() {
 	value_1.data.floatValue = value_1.data.floatValue + (value_2.data.floatValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dadd() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack();
@@ -2016,12 +2019,12 @@ void ExecutionEngine::i_dadd() {
 	value_1.data.doubleValue = value_1.data.doubleValue + (value_2.data.doubleValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_isub() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2033,12 +2036,12 @@ void ExecutionEngine::i_isub() {
 	value_1.data.intValue = value_1.data.intValue - (value_2.data.intValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lsub() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack();
@@ -2050,12 +2053,12 @@ void ExecutionEngine::i_lsub() {
 	value_1.data.longValue = value_1.data.longValue - (value_2.data.longValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fsub() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2066,12 +2069,12 @@ void ExecutionEngine::i_fsub() {
 	value_1.data.floatValue = value_1.data.floatValue - (value_2.data.floatValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dsub() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack();
@@ -2083,12 +2086,12 @@ void ExecutionEngine::i_dsub() {
 	value_1.data.doubleValue = value_1.data.doubleValue - (value_2.data.doubleValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_imul() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2100,12 +2103,12 @@ void ExecutionEngine::i_imul() {
 	value_1.data.intValue = value_1.data.intValue * (value_2.data.intValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lmul() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack();
@@ -2117,12 +2120,12 @@ void ExecutionEngine::i_lmul() {
 	value_1.data.longValue = value_1.data.longValue * (value_2.data.longValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fmul() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2133,12 +2136,12 @@ void ExecutionEngine::i_fmul() {
 	value_1.data.floatValue = value_1.data.floatValue * (value_2.data.floatValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dmul() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack();
@@ -2150,12 +2153,12 @@ void ExecutionEngine::i_dmul() {
 	value_1.data.doubleValue = value_1.data.doubleValue * (value_2.data.doubleValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_idiv() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2171,12 +2174,12 @@ void ExecutionEngine::i_idiv() {
 	value_1.data.intValue = value_1.data.intValue / (value_2.data.intValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_ldiv() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack();
@@ -2192,12 +2195,12 @@ void ExecutionEngine::i_ldiv() {
 	value_1.data.longValue = value_1.data.longValue / (value_2.data.longValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fdiv() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2211,12 +2214,12 @@ void ExecutionEngine::i_fdiv() {
 	value_1.data.floatValue = value_1.data.floatValue / (value_2.data.floatValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_ddiv() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack();
@@ -2231,12 +2234,12 @@ void ExecutionEngine::i_ddiv() {
 	value_1.data.doubleValue = value_1.data.doubleValue / (value_2.data.doubleValue);
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_irem() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_2 = topFrame->popTopOfOperandStack();
     Value value_1 = topFrame->popTopOfOperandStack();
@@ -2252,12 +2255,12 @@ void ExecutionEngine::i_irem() {
 	value_1.data.intValue = value_1.data.intValue - (value_1.data.intValue / value_2.data.intValue)*value_2.data.intValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lrem() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_2 = topFrame->popTopOfOperandStack();
     topFrame->popTopOfOperandStack();
@@ -2274,12 +2277,12 @@ void ExecutionEngine::i_lrem() {
 	value_1.data.longValue = value_1.data.longValue - (value_1.data.longValue / value_2.data.longValue)*value_2.data.longValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_frem() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_2 = topFrame->popTopOfOperandStack();
     Value value_1 = topFrame->popTopOfOperandStack();
@@ -2294,12 +2297,12 @@ void ExecutionEngine::i_frem() {
 	value_1.data.floatValue = value_1.data.floatValue - ((uint32_t)(value_1.data.floatValue / value_2.data.floatValue))*value_2.data.floatValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_drem() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_2 = topFrame->popTopOfOperandStack();
     topFrame->popTopOfOperandStack(); // PADDING
@@ -2316,12 +2319,12 @@ void ExecutionEngine::i_drem() {
 	value_1.data.doubleValue = value_1.data.doubleValue - ((uint64_t)(value_1.data.doubleValue / value_2.data.doubleValue))*value_2.data.doubleValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_ineg() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_1 = topFrame->popTopOfOperandStack();
     assert(value_1.type == ValueType::INT);
@@ -2330,12 +2333,12 @@ void ExecutionEngine::i_ineg() {
 	value_1.data.intValue = -value_1.data.intValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lneg() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
 	// Não precisa tirar o padding
     Value value_1 = topFrame->popTopOfOperandStack();
@@ -2344,12 +2347,12 @@ void ExecutionEngine::i_lneg() {
 	value_1.data.longValue = -value_1.data.longValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fneg() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_1 = topFrame->popTopOfOperandStack();
     assert(value_1.type == ValueType::FLOAT);
@@ -2357,12 +2360,12 @@ void ExecutionEngine::i_fneg() {
 	value_1.data.floatValue = -value_1.data.floatValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dneg() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
 	// Não precisa tirar o padding
     Value value_1 = topFrame->popTopOfOperandStack();
@@ -2371,12 +2374,12 @@ void ExecutionEngine::i_dneg() {
 	value_1.data.doubleValue = -value_1.data.doubleValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_ishl() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_2 = topFrame->popTopOfOperandStack();
     Value value_1 = topFrame->popTopOfOperandStack();
@@ -2389,12 +2392,12 @@ void ExecutionEngine::i_ishl() {
     value_1.printType = ValueType::INT;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lshl() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_2 = topFrame->popTopOfOperandStack();
     Value value_1 = topFrame->popTopOfOperandStack();
@@ -2407,12 +2410,12 @@ void ExecutionEngine::i_lshl() {
     value_1.data.longValue = (value_1.data.longValue) << value_2.data.intValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_ishr() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_2 = topFrame->popTopOfOperandStack();
     Value value_1 = topFrame->popTopOfOperandStack();
@@ -2425,12 +2428,12 @@ void ExecutionEngine::i_ishr() {
     value_1.printType = ValueType::INT;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lshr() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
 
     Value value_2 = topFrame->popTopOfOperandStack();
     Value value_1 = topFrame->popTopOfOperandStack();
@@ -2444,12 +2447,12 @@ void ExecutionEngine::i_lshr() {
 	value_1.data.longValue = value_1.data.longValue >> value_2.data.longValue;
     topFrame->pushIntoOperandStack(value_1);
 
-    stackFrame.pc += 1;
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iushr() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2465,12 +2468,12 @@ void ExecutionEngine::i_iushr() {
     value_1.printType = ValueType::INT;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lushr() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2485,12 +2488,12 @@ void ExecutionEngine::i_lushr() {
 	}
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iand() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2502,12 +2505,12 @@ void ExecutionEngine::i_iand() {
 	value_1.data.intValue = value_1.data.intValue & value_2.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_land() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack(); // PADDING
@@ -2521,12 +2524,12 @@ void ExecutionEngine::i_land() {
 	value_1.data.longValue = value_1.data.longValue & value_2.data.longValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_ior() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2538,12 +2541,12 @@ void ExecutionEngine::i_ior() {
 	value_1.data.intValue = value_1.data.intValue | value_2.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lor() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack(); // PADDING
@@ -2556,12 +2559,12 @@ void ExecutionEngine::i_lor() {
 	value_1.data.longValue = value_1.data.longValue | value_2.data.longValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_ixor() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2573,12 +2576,12 @@ void ExecutionEngine::i_ixor() {
 	value_1.data.intValue = value_1.data.intValue ^ value_2.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lxor() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack(); // PADDING
@@ -2591,14 +2594,14 @@ void ExecutionEngine::i_lxor() {
 	value_1.data.longValue = value_1.data.longValue ^ value_2.data.longValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_iinc() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
     
     u2 index = 0;
     if (_isWide) {
@@ -2621,13 +2624,13 @@ void ExecutionEngine::i_iinc() {
     localVariable.data.intValue += inc;
     topFrame->changeLocalVariable(localVariable, index);
     
-    stackFrame.pc += _isWide ? 5 : 3;
+    topFrame->pc += _isWide ? 5 : 3;
     _isWide = false;
 }
 
 void ExecutionEngine::i_i2l() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 
@@ -2643,12 +2646,12 @@ void ExecutionEngine::i_i2l() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_i2f() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 
@@ -2659,12 +2662,12 @@ void ExecutionEngine::i_i2f() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_i2d() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 
@@ -2679,12 +2682,12 @@ void ExecutionEngine::i_i2d() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_l2i() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack(); //padding
@@ -2697,12 +2700,12 @@ void ExecutionEngine::i_l2i() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_l2f() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack(); //padding
@@ -2714,12 +2717,12 @@ void ExecutionEngine::i_l2f() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_l2d() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 	//manter padding na pilha de operandos
@@ -2731,12 +2734,12 @@ void ExecutionEngine::i_l2d() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_f2i() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 
@@ -2748,12 +2751,12 @@ void ExecutionEngine::i_f2i() {
 
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_f2l() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 
@@ -2767,12 +2770,12 @@ void ExecutionEngine::i_f2l() {
 	value_1.data.longValue = (uint64_t) value_1.data.floatValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_f2d() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 
@@ -2786,12 +2789,12 @@ void ExecutionEngine::i_f2d() {
 	value_1.data.doubleValue = (double) value_1.data.floatValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_d2i() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack(); //padding
@@ -2803,12 +2806,12 @@ void ExecutionEngine::i_d2i() {
 	value_1.data.intValue = (int32_t) value_1.data.doubleValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_d2l() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 	//manter padding na pilha de operandos
@@ -2819,12 +2822,12 @@ void ExecutionEngine::i_d2l() {
 	value_1.data.longValue = (int64_t) value_1.data.doubleValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_d2f() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack(); //padding
@@ -2835,12 +2838,12 @@ void ExecutionEngine::i_d2f() {
 	value_1.data.floatValue = (float) value_1.data.doubleValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_i2b() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 
@@ -2851,12 +2854,12 @@ void ExecutionEngine::i_i2b() {
     value_1.data.intValue = (int32_t) (int8_t) value_1.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_i2c() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 
@@ -2867,12 +2870,12 @@ void ExecutionEngine::i_i2c() {
     value_1.data.charValue = (uint32_t) (uint8_t) value_1.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_i2s() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_1 = topFrame->popTopOfOperandStack();
 
@@ -2883,12 +2886,12 @@ void ExecutionEngine::i_i2s() {
     value_1.data.intValue = (int32_t) (int16_t) value_1.data.intValue;
 	topFrame->pushIntoOperandStack(value_1);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_lcmp() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack();
@@ -2911,12 +2914,12 @@ void ExecutionEngine::i_lcmp() {
 
 	topFrame->pushIntoOperandStack(resultado);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fcmpl() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2939,12 +2942,12 @@ void ExecutionEngine::i_fcmpl() {
 
 	topFrame->pushIntoOperandStack(resultado);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_fcmpg() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	Value value_1 = topFrame->popTopOfOperandStack();
@@ -2967,12 +2970,12 @@ void ExecutionEngine::i_fcmpg() {
 
 	topFrame->pushIntoOperandStack(resultado);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dcmpl() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack();
@@ -2997,12 +3000,12 @@ void ExecutionEngine::i_dcmpl() {
 
 	topFrame->pushIntoOperandStack(resultado);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_dcmpg() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value_2 = topFrame->popTopOfOperandStack();
 	topFrame->popTopOfOperandStack();
@@ -3027,120 +3030,120 @@ void ExecutionEngine::i_dcmpg() {
 
 	topFrame->pushIntoOperandStack(resultado);
 
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_ifeq() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     Value value = topFrame->popTopOfOperandStack();
     assert(value.type == ValueType::INT);
     
     if (value.data.intValue == 0) {
-        u1 *code = topFrame->getCode(stackFrame.pc);
+        u1 *code = topFrame->getCode(topFrame->pc);
         u1 byte1 = code[1];
         u1 byte2 = code[2];
         int16_t branchOffset = (byte1 << 8) | byte2;
-        stackFrame.pc += branchOffset;
+        topFrame->pc += branchOffset;
     } else {
-        stackFrame.pc += 3;
+        topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_ifne() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::INT);
 	
 	if (value.data.intValue != 0) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_iflt() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::INT);
 	
 	if (value.data.intValue < 0) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_ifge() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::INT);
 	
 	if (value.data.intValue >= 0) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_ifgt() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::INT);
 	
 	if (value.data.intValue > 0) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_ifle() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
 	Value value = topFrame->popTopOfOperandStack();
 	assert(value.type == ValueType::INT);
 	
 	if (value.data.intValue <= 0) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_if_icmpeq() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
 	Value value2 = topFrame->popTopOfOperandStack();
 	Value value1 = topFrame->popTopOfOperandStack();
@@ -3148,19 +3151,19 @@ void ExecutionEngine::i_if_icmpeq() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue == value2.data.intValue) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_if_icmpne() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
 	Value value2 = topFrame->popTopOfOperandStack();
 	Value value1 = topFrame->popTopOfOperandStack();
@@ -3168,19 +3171,19 @@ void ExecutionEngine::i_if_icmpne() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue != value2.data.intValue) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
 	} else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_if_icmplt() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
 	Value value2 = topFrame->popTopOfOperandStack();
 	Value value1 = topFrame->popTopOfOperandStack();
@@ -3188,19 +3191,19 @@ void ExecutionEngine::i_if_icmplt() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue < value2.data.intValue) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_if_icmpge() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
 	Value value2 = topFrame->popTopOfOperandStack();
 	Value value1 = topFrame->popTopOfOperandStack();
@@ -3208,19 +3211,19 @@ void ExecutionEngine::i_if_icmpge() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue >= value2.data.intValue) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_if_icmpgt() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
 	Value value2 = topFrame->popTopOfOperandStack();
 	Value value1 = topFrame->popTopOfOperandStack();
@@ -3228,19 +3231,19 @@ void ExecutionEngine::i_if_icmpgt() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue > value2.data.intValue) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_if_icmple() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
 	Value value2 = topFrame->popTopOfOperandStack();
 	Value value1 = topFrame->popTopOfOperandStack();
@@ -3248,19 +3251,19 @@ void ExecutionEngine::i_if_icmple() {
 	assert(value2.type == ValueType::INT);
 	
 	if (value1.data.intValue <= value2.data.intValue) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_if_acmpeq() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value2 = topFrame->popTopOfOperandStack();
 	Value value1 = topFrame->popTopOfOperandStack();
@@ -3268,19 +3271,19 @@ void ExecutionEngine::i_if_acmpeq() {
 	assert(value2.type == ValueType::REFERENCE);
 	
 	if (value1.data.object == value2.data.object) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_if_acmpne() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
 	Value value2 = topFrame->popTopOfOperandStack();
 	Value value1 = topFrame->popTopOfOperandStack();
@@ -3288,50 +3291,50 @@ void ExecutionEngine::i_if_acmpne() {
 	assert(value2.type == ValueType::REFERENCE);
 
 	if (value1.data.object != value2.data.object) {
-		u1 *code = topFrame->getCode(stackFrame.pc);
+		u1 *code = topFrame->getCode(topFrame->pc);
 		u1 byte1 = code[1];
 		u1 byte2 = code[2];
 		int16_t branchOffset = (byte1 << 8) | byte2;
-		stackFrame.pc += branchOffset;
+		topFrame->pc += branchOffset;
     } else {
-		stackFrame.pc += 3;
+		topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_goto() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1];
 	u1 byte2 = code[2];
 	int16_t branchOffset = (byte1 << 8) | byte2;
-	stackFrame.pc += branchOffset;
+	topFrame->pc += branchOffset;
 }
 
 void ExecutionEngine::i_jsr() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 	
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1];
 	u1 byte2 = code[2];
 	int16_t branchOffset = (byte1 << 8) | byte2;
 	
 	Value returnAddr;
 	returnAddr.type = ValueType::RETURN_ADDR;
-	returnAddr.data.returnAddress = stackFrame.pc + 3; 
+	returnAddr.data.returnAddress = topFrame->pc + 3; 
 	topFrame->pushIntoOperandStack(returnAddr);
 	
-	stackFrame.pc += branchOffset;
+	topFrame->pc += branchOffset;
 }
 
 // Pode ser modificado pelo wide
 void ExecutionEngine::i_ret() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1]; // índice do vetor de variáveis locais
 	uint16_t index = (uint16_t) byte1;
 
@@ -3346,16 +3349,16 @@ void ExecutionEngine::i_ret() {
 	assert(value.type == ValueType::RETURN_ADDR);
 	topFrame->changeLocalVariable(value, index);
 
-	stackFrame.pc = value.data.returnAddress;
+	topFrame->pc = value.data.returnAddress;
 	_isWide = false;
 }
 
 void ExecutionEngine::i_tableswitch() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
-    u1* code = topFrame->getCode(stackFrame.pc);
-    u1 padding = 4 - (stackFrame.pc + 1) % 4;
+    u1* code = topFrame->getCode(topFrame->pc);
+    u1 padding = 4 - (topFrame->pc + 1) % 4;
     padding = (padding == 4) ? 0 : padding;
     
     u1 defaultbyte1 = code[padding + 1];
@@ -3387,7 +3390,7 @@ void ExecutionEngine::i_tableswitch() {
     for (i = 0; i < offsets; i++) {
         if (key == lowbytes) {
             int32_t offset = (code[baseIndex] << 24) | (code[baseIndex+1] << 16) | (code[baseIndex+2] << 8) | code[baseIndex+3];
-            stackFrame.pc += offset;
+            topFrame->pc += offset;
             matched = true;
             break;
         }
@@ -3396,16 +3399,16 @@ void ExecutionEngine::i_tableswitch() {
     }
     
     if (!matched) {
-        stackFrame.pc += defaultBytes; // salto default
+        topFrame->pc += defaultBytes; // salto default
     }
 }
 
 void ExecutionEngine::i_lookupswitch() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
-    u1* code = topFrame->getCode(stackFrame.pc);
-    u1 padding = 4 - (stackFrame.pc + 1) % 4;
+    u1* code = topFrame->getCode(topFrame->pc);
+    u1 padding = 4 - (topFrame->pc + 1) % 4;
     padding = (padding == 4) ? 0 : padding;
     
     u1 defaultbyte1 = code[padding + 1];
@@ -3432,7 +3435,7 @@ void ExecutionEngine::i_lookupswitch() {
         
         if (key == match) {
             int32_t offset = (code[baseIndex+4] << 24) | (code[baseIndex+5] << 16) | (code[baseIndex+6] << 8) | code[baseIndex+7];
-            stackFrame.pc += offset;
+            topFrame->pc += offset;
             matched = true;
             break;
         }
@@ -3440,34 +3443,34 @@ void ExecutionEngine::i_lookupswitch() {
     }
     
     if (!matched) {
-        stackFrame.pc += defaultBytes; // salto default
+        topFrame->pc += defaultBytes; // salto default
     }
 }
 
 void ExecutionEngine::i_ireturn() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     Value returnValue = topFrame->popTopOfOperandStack();
     assert(returnValue.type == ValueType::INT);
     
-    stackFrame.destroyTopFrame();
+    thread->destroyTopFrame();
     
-    Frame *newTopFrame = stackFrame.getTopFrame();
+    Frame *newTopFrame = thread->getTopFrame();
     newTopFrame->pushIntoOperandStack(returnValue);
 }
 
 void ExecutionEngine::i_lreturn() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     Value returnValue = topFrame->popTopOfOperandStack();
     assert(returnValue.type == ValueType::LONG);
     assert(topFrame->popTopOfOperandStack().type == ValueType::PADDING); // o debaixo precisa ser padding
     
-    stackFrame.destroyTopFrame();
+    thread->destroyTopFrame();
     
-    Frame *newTopFrame = stackFrame.getTopFrame();
+    Frame *newTopFrame = thread->getTopFrame();
     Value padding;
     padding.type = ValueType::PADDING;
     newTopFrame->pushIntoOperandStack(padding);
@@ -3475,29 +3478,29 @@ void ExecutionEngine::i_lreturn() {
 }
 
 void ExecutionEngine::i_freturn() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     Value returnValue = topFrame->popTopOfOperandStack();
     assert(returnValue.type == ValueType::FLOAT);
     
-    stackFrame.destroyTopFrame();
+    thread->destroyTopFrame();
     
-    Frame *newTopFrame = stackFrame.getTopFrame();
+    Frame *newTopFrame = thread->getTopFrame();
     newTopFrame->pushIntoOperandStack(returnValue);
 }
 
 void ExecutionEngine::i_dreturn() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     Value returnValue = topFrame->popTopOfOperandStack();
     assert(returnValue.type == ValueType::DOUBLE);
     assert(topFrame->popTopOfOperandStack().type == ValueType::PADDING); // o debaixo precisa ser padding
     
-    stackFrame.destroyTopFrame();
+    thread->destroyTopFrame();
     
-    Frame *newTopFrame = stackFrame.getTopFrame();
+    Frame *newTopFrame = thread->getTopFrame();
     
     Value padding;
     padding.type = ValueType::PADDING;
@@ -3506,28 +3509,28 @@ void ExecutionEngine::i_dreturn() {
 }
 
 void ExecutionEngine::i_areturn() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     Value returnValue = topFrame->popTopOfOperandStack();
     assert(returnValue.type == ValueType::REFERENCE);
     
-    stackFrame.destroyTopFrame();
+    thread->destroyTopFrame();
     
-    Frame *newTopFrame = stackFrame.getTopFrame();
+    Frame *newTopFrame = thread->getTopFrame();
     newTopFrame->pushIntoOperandStack(returnValue);
 }
 
 void ExecutionEngine::i_return() {
-    VMStack &stackFrame = VMStack::getInstance();
-    stackFrame.destroyTopFrame();
+    Thread* thread = Thread::currentThread();
+    thread->destroyTopFrame();
 }
 
 void ExecutionEngine::i_getstatic() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -3550,7 +3553,7 @@ void ExecutionEngine::i_getstatic() {
 
     // caso especial
     if (className == "java/lang/System" && fieldDescriptor == "Ljava/io/PrintStream;" ) {
-        stackFrame.pc += 3;
+        topFrame->pc += 3;
         return;
     }
     // fim do caso especial
@@ -3577,7 +3580,7 @@ void ExecutionEngine::i_getstatic() {
     }
 
     // se a stack frame mudou, é porque teve <clinit> adicionado, então terminar a execução da instrução para eles serem executados.
-    if (stackFrame.getTopFrame() != topFrame) return;
+    if (thread->getTopFrame() != topFrame) return;
     
     Value staticValue = classRuntime->getValueFromField(fieldName);
     switch (staticValue.type) {
@@ -3609,14 +3612,14 @@ void ExecutionEngine::i_getstatic() {
 
     topFrame->pushIntoOperandStack(staticValue);
 
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_putstatic() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -3659,7 +3662,7 @@ void ExecutionEngine::i_putstatic() {
     }
 
     // se a stack frame mudou, é porque teve <clinit> adicionado, então terminar a execução da instrução para eles serem executados.
-    if (stackFrame.getTopFrame() != topFrame) return;
+    if (thread->getTopFrame() != topFrame) return;
     
     Value topValue = topFrame->popTopOfOperandStack();
     if (topValue.type == ValueType::DOUBLE || topValue.type == ValueType::LONG) {
@@ -3687,14 +3690,14 @@ void ExecutionEngine::i_putstatic() {
 
     classRuntime->putValueIntoField(topValue, fieldName);
 
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_getfield() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -3756,14 +3759,14 @@ void ExecutionEngine::i_getfield() {
 
     topFrame->pushIntoOperandStack(fieldValue);
 
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_putfield() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -3816,17 +3819,17 @@ void ExecutionEngine::i_putfield() {
 
     classInstance->putValueIntoField(valueToBeInserted, fieldName);
 
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_invokevirtual() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
-    
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
+
     stack<Value> operandStackBackup = topFrame->backupOperandStack();
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -3989,26 +3992,26 @@ void ExecutionEngine::i_invokevirtual() {
         Frame *newFrame = new Frame(instance, classRuntime, methodName, methodDescriptor, args);
 
         // se a stack frame mudou, é porque teve <clinit> adicionado, então terminar a execução da instrução para eles serem executados.
-        if (stackFrame.getTopFrame() != topFrame) {
+        if (thread->getTopFrame() != topFrame) {
             topFrame->setOperandStackFromBackup(operandStackBackup);
             delete newFrame;
             return;
         }
 
-        stackFrame.addFrame(newFrame);
+        thread->addFrame(newFrame);
     }
 
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_invokespecial() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     stack<Value> operandStackBackup = topFrame->backupOperandStack();
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -4035,7 +4038,7 @@ void ExecutionEngine::i_invokespecial() {
             topFrame->popTopOfOperandStack();
         }
         
-        stackFrame.pc += 3;
+        topFrame->pc += 3;
         return;
     }
     // fim dos casos especiais
@@ -4087,26 +4090,26 @@ void ExecutionEngine::i_invokespecial() {
         Frame *newFrame = new Frame(instance, classRuntime, methodName, methodDescriptor, args);
 
         // se a stack frame mudou, é porque teve <clinit> adicionado, então terminar a execução da instrução para eles serem executados.
-        if (stackFrame.getTopFrame() != topFrame) {
+        if (thread->getTopFrame() != topFrame) {
             topFrame->setOperandStackFromBackup(operandStackBackup);
             delete newFrame;
             return;
         }
 
-        stackFrame.addFrame(newFrame);
+        thread->addFrame(newFrame);
     }
 
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_invokestatic() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     stack<Value> operandStackBackup = topFrame->backupOperandStack();
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -4128,7 +4131,7 @@ void ExecutionEngine::i_invokestatic() {
     string methodDescriptor = getFormattedConstant(constantPool, methodNameAndType.descriptor_index);
 
     if (className == "java/lang/Object" && methodName == "registerNatives") {
-        stackFrame.pc += 3;
+        topFrame->pc += 3;
         return;
     }
     
@@ -4170,26 +4173,26 @@ void ExecutionEngine::i_invokestatic() {
         Frame *newFrame = new Frame(classRuntime, methodName, methodDescriptor, args);
 
         // se a stack frame mudou, é porque teve <clinit> adicionado, então terminar a execução da instrução para eles serem executados.
-        if (stackFrame.getTopFrame() != topFrame) {
+        if (thread->getTopFrame() != topFrame) {
             topFrame->setOperandStackFromBackup(operandStackBackup);
             delete newFrame;
             return;
         }
 
-        stackFrame.addFrame(newFrame);
+        thread->addFrame(newFrame);
     }
 
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_invokeinterface() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     stack<Value> operandStackBackup = topFrame->backupOperandStack();
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -4257,23 +4260,23 @@ void ExecutionEngine::i_invokeinterface() {
         Frame *newFrame = new Frame(instance, instance->getClassRuntime(), methodName, methodDescriptor, args);
 
         // se a stack frame mudou, é porque teve <clinit> adicionado, então terminar a execução da instrução para eles serem executados.
-        if (stackFrame.getTopFrame() != topFrame) {
+        if (thread->getTopFrame() != topFrame) {
             topFrame->setOperandStackFromBackup(operandStackBackup);
             delete newFrame;
             return;
         }
 
-        stackFrame.addFrame(newFrame);
+        thread->addFrame(newFrame);
     }
 
-    stackFrame.pc += 5;
+    topFrame->pc += 5;
 }
 
 void ExecutionEngine::i_new() {
-    VMStack &stackFrame = VMStack::getInstance();       
-    Frame *topFrame = stackFrame.getTopFrame();     
+    Thread* thread = Thread::currentThread();       
+    Frame *topFrame = thread->getTopFrame();     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
 
     u1 byte1 = code[1];
     u1 byte2 = code[2];
@@ -4300,12 +4303,12 @@ void ExecutionEngine::i_new() {
     objectref.type = ValueType::REFERENCE;
     topFrame->pushIntoOperandStack(objectref);
     
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_newarray() {
-    VMStack &stackFrame = VMStack::getInstance();       
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();       
+    Frame *topFrame = thread->getTopFrame();
     
     Value count = topFrame->popTopOfOperandStack(); // Número de elementos no array
     assert(count.type == ValueType::INT);
@@ -4322,7 +4325,7 @@ void ExecutionEngine::i_newarray() {
     Value padding; // padding poderá ser usado
     padding.type = ValueType::PADDING;
     
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
     switch (code[1]) { // argumento representa tipo do array
         case 4:
             array = new ArrayObject(ValueType::BOOLEAN);
@@ -4392,12 +4395,12 @@ void ExecutionEngine::i_newarray() {
     arrayref.data.object = array;
     
     topFrame->pushIntoOperandStack(arrayref);
-    stackFrame.pc += 2;
+    topFrame->pc += 2;
 }
 
 void ExecutionEngine::i_anewarray() {
-    VMStack &stackFrame = VMStack::getInstance();       
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();       
+    Frame *topFrame = thread->getTopFrame();
     
     Value count = topFrame->popTopOfOperandStack(); // Número de elementos no array
     assert(count.type == ValueType::INT);
@@ -4407,7 +4410,7 @@ void ExecutionEngine::i_anewarray() {
     }
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
 
@@ -4442,12 +4445,12 @@ void ExecutionEngine::i_anewarray() {
 
     topFrame->pushIntoOperandStack(objectref);
     
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_arraylength() {
-    VMStack &stackFrame = VMStack::getInstance();       
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();       
+    Frame *topFrame = thread->getTopFrame();
     
     Value arrayref = topFrame->popTopOfOperandStack();  
     assert(arrayref.type == ValueType::REFERENCE);
@@ -4461,22 +4464,22 @@ void ExecutionEngine::i_arraylength() {
     length.data.intValue = ((ArrayObject *) arrayref.data.object)->getSize();
     
     topFrame->pushIntoOperandStack(length);
-    stackFrame.pc += 1 ;
+    topFrame->pc += 1 ;
 }
 
 void ExecutionEngine::i_athrow() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
-    stackFrame.pc += 1;
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_checkcast() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     MethodArea &methodArea = MethodArea::getInstance();
     
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
     
@@ -4533,16 +4536,16 @@ void ExecutionEngine::i_checkcast() {
     
     topFrame->pushIntoOperandStack(resultValue);
     
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_instanceof() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     MethodArea &methodArea = MethodArea::getInstance();
 
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
     
@@ -4598,34 +4601,34 @@ void ExecutionEngine::i_instanceof() {
     
     topFrame->pushIntoOperandStack(resultValue);
     
-    stackFrame.pc += 3;
+    topFrame->pc += 3;
 }
 
 void ExecutionEngine::i_monitorenter() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
-    stackFrame.pc += 1;
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_monitorexit() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
-    stackFrame.pc += 1;
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
+    topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_wide() {
-	VMStack &stackFrame = VMStack::getInstance();       
-    Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();       
+    Frame *topFrame = thread->getTopFrame();
 	_isWide = true;
-	stackFrame.pc += 1;
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_multianewarray() {
-    VMStack &stackFrame = VMStack::getInstance();       
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();       
+    Frame *topFrame = thread->getTopFrame();
     
     cp_info *constantPool = *(topFrame->getConstantPool());
-    u1 *code = topFrame->getCode(stackFrame.pc);
+    u1 *code = topFrame->getCode(topFrame->pc);
     u1 byte1 = code[1];
     u1 byte2 = code[2];
     u1 dimensions = code[3];
@@ -4698,65 +4701,65 @@ void ExecutionEngine::i_multianewarray() {
     
     topFrame->pushIntoOperandStack(arrayValue);
     
-    stackFrame.pc += 4;
+    topFrame->pc += 4;
 }
 
 void ExecutionEngine::i_ifnull() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     Value referenceValue = topFrame->popTopOfOperandStack();
     assert(referenceValue.type == ValueType::REFERENCE);
     
     if (referenceValue.data.object == NULL) {
-        u1 *code = topFrame->getCode(stackFrame.pc);
+        u1 *code = topFrame->getCode(topFrame->pc);
         u1 byte1 = code[1];
         u1 byte2 = code[2];
         int16_t branch =  (byte1 << 8) | byte2;
-        stackFrame.pc += branch;
+        topFrame->pc += branch;
     } else {
-        stackFrame.pc += 3;
+        topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_ifnonnull() {
-    VMStack &stackFrame = VMStack::getInstance();
-    Frame *topFrame = stackFrame.getTopFrame();
+    Thread* thread = Thread::currentThread();
+    Frame *topFrame = thread->getTopFrame();
     
     Value referenceValue = topFrame->popTopOfOperandStack();
     assert(referenceValue.type == ValueType::REFERENCE);
     
     if (referenceValue.data.object != NULL) {
-        u1 *code = topFrame->getCode(stackFrame.pc);
+        u1 *code = topFrame->getCode(topFrame->pc);
         u1 byte1 = code[1];
         u1 byte2 = code[2];
         int16_t branch =  (byte1 << 8) | byte2;
-        stackFrame.pc += branch;
+        topFrame->pc += branch;
     } else {
-        stackFrame.pc += 3;
+        topFrame->pc += 3;
     }
 }
 
 void ExecutionEngine::i_goto_w() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1];
 	u1 byte2 = code[2];
 	u1 byte3 = code[3];
 	u1 byte4 = code[4];
 	int32_t branchOffset = (byte1 << 24) | (byte2 << 16) | (byte3 << 8) | byte4;
 
-	stackFrame.pc += branchOffset;
-	assert(stackFrame.pc < (int32_t)topFrame->sizeCode());
+	topFrame->pc += branchOffset;
+	assert(topFrame->pc < (int32_t)topFrame->sizeCode());
 }
 
 void ExecutionEngine::i_jsr_w() {
-	VMStack &stackFrame = VMStack::getInstance();
-	Frame *topFrame = stackFrame.getTopFrame();
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
 
-	u1 *code = topFrame->getCode(stackFrame.pc);
+	u1 *code = topFrame->getCode(topFrame->pc);
 	u1 byte1 = code[1];
 	u1 byte2 = code[2];
 	u1 byte3 = code[3];
@@ -4765,11 +4768,11 @@ void ExecutionEngine::i_jsr_w() {
 
 	Value returnAddr;
 	returnAddr.type = ValueType::RETURN_ADDR;
-	returnAddr.data.returnAddress = stackFrame.pc + 5;
+	returnAddr.data.returnAddress = topFrame->pc + 5;
 	topFrame->pushIntoOperandStack(returnAddr);
 
-	stackFrame.pc += branchOffset;
-	assert(stackFrame.pc < (int32_t)topFrame->sizeCode());
+	topFrame->pc += branchOffset;
+	assert(topFrame->pc < (int32_t)topFrame->sizeCode());
 }
 
 void ExecutionEngine::initInstructions() {
