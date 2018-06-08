@@ -1,0 +1,3 @@
+/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/rebuild_cache.dir
+/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/edit_cache.dir
+/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/jvm.dir
