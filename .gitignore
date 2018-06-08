@@ -32,7 +32,7 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-
+*.obj
 # Windows shortcuts
 *.lnk
 
