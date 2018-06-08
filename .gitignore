@@ -1,6 +1,5 @@
 ##### Project .gitignore #####
 
-build/*
 docs/*
 
 ##### Linux .gitignore #####
@@ -22,7 +21,6 @@ ehthumbs.db
 .vs/
 # Folder config file
 Desktop.ini
-build/*
 Debug/*
 # Recycle Bin used on file shares
 $RECYCLE.BIN/

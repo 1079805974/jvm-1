@@ -3883,6 +3883,8 @@ void ExecutionEngine::i_invokevirtual() {
     string methodName = getFormattedConstant(constantPool, methodNameAndType.name_index);
     string methodDescriptor = getFormattedConstant(constantPool, methodNameAndType.descriptor_index);
 
+    cout<<"方法名"<<className<<methodName<<endl;
+
     if (className.find("java/") != string::npos) {
         // simulando println ou print
         if (className == "java/io/PrintStream" && (methodName == "print" || methodName == "println")) {
@@ -4064,7 +4066,7 @@ void ExecutionEngine::i_invokespecial() {
 
     string methodName = getFormattedConstant(constantPool, methodNameAndType.name_index);
     string methodDescriptor = getFormattedConstant(constantPool, methodNameAndType.descriptor_index);
-    
+        cout<< "方法名: "<< className << methodName <<endl;
     // casos especiais
     if ((className == "java/lang/Object" || className == "java/lang/String") && methodName == "<init>") {
         if (className == "java/lang/String") {
@@ -4076,8 +4078,8 @@ void ExecutionEngine::i_invokespecial() {
     }
     // fim dos casos especiais
     
-    if (className.find("java/") != string::npos) {
-        cerr << "Tentando invocar metodo especial invalido: " << methodName << endl;
+    if (className.find("jagva/") != string::npos) {
+        cerr << "Tentando invocar metodo especial invalido: " << className << methodName << endl;
         exit(1);
     } else {
         uint16_t nargs = 0; // numero de argumentos contidos na pilha de operandos
