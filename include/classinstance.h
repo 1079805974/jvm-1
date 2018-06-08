@@ -56,7 +56,8 @@ public:
      * @return O valor correspondente ao field.
      */
     Value getValueFromField(string fieldName);
-    
+	void initFields(ClassFile * classFile, field_info * fields);
+	void initMethods(ClassFile * , method_info * );
     /**
      * @brief Verifica se existe um field com o nome dado.
      * @param string O nome do field.
@@ -74,7 +75,7 @@ private:
      * Armazena os fields do objeto (de instância).
      */
     map<string, Value> _fields;
-    
+	map<string, method_info*> _methods;
 };
 
 #endif /* classinstance_h */

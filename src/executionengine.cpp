@@ -18,6 +18,7 @@
 #include <cstdlib>
 #include <cstdlib>
 
+using namespace std;
 ExecutionEngine::ExecutionEngine() : paused(false), _isWide(false) {
     initInstructions();
 }
@@ -31,7 +32,7 @@ void ExecutionEngine::startExecutionEngine(ClassRuntime *classRuntime) {
     Thread thread0(0);
 	Thread* thread = &thread0;
     thread->nextThread = thread;
-    thread->prevThread = thread;
+   // thread->prevThread = thread;
     Thread::mainThread = thread;
 	Thread::setCurrentThread(thread);
     vector<Value> arguments;
@@ -49,6 +50,14 @@ void ExecutionEngine::startExecutionEngine(ClassRuntime *classRuntime) {
     run();
 }
 
+void ExecutionEngine::pause() {
+	paused = true;
+}
+
+void ExecutionEngine::continueRun() {
+	paused = false;
+	run();
+}
 void ExecutionEngine::run(){
     int count =  0;
     while (!paused) {
@@ -64,17 +73,19 @@ void ExecutionEngine::run(){
             if(count == 3){
                 switchThread();
             }
-        }else{
-            break;
-        }
+        }else if(Thread::deleteThread(thread) == true){
+			cout<< "a thread end" <<endl;
+		}else {
+			cout << "last thread end" << endl;
+			system("pause");
+			break;
+		}
     }
 }
 
 void ExecutionEngine::switchThread(){
     Thread* thread = Thread::currentThread();
-    if(thread->nextThread != NULL){
-        Thread::setCurrentThread(thread->nextThread);
-    }
+    Thread::setCurrentThread(thread->nextThread);
 }
 
 bool ExecutionEngine::doesMethodExist(ClassRuntime *classRuntime, string name, string descriptor) {

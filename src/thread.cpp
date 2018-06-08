@@ -1,14 +1,32 @@
+#include <iostream>
+
 #include "thread.h"
 
+using namespace std;
 Thread::Thread(int pid)
 {
 	this->pc = 0;
 	this->pid = pid;
+	nextThread = nullptr;
 }
 
 Thread::Thread()
 {
 	this->pc = 0;
+}
+
+void Thread::appendNewThread(Thread* thread) {
+	thread->nextThread = _currentThread->nextThread;
+	_currentThread->nextThread = thread;
+}
+
+bool Thread::deleteThread(Thread* thread) {
+	if (thread->nextThread != thread) {
+		thread->nextThread = thread->nextThread->nextThread;
+		return true;
+	}else {
+		return false;
+	}
 }
 
 int Thread::PC()

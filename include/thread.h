@@ -17,6 +17,8 @@ public:
 	static Thread* mainThread;
 	Thread(int pid);
 	Thread();
+	static void appendNewThread(Thread * thread);
+	static bool deleteThread(Thread * thread);
 	int PC();
 	volatile long state;
 	long nice;

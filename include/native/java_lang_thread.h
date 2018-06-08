@@ -18,22 +18,22 @@ enum ThreadPriority {        // JLS 20.20.1-3
 	CriticalPriority = 11      // Critical thread priority
 };
 
-void JVM_StartThread(list<ClassInstance *> & _stack);
-void JVM_StopThread(list<ClassInstance *> & _stack);
-void JVM_IsThreadAlive(list<ClassInstance *> & _stack);
-void JVM_SuspendThread(list<ClassInstance *> & _stack);
-void JVM_ResumeThread(list<ClassInstance *> & _stack);
-void JVM_SetThreadPriority(list<ClassInstance *> & _stack);
-void JVM_Yield(list<ClassInstance *> & _stack);
-void JVM_Sleep(list<ClassInstance *> & _stack);
-void JVM_CurrentThread(list<ClassInstance *> & _stack);
-void JVM_CountStackFrames(list<ClassInstance *> & _stack);
-void JVM_Interrupt(list<ClassInstance *> & _stack);
-void JVM_IsInterrupted(list<ClassInstance *> & _stack);
-void JVM_HoldsLock(list<ClassInstance *> & _stack);
-void JVM_GetAllThreads(list<ClassInstance *> & _stack);
-void JVM_DumpThreads(list<ClassInstance *> & _stack);
-void JVM_SetNativeThreadName(list<ClassInstance *> & _stack);
+void JVM_StartThread(ClassInstance *threadInstance);
+void JVM_StopThread(ClassInstance *threadInstance);
+void JVM_IsThreadAlive(ClassInstance *threadInstance);
+void JVM_SuspendThread(ClassInstance *threadInstance);
+void JVM_ResumeThread(ClassInstance *threadInstance);
+void JVM_SetThreadPriority(ClassInstance *threadInstance);
+void JVM_Yield(ClassInstance *threadInstance);
+void JVM_Sleep(ClassInstance *threadInstance);
+void JVM_CurrentThread(ClassInstance *threadInstance);
+void JVM_CountStackFrames(ClassInstance *threadInstance);
+void JVM_Interrupt(ClassInstance *threadInstance);
+void JVM_IsInterrupted(ClassInstance *threadInstance);
+void JVM_HoldsLock(ClassInstance *threadInstance);
+void JVM_GetAllThreads(ClassInstance *threadInstance);
+void JVM_DumpThreads(ClassInstance *threadInstance);
+void JVM_SetNativeThreadName(ClassInstance *threadInstance);
 
 void *java_lang_thread_search_method(const wstring & str);
 

@@ -38,7 +38,11 @@ public:
 
     bool paused;
 
-    void run();
+	void pause();
+
+	void continueRun();
+
+	void run();
     /**
      * @brief Inicia a Execution Engine com a classe passada.
      *

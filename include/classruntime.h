@@ -46,12 +46,12 @@ public:
      * @return Retorna \c true caso o field exista, e \c false caso contrário.
      */
     bool fieldExists(string fieldName);
-    
+	ClassFile *_classFile;
+
 private:
     /**
      * A \c ClassFile correspondente à classe.
      */
-    ClassFile *_classFile;
     string name;
     
     uint16_t accessFlags;
