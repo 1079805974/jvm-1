@@ -5,6 +5,7 @@
 void registerNatives()
 {
 	native_map["vm/lang/Thread"] = java_lang_thread_search_method;
+	native_map["java/lang/Thread"] = java_lang_thread_search_method;
 }
 
 void *find_native(const string & class_name, const string & methodName, const string & descriptor)	// such as: find_native(L"java/lang/Object", L"notify:()V")

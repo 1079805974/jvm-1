@@ -32,6 +32,7 @@
         "utility": "cpp",
         "__hash_table": "cpp",
         "list": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "__locale": "cpp"
     }
 }

@@ -2,7 +2,7 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by Fernflower decompiler)
 //
-package vm.lang;
+package java.lang;
 
 public class Thread implements Runnable {
     public void run(){

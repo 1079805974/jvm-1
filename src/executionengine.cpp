@@ -3886,7 +3886,7 @@ void ExecutionEngine::i_invokevirtual() {
 
 	cout << "methodName" << className << methodName << endl;
 
-    if (className.find("java/") != string::npos) {
+    if (className.find("java/io/") != string::npos) {
         // simulando println ou print
         if (className == "java/io/PrintStream" && (methodName == "print" || methodName == "println")) {
             if (methodDescriptor != "()V") {

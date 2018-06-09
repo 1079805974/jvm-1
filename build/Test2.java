@@ -1,4 +1,4 @@
-import vm.lang.Thread;
+import java.lang.Thread;
 
 class Test2 extends Thread
 {
