@@ -5,8 +5,17 @@
 package java.lang;
 
 public class Thread implements Runnable {
-    public void run(){
+    private Runnable target;
+    Thread(){}
 
+    Thread(Runnable var1){
+        this.target = var1;
+    }
+
+    public void run(){
+        if(target!=null){
+            target.run();
+        }
     }
     public void start(){
         start0();

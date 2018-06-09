@@ -1,14 +1,17 @@
 import java.lang.Thread;
 
-class Test2 extends Thread
+class Test2 
 {
-	public void run(){
-        System.out.println(fib(20));
-    }
 	
 	public static void main(String[] args)
 	{
-		new Test2().start();
+		Thread thread = new Thread(new Runnable(){
+			@Override
+			public void run(){
+				System.out.println(fib(10));
+			}
+		});
+		thread.start();
 		System.out.println("main");
 	}
 	public static int fib (int n){

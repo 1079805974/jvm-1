@@ -40,7 +40,6 @@ void JVM_StartThread(ClassInstance *threadInstance) {
 	args.insert(args.begin(), obj);
 	thread->addFrame(new Frame(threadInstance, threadInstance->getClassRuntime() , "run", "()V", args));
 	Thread::appendNewThread(thread);
-	Thread::setCurrentThread(thread);
 }
 
 void JVM_StopThread(ClassInstance *threadInstance) {

@@ -66,7 +66,7 @@ void ExecutionEngine::run(){
             Frame *topFrame = thread->getTopFrame();
             u1 *code = topFrame->getCode(topFrame->pc);
 
-            //cout<< "执行" <<instructions[code[0]] <<endl;
+            cout<< "执行" <<instructions[code[0]] <<endl;
             
             (*this.*_instructionFunctions[code[0]])();
             count++;
@@ -4252,7 +4252,7 @@ void ExecutionEngine::i_invokeinterface() {
     string methodName = getFormattedConstant(constantPool, methodNameAndType.name_index);
     string methodDescriptor = getFormattedConstant(constantPool, methodNameAndType.descriptor_index);
 
-    if (className.find("java/") != string::npos) {
+    if (className.find("java/io/") != string::npos) {
         cerr << "Tentando invocar metodo de interface invalido: " << methodName << endl;
         exit(1);
     } else {
