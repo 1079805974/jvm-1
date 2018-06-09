@@ -393,6 +393,60 @@ src/methodarea.cpp.s:
 	$(MAKE) -f CMakeFiles/jvm.dir/build.make CMakeFiles/jvm.dir/src/methodarea.cpp.s
 .PHONY : src/methodarea.cpp.s
 
+src/native/java_lang_thread.o: src/native/java_lang_thread.cpp.o
+
+.PHONY : src/native/java_lang_thread.o
+
+# target to build an object file
+src/native/java_lang_thread.cpp.o:
+	$(MAKE) -f CMakeFiles/jvm.dir/build.make CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o
+.PHONY : src/native/java_lang_thread.cpp.o
+
+src/native/java_lang_thread.i: src/native/java_lang_thread.cpp.i
+
+.PHONY : src/native/java_lang_thread.i
+
+# target to preprocess a source file
+src/native/java_lang_thread.cpp.i:
+	$(MAKE) -f CMakeFiles/jvm.dir/build.make CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.i
+.PHONY : src/native/java_lang_thread.cpp.i
+
+src/native/java_lang_thread.s: src/native/java_lang_thread.cpp.s
+
+.PHONY : src/native/java_lang_thread.s
+
+# target to generate assembly for a file
+src/native/java_lang_thread.cpp.s:
+	$(MAKE) -f CMakeFiles/jvm.dir/build.make CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.s
+.PHONY : src/native/java_lang_thread.cpp.s
+
+src/native/nativeinterface.o: src/native/nativeinterface.cpp.o
+
+.PHONY : src/native/nativeinterface.o
+
+# target to build an object file
+src/native/nativeinterface.cpp.o:
+	$(MAKE) -f CMakeFiles/jvm.dir/build.make CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o
+.PHONY : src/native/nativeinterface.cpp.o
+
+src/native/nativeinterface.i: src/native/nativeinterface.cpp.i
+
+.PHONY : src/native/nativeinterface.i
+
+# target to preprocess a source file
+src/native/nativeinterface.cpp.i:
+	$(MAKE) -f CMakeFiles/jvm.dir/build.make CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.i
+.PHONY : src/native/nativeinterface.cpp.i
+
+src/native/nativeinterface.s: src/native/nativeinterface.cpp.s
+
+.PHONY : src/native/nativeinterface.s
+
+# target to generate assembly for a file
+src/native/nativeinterface.cpp.s:
+	$(MAKE) -f CMakeFiles/jvm.dir/build.make CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.s
+.PHONY : src/native/nativeinterface.cpp.s
+
 src/stringobject.o: src/stringobject.cpp.o
 
 .PHONY : src/stringobject.o
@@ -540,6 +594,12 @@ help:
 	@echo "... src/methodarea.o"
 	@echo "... src/methodarea.i"
 	@echo "... src/methodarea.s"
+	@echo "... src/native/java_lang_thread.o"
+	@echo "... src/native/java_lang_thread.i"
+	@echo "... src/native/java_lang_thread.s"
+	@echo "... src/native/nativeinterface.o"
+	@echo "... src/native/nativeinterface.i"
+	@echo "... src/native/nativeinterface.s"
 	@echo "... src/stringobject.o"
 	@echo "... src/stringobject.i"
 	@echo "... src/stringobject.s"

@@ -4,8 +4,8 @@
 #include <string>
 #include <iostream>
 
-typedef void* (*FP)(string&);
 using namespace std;
+typedef void* (*FP)(const string&);
 
 static map<string, FP> native_map;
 void registerNatives();

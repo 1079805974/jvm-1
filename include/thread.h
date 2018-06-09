@@ -24,7 +24,6 @@ public:
 	int PC();
 	volatile long state;
 	long nice;
-	queue<Thread*> & threadQueuea = threadQueue;
 	int pid;
 	VMStack& getVMStack();
 	void setPC(int pc);

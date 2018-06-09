@@ -267,7 +267,7 @@ const char* getFormattedConstant(cp_info* constantPool, u2 index) {
         int32_t s = ((floatInfo.bytes >> 31) == 0) ? 1 : -1;
         int32_t e = ((floatInfo.bytes >> 23) & 0xff);
         int32_t m = (e == 0) ? (floatInfo.bytes & 0x7fffff) << 1 : (floatInfo.bytes & 0x7fffff) | 0x800000;
-        float number = s * m * pow(2, e-150);
+        float number = s * m * pow(2.0, e-150);
         
         char *str = (char*) malloc(sizeof(char)*100);
         sprintf(str, "%f", number);
@@ -286,7 +286,7 @@ const char* getFormattedConstant(cp_info* constantPool, u2 index) {
         int32_t s = ((bytes >> 63) == 0) ? 1 : -1;
         int32_t e = (int32_t)((bytes >> 52) & 0x7ffL);
         int64_t m = (e == 0) ? (bytes & 0xfffffffffffffL) << 1 : (bytes & 0xfffffffffffffL) | 0x10000000000000L;
-        double number = s * m * pow(2, e-1075);
+        double number = s * m * pow(2.0, e-1075);
         
         char *str = (char*) malloc(sizeof(char)*100);
         sprintf(str, "%f", number);

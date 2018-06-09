@@ -57,7 +57,9 @@ CMakeFiles/jvm.dir/src/frame.cpp.o
  ../include/classviewer.h
  ../include/frame.h
  ../include/methodarea.h
+ ../include/native/nativeinterface.h
  ../include/object.h
+ ../include/thread.h
  ../include/tipos.h
  ../include/utils.h
  ../include/vmstack.h
@@ -93,6 +95,28 @@ CMakeFiles/jvm.dir/src/methodarea.cpp.o
  ../include/tipos.h
  ../include/vmstack.h
  /Users/jingruili/IdeaProjects/jvm-1/src/methodarea.cpp
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o
+ ../include/classinstance.h
+ ../include/classloader.h
+ ../include/classruntime.h
+ ../include/frame.h
+ ../include/methodarea.h
+ ../include/native/java_lang_thread.h
+ ../include/native/nativeinterface.h
+ ../include/object.h
+ ../include/thread.h
+ ../include/tipos.h
+ ../include/vmstack.h
+ /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o
+ ../include/classinstance.h
+ ../include/classloader.h
+ ../include/classruntime.h
+ ../include/native/java_lang_thread.h
+ ../include/native/nativeinterface.h
+ ../include/object.h
+ ../include/tipos.h
+ /Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp
 CMakeFiles/jvm.dir/src/stringobject.cpp.o
  ../include/object.h
  ../include/stringobject.h

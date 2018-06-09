@@ -14,6 +14,8 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/jingruili/IdeaProjects/jvm-1/src/heap.cpp" "/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/jvm.dir/src/heap.cpp.o"
   "/Users/jingruili/IdeaProjects/jvm-1/src/main.cpp" "/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/jvm.dir/src/main.cpp.o"
   "/Users/jingruili/IdeaProjects/jvm-1/src/methodarea.cpp" "/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/jvm.dir/src/methodarea.cpp.o"
+  "/Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp" "/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o"
+  "/Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp" "/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o"
   "/Users/jingruili/IdeaProjects/jvm-1/src/stringobject.cpp" "/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/jvm.dir/src/stringobject.cpp.o"
   "/Users/jingruili/IdeaProjects/jvm-1/src/thread.cpp" "/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/jvm.dir/src/thread.cpp.o"
   "/Users/jingruili/IdeaProjects/jvm-1/src/utils.cpp" "/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/jvm.dir/src/utils.cpp.o"

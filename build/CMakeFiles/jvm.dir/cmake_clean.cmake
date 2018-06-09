@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/jvm.dir/src/arrayobject.cpp.o"
   "CMakeFiles/jvm.dir/src/classinstance.cpp.o"
   "CMakeFiles/jvm.dir/src/classruntime.cpp.o"
+  "CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o"
+  "CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o"
   "jvm.pdb"
   "jvm"
 )

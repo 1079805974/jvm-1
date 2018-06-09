@@ -90,6 +90,26 @@ map
 string
 -
 
+../include/native/java_lang_thread.h
+map
+-
+string
+-
+list
+-
+unordered_map
+-
+classinstance.h
+../include/native/classinstance.h
+
+../include/native/nativeinterface.h
+map
+-
+string
+-
+iostream
+-
+
 ../include/object.h
 tipos.h
 ../include/tipos.h
@@ -101,6 +121,8 @@ string
 -
 
 ../include/thread.h
+queue
+-
 vmstack.h
 ../include/vmstack.h
 frame.h
@@ -158,8 +180,6 @@ cstdlib
 cstring
 -
 cassert
--
-cstdbool
 -
 cstdlib
 -
@@ -257,6 +277,10 @@ methodarea.h
 /Users/jingruili/IdeaProjects/jvm-1/src/methodarea.h
 vmstack.h
 /Users/jingruili/IdeaProjects/jvm-1/src/vmstack.h
+native/nativeinterface.h
+/Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.h
+thread.h
+/Users/jingruili/IdeaProjects/jvm-1/src/thread.h
 
 /Users/jingruili/IdeaProjects/jvm-1/src/heap.cpp
 iostream
@@ -313,6 +337,22 @@ vmstack.h
 /Users/jingruili/IdeaProjects/jvm-1/src/vmstack.h
 executionengine.h
 /Users/jingruili/IdeaProjects/jvm-1/src/executionengine.h
+
+/Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp
+native/java_lang_thread.h
+/Users/jingruili/IdeaProjects/jvm-1/src/native/native/java_lang_thread.h
+thread.h
+/Users/jingruili/IdeaProjects/jvm-1/src/native/thread.h
+methodarea.h
+/Users/jingruili/IdeaProjects/jvm-1/src/native/methodarea.h
+native/nativeinterface.h
+/Users/jingruili/IdeaProjects/jvm-1/src/native/native/nativeinterface.h
+
+/Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp
+native/nativeinterface.h
+/Users/jingruili/IdeaProjects/jvm-1/src/native/native/nativeinterface.h
+native/java_lang_thread.h
+/Users/jingruili/IdeaProjects/jvm-1/src/native/native/java_lang_thread.h
 
 /Users/jingruili/IdeaProjects/jvm-1/src/stringobject.cpp
 stringobject.h

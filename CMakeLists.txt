@@ -1,7 +1,10 @@
-SET(CMAKE_BUILD_TYPE "Debug")  
-SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")  
-SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")  
+#SET(CMAKE_BUILD_TYPE "Debug")  
+#SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")  
+#SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")  
 cmake_minimum_required (VERSION 2.6)
+
+add_definitions(-std=c++14)
+#add_definitions(--stdlib=libstdc++)
 
 project (jvm)
 
@@ -22,6 +25,10 @@ add_executable(jvm WIN32
     src/arrayobject.cpp
     src/classinstance.cpp
     src/classruntime.cpp
+    src/native/java_lang_thread.cpp
+    src/native/nativeinterface.cpp
+    include/native/nativeinterface.h
+    include/native/java_lang_thread.h
     include/thread.h
     include/utils.h
     include/classloader.h
@@ -42,4 +49,6 @@ add_executable(jvm WIN32
 
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/java" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
 
-add_definitions(-std=c++11)
+
+
+

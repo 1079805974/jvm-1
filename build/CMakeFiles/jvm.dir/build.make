@@ -239,6 +239,32 @@ CMakeFiles/jvm.dir/src/classruntime.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/classruntime.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/classruntime.cpp -o CMakeFiles/jvm.dir/src/classruntime.cpp.s
 
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../src/native/java_lang_thread.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp
+
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp > CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.i
+
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp -o CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.s
+
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../src/native/nativeinterface.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp
+
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp > CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.i
+
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp -o CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.s
+
 # Object files for target jvm
 jvm_OBJECTS = \
 "CMakeFiles/jvm.dir/src/main.cpp.o" \
@@ -254,7 +280,9 @@ jvm_OBJECTS = \
 "CMakeFiles/jvm.dir/src/stringobject.cpp.o" \
 "CMakeFiles/jvm.dir/src/arrayobject.cpp.o" \
 "CMakeFiles/jvm.dir/src/classinstance.cpp.o" \
-"CMakeFiles/jvm.dir/src/classruntime.cpp.o"
+"CMakeFiles/jvm.dir/src/classruntime.cpp.o" \
+"CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o" \
+"CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o"
 
 # External object files for target jvm
 jvm_EXTERNAL_OBJECTS =
@@ -273,9 +301,11 @@ jvm: CMakeFiles/jvm.dir/src/stringobject.cpp.o
 jvm: CMakeFiles/jvm.dir/src/arrayobject.cpp.o
 jvm: CMakeFiles/jvm.dir/src/classinstance.cpp.o
 jvm: CMakeFiles/jvm.dir/src/classruntime.cpp.o
+jvm: CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o
+jvm: CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o
 jvm: CMakeFiles/jvm.dir/build.make
 jvm: CMakeFiles/jvm.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable jvm"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable jvm"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/jvm.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

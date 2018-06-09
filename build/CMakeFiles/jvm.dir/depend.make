@@ -56,7 +56,9 @@ CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/classruntime.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/classviewer.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/frame.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/methodarea.h
+CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/native/nativeinterface.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/object.h
+CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/thread.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/tipos.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/utils.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/vmstack.h
@@ -92,6 +94,28 @@ CMakeFiles/jvm.dir/src/methodarea.cpp.o: ../include/object.h
 CMakeFiles/jvm.dir/src/methodarea.cpp.o: ../include/tipos.h
 CMakeFiles/jvm.dir/src/methodarea.cpp.o: ../include/vmstack.h
 CMakeFiles/jvm.dir/src/methodarea.cpp.o: ../src/methodarea.cpp
+
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/classinstance.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/classloader.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/classruntime.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/frame.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/methodarea.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/native/java_lang_thread.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/native/nativeinterface.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/object.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/thread.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/tipos.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/vmstack.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../src/native/java_lang_thread.cpp
+
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/classinstance.h
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/classloader.h
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/classruntime.h
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/native/java_lang_thread.h
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/native/nativeinterface.h
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/object.h
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/tipos.h
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../src/native/nativeinterface.cpp
 
 CMakeFiles/jvm.dir/src/stringobject.cpp.o: ../include/object.h
 CMakeFiles/jvm.dir/src/stringobject.cpp.o: ../include/stringobject.h
