@@ -60,7 +60,6 @@ public:
      */
     bool doesMethodExist(ClassRuntime *classRuntime, string name, string descriptor);
     
-    void switchThread();
     /**
      * @brief Popula os vetores de um multiarray
      * @param array Cada array que representa uma dimansão

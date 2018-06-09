@@ -35,5 +35,6 @@ void JVM_GetAllThreads(ClassInstance *threadInstance);
 void JVM_DumpThreads(ClassInstance *threadInstance);
 void JVM_SetNativeThreadName(ClassInstance *threadInstance);
 
-void *java_lang_thread_search_method(const wstring & str);
+
+void* java_lang_thread_search_method(const string & str);
 

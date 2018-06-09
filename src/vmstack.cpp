@@ -12,7 +12,8 @@ VMStack::~VMStack() {
 }
 
 void VMStack::addFrame(Frame *frame) {
-    // Verifica se a stack está cheia
+    // Verifica se a stack está cheia		thread	未定义标识符 "thread"	
+
     if (_frameStack.size() >= FRAME_MAX_SIZE) {
         cerr << "java.lang.StackOverflowError" << endl;
         exit(1);

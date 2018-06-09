@@ -1,6 +1,8 @@
 #ifndef thread_h
 #define thread_h
 
+#include <queue>
+
 #include "vmstack.h"
 #include "frame.h"
 
@@ -12,18 +14,17 @@ public:
 	static const int TIMEDWAITING = 3;
 	static const int BLOCKED = 4;
 	static const int TERMINATED = 5;
+	static queue<Thread*> threadQueue;
 	static Thread* currentThread();
 	static void setCurrentThread(Thread*);
 	static Thread* mainThread;
 	Thread(int pid);
 	Thread();
 	static void appendNewThread(Thread * thread);
-	static bool deleteThread(Thread * thread);
 	int PC();
 	volatile long state;
 	long nice;
-	Thread *nextThread, *prevThread;
-	
+	queue<Thread*> & threadQueuea = threadQueue;
 	int pid;
 	VMStack& getVMStack();
 	void setPC(int pc);
@@ -31,11 +32,12 @@ public:
 	bool destroyTopFrame();
 	Frame* getTopFrame();
 	int size();
-	
+	static bool switchThread();
 private:
 	static Thread * _currentThread;
 	int pc;
 	VMStack vmstack;
+	
 };
 
 #endif

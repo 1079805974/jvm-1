@@ -9,6 +9,8 @@
 #include "classviewer.h"
 #include "methodarea.h"
 #include "vmstack.h"
+#include "native/nativeinterface.h"
+#include "thread.h"
 
 Frame::Frame(ClassInstance *object, ClassRuntime *classRuntime, string methodName, string methodDescriptor, vector<Value> arguments) : pc(0), _object(object) {
     
@@ -16,12 +18,19 @@ Frame::Frame(ClassInstance *object, ClassRuntime *classRuntime, string methodNam
         _localVariables[i] = arguments[i];
     }
     
+	cout << "new method:" << methodName << endl;
+
     method_info *method = getMethodNamed(classRuntime, methodName, methodDescriptor);
     assert(method != NULL);
     _method = *method;
     assert((_method.access_flags & 0x0008) == 0); // o método não pode ser estático
-    
-    findAttributes();
+	if ((_method.access_flags & 0x0100) != 0) { //is native method
+		pc = -1;
+		void* fp = find_native(classRuntime->name, methodName, methodDescriptor);
+		((void(*)(ClassInstance *))fp)(object);
+	}else {
+		findAttributes();
+	}
 }
 
 Frame::Frame(ClassRuntime *classRuntime, string methodName, string methodDescriptor, vector<Value> arguments) : pc(0), _object(NULL) {
@@ -43,6 +52,7 @@ Frame::Frame(ClassRuntime *classRuntime, string methodName, string methodDescrip
 Frame::~Frame() {
     
 }
+
 
 cp_info** Frame::getConstantPool() {
     return &(_classRuntime->getClassFile()->constant_pool);

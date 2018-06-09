@@ -7,7 +7,6 @@ Thread::Thread(int pid)
 {
 	this->pc = 0;
 	this->pid = pid;
-	nextThread = nullptr;
 }
 
 Thread::Thread()
@@ -16,18 +15,24 @@ Thread::Thread()
 }
 
 void Thread::appendNewThread(Thread* thread) {
-	thread->nextThread = _currentThread->nextThread;
-	_currentThread->nextThread = thread;
+	threadQueue.push(thread);
 }
 
-bool Thread::deleteThread(Thread* thread) {
-	if (thread->nextThread != thread) {
-		thread->nextThread = thread->nextThread->nextThread;
+bool Thread::switchThread() {
+	if(_currentThread->size()>0)
+		threadQueue.push(_currentThread);
+	if (!threadQueue.empty()){
+		Thread* t = threadQueue.front();
+		threadQueue.pop();
+		if (t->size() > 0) {
+			setCurrentThread(t);
+		}
+		//cout << "switch thread: "<<t->pid<<endl;
 		return true;
-	}else {
-		return false;
 	}
+	return false;
 }
+
 
 int Thread::PC()
 {
@@ -75,7 +80,7 @@ int Thread::size()
 
 Thread* Thread::mainThread;
 Thread* Thread::_currentThread;
-
+queue<Thread*> Thread::threadQueue;
 //language
 //lib
 //base

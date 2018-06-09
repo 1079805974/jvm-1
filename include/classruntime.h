@@ -47,12 +47,12 @@ public:
      */
     bool fieldExists(string fieldName);
 	ClassFile *_classFile;
+	string name;
 
 private:
     /**
      * A \c ClassFile correspondente à classe.
      */
-    string name;
     
     uint16_t accessFlags;
     string superClassName;

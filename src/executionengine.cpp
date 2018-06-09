@@ -1,4 +1,4 @@
-#include "executionengine.h"
+﻿#include "executionengine.h"
 
 #include "vmstack.h"
 #include "frame.h"
@@ -31,7 +31,7 @@ void ExecutionEngine::startExecutionEngine(ClassRuntime *classRuntime) {
     //Thread* thread = Thread::currentThread();
     Thread thread0(0);
 	Thread* thread = &thread0;
-    thread->nextThread = thread;
+	Thread::appendNewThread(thread);
    // thread->prevThread = thread;
     Thread::mainThread = thread;
 	Thread::setCurrentThread(thread);
@@ -66,27 +66,28 @@ void ExecutionEngine::run(){
             Frame *topFrame = thread->getTopFrame();
             u1 *code = topFrame->getCode(topFrame->pc);
 
-            cout<< "执行" <<instructions[code[0]] <<endl;
+            //cout<< "执行" <<instructions[code[0]] <<endl;
             
             (*this.*_instructionFunctions[code[0]])();
             count++;
-            if(count == 3){
-                switchThread();
+            if(count == 1){
+				if (Thread::switchThread() == false) {
+					cout << "last thread end" << endl;
+					paused = true;
+				}
+				count = 0;
             }
-        }else if(Thread::deleteThread(thread) == true){
-			cout<< "a thread end" <<endl;
-		}else {
-			cout << "last thread end" << endl;
-			system("pause");
-			break;
+		}
+		else {
+			if (Thread::switchThread() == false) {
+				cout << "last thread end" << endl;
+				paused = true;
+			}
 		}
     }
 }
 
-void ExecutionEngine::switchThread(){
-    Thread* thread = Thread::currentThread();
-    Thread::setCurrentThread(thread->nextThread);
-}
+
 
 bool ExecutionEngine::doesMethodExist(ClassRuntime *classRuntime, string name, string descriptor) {
     ClassFile *classFile = classRuntime->getClassFile();
@@ -3872,7 +3873,7 @@ void ExecutionEngine::i_invokevirtual() {
     assert(methodCP.tag == CONSTANT_Methodref); // precisa referenciar um método
 
     CONSTANT_Methodref_info methodInfo = methodCP.info.methodref_info;
-
+	
     string className = getFormattedConstant(constantPool, methodInfo.class_index);
 
     cp_info nameAndTypeCP = constantPool[methodInfo.name_and_type_index-1];
@@ -3883,7 +3884,7 @@ void ExecutionEngine::i_invokevirtual() {
     string methodName = getFormattedConstant(constantPool, methodNameAndType.name_index);
     string methodDescriptor = getFormattedConstant(constantPool, methodNameAndType.descriptor_index);
 
-    cout<<"方法名"<<className<<methodName<<endl;
+	cout << "methodName" << className << methodName << endl;
 
     if (className.find("java/") != string::npos) {
         // simulando println ou print
@@ -4025,7 +4026,10 @@ void ExecutionEngine::i_invokevirtual() {
         ClassRuntime *classRuntime = methodArea.loadClassNamed(className);
         
         Frame *newFrame = new Frame(instance, classRuntime, methodName, methodDescriptor, args);
-
+		if (newFrame->pc == -1) {
+			topFrame->pc += 3;
+			return;
+		}
         // se a stack frame mudou, é porque teve <clinit> adicionado, então terminar a execução da instrução para eles serem executados.
         if (thread->getTopFrame() != topFrame) {
             topFrame->setOperandStackFromBackup(operandStackBackup);

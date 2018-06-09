@@ -1,6 +1,3 @@
 ﻿  Thread.cpp
 c:\c++projects\jvm-1\include\classruntime.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  executionengine.cpp
-c:\c++projects\jvm-1\include\classruntime.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  正在生成代码...
   jvm-1.vcxproj -> C:\C++Projects\jvm-1\Debug\jvm-1.exe

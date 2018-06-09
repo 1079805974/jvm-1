@@ -1,6 +1,8 @@
 
 #include "native/java_lang_thread.h"
 #include "thread.h"
+#include "methodarea.h"
+#include "native/nativeinterface.h"
 
 #define THD "Ljava/lang/Thread;"
 #define OBJ "Ljava/lang/Object;"
@@ -29,10 +31,16 @@ static map<string, void*> methods = {
 
 
 void JVM_StartThread(ClassInstance *threadInstance) {
-	Thread thread;
+	Thread* thread = new Thread(2);
 	vector<Value> args;
-	thread.addFrame(new Frame(threadInstance, threadInstance->getClassRuntime() , "run", "()V", args));
-	Thread::appendNewThread(&thread);
+	Value obj;
+	obj.type = REFERENCE;
+	obj.printType = REFERENCE;
+	obj.data.object = threadInstance;
+	args.insert(args.begin(), obj);
+	thread->addFrame(new Frame(threadInstance, threadInstance->getClassRuntime() , "run", "()V", args));
+	Thread::appendNewThread(thread);
+	Thread::setCurrentThread(thread);
 }
 
 void JVM_StopThread(ClassInstance *threadInstance) {
@@ -80,8 +88,8 @@ void JVM_DumpThreads(ClassInstance * threadInstance)
 void JVM_SetNativeThreadName(ClassInstance *threadInstance) {
 	
 }
-
-void *java_lang_thread_search_method(const wstring & signature)
+void* java_lang_thread_search_method(const string & str)
 {
-	return NULL;
+	return methods[str];
 }
+
