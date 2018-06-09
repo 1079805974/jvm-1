@@ -33,6 +33,7 @@
         "__hash_table": "cpp",
         "list": "cpp",
         "unordered_map": "cpp",
-        "__locale": "cpp"
+        "__locale": "cpp",
+        "array": "cpp"
     }
 }

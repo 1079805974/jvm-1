@@ -6,12 +6,13 @@ using namespace std;
 Thread::Thread(int pid)
 {
 	this->pc = 0;
-	this->pid = pid;
+	this->pid = threadCount++;
 }
 
 Thread::Thread()
 {
 	this->pc = 0;
+	this->pid = threadCount++;
 }
 
 void Thread::appendNewThread(Thread* thread) {
@@ -21,11 +22,15 @@ void Thread::appendNewThread(Thread* thread) {
 bool Thread::switchThread() {
 	if(_currentThread->size()>0)
 		threadQueue.push(_currentThread);
+	else
+		threadCount--;
 	if (!threadQueue.empty()){
 		Thread* t = threadQueue.front();
 		threadQueue.pop();
 		if (t->size() > 0) {
 			setCurrentThread(t);
+		}else{
+			threadCount--;
 		}
 		//cout << "switch thread: "<<t->pid<<endl;
 		return true;
@@ -81,6 +86,7 @@ int Thread::size()
 Thread* Thread::mainThread;
 Thread* Thread::_currentThread;
 queue<Thread*> Thread::threadQueue;
+int Thread::threadCount = 0;
 //language
 //lib
 //base

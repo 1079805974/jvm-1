@@ -14,6 +14,7 @@ public:
 	static const int TIMEDWAITING = 3;
 	static const int BLOCKED = 4;
 	static const int TERMINATED = 5;
+	static int threadCount;
 	static queue<Thread*> threadQueue;
 	static Thread* currentThread();
 	static void setCurrentThread(Thread*);

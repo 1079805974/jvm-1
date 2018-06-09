@@ -66,7 +66,7 @@ void ExecutionEngine::run(){
             Frame *topFrame = thread->getTopFrame();
             u1 *code = topFrame->getCode(topFrame->pc);
 
-            cout<< "执行" <<instructions[code[0]] <<endl;
+            cout<<"线程:"<< thread->pid << " 执行" <<instructions[code[0]] <<endl;
             
             (*this.*_instructionFunctions[code[0]])();
             count++;
