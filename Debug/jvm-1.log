@@ -1,3 +1,27 @@
-﻿  Thread.cpp
+﻿  frame.cpp
 c:\c++projects\jvm-1\include\classruntime.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  jvm-1.vcxproj -> C:\C++Projects\jvm-1\Debug\jvm-1.exe
+  java_lang_thread.cpp
+c:\c++projects\jvm-1\include\classruntime.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  nativeinterface.cpp
+c:\c++projects\jvm-1\include\native\nativeinterface.h(7): error C2065: “string”: 未声明的标识符
+c:\c++projects\jvm-1\include\native\nativeinterface.h(7): error C2059: 语法错误:“)”
+c:\c++projects\jvm-1\include\native\nativeinterface.h(10): error C2065: “FP”: 未声明的标识符
+c:\c++projects\jvm-1\include\native\nativeinterface.h(10): error C2923: “std::map”: 对于参数“_Ty”，“FP”不是有效的 模板 类型变量
+c:\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\map(79): error C3203: “pair”: 未专用化的 类 模板 不能用作 模板 变量，该变量属于 模板 参数“_Ty”，应为 real 类型
+c:\c++projects\jvm-1\include\native\nativeinterface.h(10): error C2133: “native_map”: 未知的大小
+c:\c++projects\jvm-1\include\native\nativeinterface.h(10): error C2512: “std::map”: 没有合适的默认构造函数可用
+  c:\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\map(81): note: 参见“std::map”的声明
+c:\c++projects\jvm-1\include\classruntime.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+c:\c++projects\jvm-1\src\native\nativeinterface.cpp(7): error C2678: 二进制“[”: 没有找到接受“std::map”类型的左操作数的运算符(或没有可接受的转换)
+  c:\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\map(361): note: 可能是“_Ty &std::map<_Kty,_Ty,_Pr,_Alloc>::operator [](const _Kty &)”
+  c:\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\map(197): note: 或    “_Ty &std::map<_Kty,_Ty,_Pr,_Alloc>::operator [](_Kty &&)”
+  c:\c++projects\jvm-1\src\native\nativeinterface.cpp(7): note: 尝试匹配参数列表“(std::map, const char [15])”时
+c:\c++projects\jvm-1\src\native\nativeinterface.cpp(14): error C2065: “FP”: 未声明的标识符
+c:\c++projects\jvm-1\src\native\nativeinterface.cpp(14): error C2146: 语法错误: 缺少“;”(在标识符“fp”的前面)
+c:\c++projects\jvm-1\src\native\nativeinterface.cpp(14): error C2065: “fp”: 未声明的标识符
+c:\c++projects\jvm-1\src\native\nativeinterface.cpp(14): error C2678: 二进制“[”: 没有找到接受“std::map”类型的左操作数的运算符(或没有可接受的转换)
+  c:\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\map(361): note: 可能是“_Ty &std::map<_Kty,_Ty,_Pr,_Alloc>::operator [](const _Kty &)”
+  c:\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\map(197): note: 或    “_Ty &std::map<_Kty,_Ty,_Pr,_Alloc>::operator [](_Kty &&)”
+  c:\c++projects\jvm-1\src\native\nativeinterface.cpp(14): note: 尝试匹配参数列表“(std::map, const std::string)”时
+c:\c++projects\jvm-1\src\native\nativeinterface.cpp(16): error C3861: “fp”: 找不到标识符
+  正在生成代码...

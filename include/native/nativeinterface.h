@@ -3,11 +3,11 @@
 #include <map>
 #include <string>
 #include <iostream>
-#include <functional>
 
+typedef void* (*FP)(string&);
 using namespace std;
 
-static map<string, function<void*(const string &)>> native_map;
+static map<string, FP> native_map;
 void registerNatives();
 
 void * find_native(const string & class_name, const string & methodName, const string & descriptor);

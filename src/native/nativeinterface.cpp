@@ -11,7 +11,7 @@ void *find_native(const string & class_name, const string & methodName, const st
 {
 	registerNatives();
 	std::cout << class_name << endl;
-	function<void*(const string &)> fp = native_map[class_name];
+	FP fp = native_map[class_name];
 	std::cout << methodName + ":" + descriptor << endl;
 	void* result = fp(methodName+":"+ descriptor);
 	if (result != nullptr) {
