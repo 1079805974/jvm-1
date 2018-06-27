@@ -3,12 +3,8 @@
 #include "thread.h"
 #include "methodarea.h"
 #include "native/nativeinterface.h"
+#include "executionengine.h"
 
-#define THD "Ljava/lang/Thread;"
-#define OBJ "Ljava/lang/Object;"
-#define STE "Ljava/lang/StackTraceElement;"
-#define TRB "Ljava/lang/Throwable;"
-#define STR "Ljava/lang/String;"
 
 static map<string, void*> methods = {
 { "start0:()V",						(void *)&JVM_StartThread },
@@ -34,11 +30,12 @@ void JVM_StartThread(ClassInstance *threadInstance) {
 	Thread* thread = new Thread(2);
 	vector<Value> args;
 	Value obj;
+	ClassRuntime *runtime = threadInstance->getClassRuntime();
 	obj.type = REFERENCE;
 	obj.printType = REFERENCE;
 	obj.data.object = threadInstance;
 	args.insert(args.begin(), obj);
-	thread->addFrame(new Frame(threadInstance, threadInstance->getClassRuntime() , "run", "()V", args));
+	thread->addFrame(new Frame(threadInstance, runtime, "run", "()V", args));
 	Thread::appendNewThread(thread);
 }
 

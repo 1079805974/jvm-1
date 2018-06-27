@@ -28,11 +28,19 @@ Frame::Frame(ClassInstance *object, ClassRuntime *classRuntime, string methodNam
 		pc = -1;
 		void* fp = find_native(classRuntime->name, methodName, methodDescriptor);
 		((void(*)(ClassInstance *))fp)(object);
-	}else {
+	}
+	else if ((_method.access_flags & 0x0200) != 0) {//is synchronize method
+		findAttributes();
+	}
+	else{
 		findAttributes();
 	}
 }
-
+bool test_and_set(bool *lock) {
+	bool rv = *lock;
+	*lock = true;
+	return rv;
+}
 Frame::Frame(ClassRuntime *classRuntime, string methodName, string methodDescriptor, vector<Value> arguments) : pc(0), _object(NULL) {
     
     for (int i = 0; i < arguments.size(); i++) {

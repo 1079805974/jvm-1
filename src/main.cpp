@@ -27,6 +27,7 @@ int main(int argc, char *argv[]) {
     
 	const char *file_className = argv[1];
 	const char *file_output = (argc < 3) ? NULL : argv[2];
+
 	file_className = "Test2";
     // Carregamento da classe de entrada.
     MethodArea &methodArea = MethodArea::getInstance();

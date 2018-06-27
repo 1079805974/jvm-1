@@ -59,6 +59,7 @@ private:
     method_info* methods;
     //ClassLoader loader;
     ClassRuntime* superClass;
+	ClassInstance* reflectClass;
     /**
      * Os fields estáticos da classe.
      */

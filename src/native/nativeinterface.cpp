@@ -1,11 +1,15 @@
 #include "native/nativeinterface.h"
 #include "native/java_lang_thread.h"
+//#include "native/java_lang_class.h"
+#include "native/java_lang_object.h"
 
 
 void registerNatives()
 {
 	native_map["vm/lang/Thread"] = java_lang_thread_search_method;
 	native_map["java/lang/Thread"] = java_lang_thread_search_method;
+	//native_map["java/lang/Class"] = java_lang_class_search_method;
+	native_map["java/lang/Object"] = java_lang_object_search_method;
 }
 
 void *find_native(const string & class_name, const string & methodName, const string & descriptor)	// such as: find_native(L"java/lang/Object", L"notify:()V")

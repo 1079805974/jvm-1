@@ -425,15 +425,19 @@ void ExecutionEngine::i_ldc() {
         value.printType = ValueType::INT;
         value.type = ValueType::INT;
         value.data.intValue = (int32_t) entry.info.integer_info.bytes;
-    } else if (entry.tag == CONSTANT_Float) {
-        u4 floatBytes = entry.info.float_info.bytes;
-        int s = ((floatBytes >> 31) == 0) ? 1 : -1;
-        int e = ((floatBytes >> 23) & 0xff);
-        int m = (e == 0) ? (floatBytes & 0x7fffff) << 1 : (floatBytes & 0x7fffff) | 0x800000;
-        
-        float number = s*m*pow(2, e-150);
-        value.type = ValueType::FLOAT;
-        value.data.floatValue = number;
+	}else if (entry.tag == CONSTANT_Float) {
+		u4 floatBytes = entry.info.float_info.bytes;
+		int s = ((floatBytes >> 31) == 0) ? 1 : -1;
+		int e = ((floatBytes >> 23) & 0xff);
+		int m = (e == 0) ? (floatBytes & 0x7fffff) << 1 : (floatBytes & 0x7fffff) | 0x800000;
+
+		float number = s * m*pow(2, e - 150);
+		value.type = ValueType::FLOAT;
+		value.data.floatValue = number;
+	}else if (entry.tag == CONSTANT_Class) {
+		cerr << "ldc load a class" << entry.tag << endl;
+		value.type = ValueType::REFERENCE;
+		value.data.object = new StringObject("fuck");
     } else {
         cerr << "ldc tentando acessar um elemento da CP invalido: " << entry.tag << endl;
         exit(1);
@@ -4646,6 +4650,10 @@ void ExecutionEngine::i_instanceof() {
 void ExecutionEngine::i_monitorenter() {
     Thread* thread = Thread::currentThread();
     Frame *topFrame = thread->getTopFrame();
+
+	Value objectrefValue = topFrame->popTopOfOperandStack();
+	
+
     topFrame->pc += 1;
 }
 

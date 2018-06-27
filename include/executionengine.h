@@ -58,7 +58,7 @@ public:
      * @param descriptor O descritor do método.
      * @return Retorna \c true caso o método exista, ou \c false caso contrário.
      */
-    bool doesMethodExist(ClassRuntime *classRuntime, string name, string descriptor);
+    static bool doesMethodExist(ClassRuntime *classRuntime, string name, string descriptor);
     
     /**
      * @brief Popula os vetores de um multiarray

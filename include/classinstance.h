@@ -64,13 +64,13 @@ public:
      * @return Retorna \c true caso o field existir, e \c false caso contrário.
      */
     bool fieldExists(string fieldName);
-    
+	bool locked;
 private:
     /**
      * Armazena a classe correspondente ao objeto.
      */
     ClassRuntime *_classRuntime;
-    
+	
     /**
      * Armazena os fields do objeto (de instância).
      */

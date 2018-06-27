@@ -1,7 +1,8 @@
 #include "classruntime.h"
 #include "methodarea.h"
 #include "classviewer.h"
-
+#include "classinstance.h"
+#include "thread.h"
 #include <iostream>
 #include <cstdlib>
 
@@ -84,6 +85,13 @@ ClassRuntime::ClassRuntime(ClassFile *classFile) : _classFile(classFile) {
             putValueIntoField(value, fieldName);
         }
     }
+
+	MethodArea &methodArea = MethodArea::getInstance();
+	ClassRuntime *classRuntime = methodArea.loadClassNamed("java/lang/class");
+	ClassInstance *instance = new ClassInstance(classRuntime);
+	this->reflectClass = instance;
+	Thread* currentThread = Thread::currentThread();
+	currentThread->addFrame(new Frame());
 }
 
 ClassFile* ClassRuntime::getClassFile() {

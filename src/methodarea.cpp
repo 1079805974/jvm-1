@@ -47,8 +47,7 @@ ClassRuntime* MethodArea::loadClassNamed(const string &className) {
     fclose(fp);
     
     // adicionando <clinit> da classe (se existir) na stack frame.
-    ExecutionEngine &executionEngine = ExecutionEngine::getInstance();
-    bool existsClinit = executionEngine.doesMethodExist(classRuntime, "<clinit>", "()V");
+    bool existsClinit = ExecutionEngine::doesMethodExist(classRuntime, "<clinit>", "()V");
     if (existsClinit) {
         VMStack &stackFrame = VMStack::getInstance();
         Frame *newFrame = new Frame(classRuntime, "<clinit>", "()V");

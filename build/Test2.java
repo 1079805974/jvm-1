@@ -8,7 +8,7 @@ class Test2
 		Runnable r = new Runnable(){
 			@Override
 			public void run(){
-				System.out.println(fib(3));
+				System.out.println("Hello World");
 			}
 		};
 		Thread thread = new Thread(r);
