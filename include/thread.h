@@ -39,7 +39,6 @@ private:
 	static Thread * _currentThread;
 	int pc;
 	VMStack vmstack;
-	
 };
 
 #endif

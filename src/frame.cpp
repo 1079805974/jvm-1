@@ -10,7 +10,6 @@
 #include "methodarea.h"
 #include "vmstack.h"
 #include "native/nativeinterface.h"
-#include "thread.h"
 
 Frame::Frame(ClassInstance *object, ClassRuntime *classRuntime, string methodName, string methodDescriptor, vector<Value> arguments) : pc(0), _object(object) {
     

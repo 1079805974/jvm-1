@@ -1,3 +1,45 @@
-﻿  executionengine.cpp
+﻿  frame.cpp
+c:\c++projects\jvm-1\include\vmstack.h(38): error C2061: 语法错误: 标识符“Frame”
+c:\c++projects\jvm-1\include\vmstack.h(44): error C2143: 语法错误: 缺少“;”(在“*”的前面)
+c:\c++projects\jvm-1\include\vmstack.h(44): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+c:\c++projects\jvm-1\include\vmstack.h(44): error C2238: 意外的标记位于“;”之前
+c:\c++projects\jvm-1\include\vmstack.h(68): error C2065: “Frame”: 未声明的标识符
+c:\c++projects\jvm-1\include\vmstack.h(68): error C2059: 语法错误:“>”
+c:\c++projects\jvm-1\include\vmstack.h(68): error C2976: “std::stack”: 模板 参数太少
+  c:\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\stack(19): note: 参见“std::stack”的声明
+c:\c++projects\jvm-1\include\thread.h(32): error C2061: 语法错误: 标识符“Frame”
+c:\c++projects\jvm-1\include\thread.h(34): error C2143: 语法错误: 缺少“;”(在“*”的前面)
+c:\c++projects\jvm-1\include\thread.h(34): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+c:\c++projects\jvm-1\include\thread.h(34): error C2238: 意外的标记位于“;”之前
+c:\c++projects\jvm-1\include\thread.h(35): error C2061: 语法错误: 标识符“ClassInstance”
 c:\c++projects\jvm-1\include\classruntime.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  jvm-1.vcxproj -> C:\C++Projects\jvm-1\Debug\jvm-1.exe
+  Thread.cpp
+c:\c++projects\jvm-1\include\classinstance.h(22): error C2065: “Thread”: 未声明的标识符
+c:\c++projects\jvm-1\include\classinstance.h(22): error C2059: 语法错误:“>”
+c:\c++projects\jvm-1\include\classinstance.h(22): error C2976: “std::queue”: 模板 参数太少
+  c:\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\queue(21): note: 参见“std::queue”的声明
+c:\c++projects\jvm-1\include\classinstance.h(23): error C2065: “Thread”: 未声明的标识符
+c:\c++projects\jvm-1\include\classinstance.h(23): error C2059: 语法错误:“>”
+c:\c++projects\jvm-1\include\classinstance.h(23): error C2976: “std::queue”: 模板 参数太少
+  c:\microsoft visual studio\2017\community\vc\tools\msvc\14.14.26428\include\queue(21): note: 参见“std::queue”的声明
+c:\c++projects\jvm-1\include\classinstance.h(24): error C2143: 语法错误: 缺少“;”(在“*”的前面)
+c:\c++projects\jvm-1\include\classinstance.h(24): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+c:\c++projects\jvm-1\include\classinstance.h(24): error C2238: 意外的标记位于“;”之前
+c:\c++projects\jvm-1\include\classruntime.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+c:\c++projects\jvm-1\src\thread.cpp(83): error C2663: “std::queue<_Ty,_Container>::push”: 2 个重载没有“this”指针的合法转换
+  vmstack.cpp
+c:\c++projects\jvm-1\include\thread.h(19): error C2143: 语法错误: 缺少“;”(在“<”的前面)
+c:\c++projects\jvm-1\include\thread.h(19): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+c:\c++projects\jvm-1\include\thread.h(19): error C2238: 意外的标记位于“;”之前
+c:\c++projects\jvm-1\include\thread.h(30): error C2143: 语法错误: 缺少“;”(在“&”的前面)
+c:\c++projects\jvm-1\include\thread.h(30): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+c:\c++projects\jvm-1\include\thread.h(30): error C2238: 意外的标记位于“;”之前
+c:\c++projects\jvm-1\include\thread.h(32): error C2061: 语法错误: 标识符“Frame”
+c:\c++projects\jvm-1\include\thread.h(34): error C2143: 语法错误: 缺少“;”(在“*”的前面)
+c:\c++projects\jvm-1\include\thread.h(34): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+c:\c++projects\jvm-1\include\thread.h(34): error C2238: 意外的标记位于“;”之前
+c:\c++projects\jvm-1\include\thread.h(35): error C2061: 语法错误: 标识符“ClassInstance”
+c:\c++projects\jvm-1\include\thread.h(41): error C3646: “vmstack”: 未知重写说明符
+c:\c++projects\jvm-1\include\thread.h(41): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+c:\c++projects\jvm-1\include\classruntime.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  正在生成代码...

@@ -3,6 +3,7 @@
 
 #include "tipos.h"
 #include "object.h"
+#include "thread.h"
 
 #include <map>
 #include <string>
