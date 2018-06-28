@@ -1,0 +1,70 @@
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /mnt/c/cygwin64/bin/CC 
+Build flags: 
+Id flags: 
+
+The output was:
+Permission denied
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /mnt/c/cygwin64/bin/CC 
+Build flags: 
+Id flags: -c
+
+The output was:
+Permission denied
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+Determining if the CXX compiler works failed with the following output:
+Change Dir: /mnt/c/C++Projects/jvm-1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_5d83a/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5d83a.dir/build.make CMakeFiles/cmTC_5d83a.dir/build
+make[1]: Entering directory '/mnt/c/C++Projects/jvm-1/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_5d83a.dir/testCXXCompiler.cxx.o
+/mnt/c/cygwin64/bin/CC      -o CMakeFiles/cmTC_5d83a.dir/testCXXCompiler.cxx.o -c /mnt/c/C++Projects/jvm-1/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+make[1]: execvp: /mnt/c/cygwin64/bin/CC: Permission denied
+CMakeFiles/cmTC_5d83a.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_5d83a.dir/testCXXCompiler.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_5d83a.dir/testCXXCompiler.cxx.o] Error 127
+make[1]: Leaving directory '/mnt/c/C++Projects/jvm-1/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_5d83a/fast' failed
+make: *** [cmTC_5d83a/fast] Error 2
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /mnt/c/cygwin64/bin/CC 
+Build flags: 
+Id flags: 
+
+The output was:
+Permission denied
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /mnt/c/cygwin64/bin/CC 
+Build flags: 
+Id flags: -c
+
+The output was:
+Permission denied
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+Determining if the CXX compiler works failed with the following output:
+Change Dir: /mnt/c/C++Projects/jvm-1/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_5ec1a/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5ec1a.dir/build.make CMakeFiles/cmTC_5ec1a.dir/build
+make[1]: Entering directory '/mnt/c/C++Projects/jvm-1/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_5ec1a.dir/testCXXCompiler.cxx.o
+/mnt/c/cygwin64/bin/CC      -o CMakeFiles/cmTC_5ec1a.dir/testCXXCompiler.cxx.o -c /mnt/c/C++Projects/jvm-1/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+make[1]: execvp: /mnt/c/cygwin64/bin/CC: Permission denied
+CMakeFiles/cmTC_5ec1a.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_5ec1a.dir/testCXXCompiler.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_5ec1a.dir/testCXXCompiler.cxx.o] Error 127
+make[1]: Leaving directory '/mnt/c/C++Projects/jvm-1/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_5ec1a/fast' failed
+make: *** [cmTC_5ec1a/fast] Error 2
+
+
