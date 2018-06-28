@@ -8,6 +8,7 @@
 #include "classruntime.h"
 #include "methodarea.h"
 #include "thread.h"
+#include "heap.h"
 
 #include <iostream>
 #include <cassert>
@@ -21,6 +22,11 @@
 using namespace std;
 ExecutionEngine::ExecutionEngine() : paused(false), _isWide(false) {
     initInstructions();
+}
+
+void ExecutionEngine::checkInterrupt()
+{
+	
 }
 
 ExecutionEngine::~ExecutionEngine() {
@@ -67,9 +73,10 @@ void ExecutionEngine::run(){
             u1 *code = topFrame->getCode(topFrame->pc);
 
             cout<<"线程:"<< thread->pid << " 执行" <<instructions[code[0]] <<endl;
-            
-            (*this.*_instructionFunctions[code[0]])();
+           
+			(*this.*_instructionFunctions[code[0]])();
             count++;
+			ExecutionEngine::checkInterrupt();
             if(count == 1){
 				if (Thread::switchThread() == false) {
 					cout << "last thread end" << endl;
@@ -436,8 +443,10 @@ void ExecutionEngine::i_ldc() {
 		value.data.floatValue = number;
 	}else if (entry.tag == CONSTANT_Class) {
 		cerr << "ldc load a class" << entry.tag << endl;
+		MethodArea &area = MethodArea::getInstance();
+		ClassRuntime* runtime = area.getClassNamed(getFormattedConstant(constantPool, entry.info.class_info.name_index));
 		value.type = ValueType::REFERENCE;
-		value.data.object = new StringObject("fuck");
+		value.data.object = runtime->reflectClass;
     } else {
         cerr << "ldc tentando acessar um elemento da CP invalido: " << entry.tag << endl;
         exit(1);
@@ -4650,17 +4659,31 @@ void ExecutionEngine::i_instanceof() {
 void ExecutionEngine::i_monitorenter() {
     Thread* thread = Thread::currentThread();
     Frame *topFrame = thread->getTopFrame();
-
-	Value objectrefValue = topFrame->popTopOfOperandStack();
-	
-
-    topFrame->pc += 1;
+	Value value = topFrame->popTopOfOperandStack();
+	assert(value.type = ValueType::REFERENCE);
+	ClassInstance* object = (ClassInstance*)value.data.object;
+	if (object->lockCounter >0 && object->lockOwner != thread) {
+			Thread::addCurrentThreadToBlockingQueue(object);
+	}else{
+		object->lockCounter++;
+		object->lockOwner = thread;
+		topFrame->pc += 1;
+	}
 }
 
 void ExecutionEngine::i_monitorexit() {
-    Thread* thread = Thread::currentThread();
-    Frame *topFrame = thread->getTopFrame();
-    topFrame->pc += 1;
+	Thread* thread = Thread::currentThread();
+	Frame *topFrame = thread->getTopFrame();
+	Value value = topFrame->popTopOfOperandStack();
+	assert(value.type = ValueType::REFERENCE);
+	ClassInstance* object = (ClassInstance*)value.data.object;
+	assert(object->lockCounter > 0);
+	object->lockCounter--;
+	if (object->lockCounter == 0) {
+		object->lockOwner = nullptr;
+		object->activeBlocking();
+	}
+	topFrame->pc += 1;
 }
 
 void ExecutionEngine::i_wide() {

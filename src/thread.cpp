@@ -78,6 +78,13 @@ Frame * Thread::getTopFrame()
 	return vmstack.getTopFrame();
 }
 
+void Thread::addCurrentThreadToBlockingQueue(ClassInstance* obj)
+{
+	obj->blockingThreads.push(_currentThread);
+	threadQueue.pop();
+	setCurrentThread(threadQueue.front());
+}
+
 int Thread::size()
 {
 	return vmstack.size();

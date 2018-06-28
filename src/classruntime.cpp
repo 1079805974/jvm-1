@@ -86,12 +86,6 @@ ClassRuntime::ClassRuntime(ClassFile *classFile) : _classFile(classFile) {
         }
     }
 
-	MethodArea &methodArea = MethodArea::getInstance();
-	ClassRuntime *classRuntime = methodArea.loadClassNamed("java/lang/class");
-	ClassInstance *instance = new ClassInstance(classRuntime);
-	this->reflectClass = instance;
-	Thread* currentThread = Thread::currentThread();
-	currentThread->addFrame(new Frame());
 }
 
 ClassFile* ClassRuntime::getClassFile() {

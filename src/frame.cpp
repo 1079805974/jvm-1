@@ -96,7 +96,7 @@ void Frame::pushIntoOperandStack(Value operand) {
 Value Frame::popTopOfOperandStack() {
     if (_operandStack.size() == 0) {
         cerr << "IndexOutOfBoundsException" << endl;
-        exit(1);
+       // exit(1);
     }
     
     Value top = _operandStack.top();

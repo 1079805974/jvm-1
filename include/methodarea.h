@@ -30,6 +30,8 @@ public:
      * @brief Destrutor padrão.
      */
     ~MethodArea();
+
+	void load_java_lang_Class();
     
     /**
      * @brief Carrega a classe com o nome dado e a adiciona na área de métodos.

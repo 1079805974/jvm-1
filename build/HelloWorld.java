@@ -1,4 +1,4 @@
-import jdk.internal.misc.Signal;
+
 
 //
 // Source code recreated from a .class file by IntelliJ IDEA
@@ -8,19 +8,8 @@ import jdk.internal.misc.Signal;
 class HelloWorld {
 
     public static void main(String[] var0) {
-      
+      synchronized(HelloWorld.class){
+	  }
     }
     
-}
-
-class Semaphore{
-    private int lock = 1;
-    public synchronized void signal(){
-        lock++;
-    }
-
-    public synchronized void wait0(){
-        while(lock<=0);
-        lock--;
-    }
 }

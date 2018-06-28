@@ -2,6 +2,7 @@
 #define thread_h
 
 #include <queue>
+#include <vector>
 
 #include "vmstack.h"
 #include "frame.h"
@@ -31,6 +32,7 @@ public:
 	void addFrame(Frame* frame);
 	bool destroyTopFrame();
 	Frame* getTopFrame();
+	static void addCurrentThreadToBlockingQueue(ClassInstance*);
 	int size();
 	static bool switchThread();
 private:

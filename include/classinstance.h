@@ -3,19 +3,25 @@
 
 #include "tipos.h"
 #include "object.h"
-#include "classruntime.h"
 
 #include <map>
 #include <string>
+#include <queue>
 
 using namespace std;
 
+class ClassRuntime;
 /**
  * Representa uma instância de classe.
  */
 class ClassInstance : public Object {
     
 public:
+	int lockCounter;
+	queue<Thread*> blockingThreads;
+	queue<Thread*> waitingThreads;
+	Thread* lockOwner;
+	void activeBlocking();
     /**
      * @brief Construtor padrão.
      * @param classRuntime A classe correspondente ao objeto.

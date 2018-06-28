@@ -30,7 +30,7 @@ public:
         static ExecutionEngine instance;
         return instance;
     }
-    
+	static void checkInterrupt();
     /**
      * @brief Destrutor padrão.
      */

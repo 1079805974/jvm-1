@@ -4,11 +4,20 @@
 #include "heap.h"
 #include "stringobject.h"
 #include "arrayobject.h"
+#include "classruntime.h"
+#include "thread.h"
 
 #include <iostream>
 #include <cstdlib>
 
-ClassInstance::ClassInstance(ClassRuntime *classRuntime) : _classRuntime(classRuntime) {
+void ClassInstance::activeBlocking()
+{
+	Thread* t = blockingThreads.front();
+	blockingThreads.pop();
+	Thread::appendNewThread(t);
+}
+
+ClassInstance::ClassInstance(ClassRuntime *classRuntime) : _classRuntime(classRuntime), lockCounter(0){
     ClassFile *classFile = classRuntime->getClassFile();
     field_info *fields = classFile->fields;
 	method_info* methods = classFile->methods;

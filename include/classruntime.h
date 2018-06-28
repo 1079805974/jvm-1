@@ -9,6 +9,7 @@
 
 using namespace std;
 
+class ClassInstance;
 /**
  * Representação de uma classe carregada durante o runtime.在运行时加载的类的表示。
  */
@@ -48,6 +49,7 @@ public:
     bool fieldExists(string fieldName);
 	ClassFile *_classFile;
 	string name;
+	ClassInstance *reflectClass;
 
 private:
     /**
@@ -59,7 +61,6 @@ private:
     method_info* methods;
     //ClassLoader loader;
     ClassRuntime* superClass;
-	ClassInstance* reflectClass;
     /**
      * Os fields estáticos da classe.
      */
