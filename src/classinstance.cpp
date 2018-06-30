@@ -12,9 +12,11 @@
 
 void ClassInstance::activeBlocking()
 {
-	Thread* t = blockingThreads.front();
-	blockingThreads.pop();
-	Thread::appendNewThread(t);
+	if (blockingThreads.size() > 0) {
+		Thread* t = blockingThreads.front();
+		blockingThreads.pop();
+		Thread::appendNewThread(t);
+	}
 }
 
 ClassInstance::ClassInstance(ClassRuntime *classRuntime) : _classRuntime(classRuntime), lockCounter(0){

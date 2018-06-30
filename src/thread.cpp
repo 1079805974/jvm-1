@@ -1,6 +1,9 @@
 #include <iostream>
+#include <cassert>
 
 #include "thread.h"
+#include "frame.h"
+#include "classinstance.h"
 
 using namespace std;
 Thread::Thread(int pid)
@@ -70,7 +73,25 @@ VMStack& Thread::getVMStack(){
 
 bool Thread::destroyTopFrame()
 {
+	Frame* topFrame = getTopFrame();
+	if(topFrame->isSync)
+		releaseLock();
 	return vmstack.destroyTopFrame();
+}
+
+void Thread::releaseLock()
+{
+	Frame* topFrame = getTopFrame();
+	ClassInstance* instance = topFrame->getObject();
+	assert(instance->lockOwner == this || instance->lockOwner == nullptr);
+	if (instance->lockOwner == this) {
+		assert(instance->lockCounter > 0);
+		instance->lockCounter--;
+		if (instance->lockCounter == 0) {
+			instance->lockOwner = nullptr;
+			instance->activeBlocking();
+		}
+	}
 }
 
 Frame * Thread::getTopFrame()

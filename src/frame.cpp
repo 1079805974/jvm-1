@@ -11,13 +11,14 @@
 #include "vmstack.h"
 #include "native/nativeinterface.h"
 
-Frame::Frame(ClassInstance *object, ClassRuntime *classRuntime, string methodName, string methodDescriptor, vector<Value> arguments) : pc(0), _object(object) {
+Frame::Frame(ClassInstance *object, ClassRuntime *classRuntime, string methodName, string methodDescriptor, vector<Value> arguments) : pc(0), _object(object), isSync(false), isStatic(false){
     
     for (int i = 0; i < arguments.size(); i++) {
         _localVariables[i] = arguments[i];
     }
-    
+#ifdef DEBUG
 	cout << "new method:" << methodName << endl;
+#endif // DEBUG
 
     method_info *method = getMethodNamed(classRuntime, methodName, methodDescriptor);
     assert(method != NULL);
@@ -28,31 +29,29 @@ Frame::Frame(ClassInstance *object, ClassRuntime *classRuntime, string methodNam
 		void* fp = find_native(classRuntime->name, methodName, methodDescriptor);
 		((void(*)(ClassInstance *))fp)(object);
 	}
-	else if ((_method.access_flags & 0x0200) != 0) {//is synchronize method
-		findAttributes();
+	if ((_method.access_flags & 0x0020) != 0) {//is synchronize method
+		cout << "new Sync" << methodName << endl;
+		isSync = true;
 	}
-	else{
-		findAttributes();
-	}
+	findAttributes();
 }
-bool test_and_set(bool *lock) {
-	bool rv = *lock;
-	*lock = true;
-	return rv;
-}
-Frame::Frame(ClassRuntime *classRuntime, string methodName, string methodDescriptor, vector<Value> arguments) : pc(0), _object(NULL) {
-    
+
+Frame::Frame(ClassRuntime *classRuntime, string methodName, string methodDescriptor, vector<Value> arguments) : pc(0),  isSync(false) , isStatic(true) {
+	_object = classRuntime->reflectClass;
     for (int i = 0; i < arguments.size(); i++) {
         _localVariables[i] = arguments[i];
     }
     
     cout << "load method: "<< methodName << endl;
-
+	
     method_info *method = getMethodNamed(classRuntime, methodName, methodDescriptor);
     assert(method != NULL);
     _method = *method;
     assert((_method.access_flags & 0x0008) != 0); // o método precisa ser estático
-    
+	if ((_method.access_flags & 0x0020) != 0) {//is synchronize method
+		isSync = true;
+		findAttributes();
+	}
     findAttributes();
 }
 
@@ -115,6 +114,11 @@ void Frame::setOperandStackFromBackup(stack<Value> backup) {
 	VMStack &stackFrame = VMStack::getInstance();
 	stackFrame.pc = this->pc;
     _operandStack = backup;
+}
+
+ClassInstance * Frame::getObject()
+{
+	return _object;
 }
 
 u1* Frame::getCode(uint32_t address) {

@@ -3,7 +3,6 @@
 
 #include "tipos.h"
 #include "object.h"
-#include "thread.h"
 
 #include <map>
 #include <string>
@@ -12,6 +11,7 @@
 using namespace std;
 
 class ClassRuntime;
+class Thread;
 /**
  * Representa uma instância de classe.
  */

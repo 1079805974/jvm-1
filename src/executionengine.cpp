@@ -71,9 +71,10 @@ void ExecutionEngine::run(){
         if(thread -> size() > 0){
             Frame *topFrame = thread->getTopFrame();
             u1 *code = topFrame->getCode(topFrame->pc);
+#ifdef DEBUG
+			cout << "线程:" << thread->pid << " 执行" << instructions[code[0]] << endl;
+#endif // DEBUG
 
-            cout<<"线程:"<< thread->pid << " 执行" <<instructions[code[0]] <<endl;
-           
 			(*this.*_instructionFunctions[code[0]])();
             count++;
 			ExecutionEngine::checkInterrupt();
@@ -3896,8 +3897,10 @@ void ExecutionEngine::i_invokevirtual() {
 
     string methodName = getFormattedConstant(constantPool, methodNameAndType.name_index);
     string methodDescriptor = getFormattedConstant(constantPool, methodNameAndType.descriptor_index);
-
+#ifdef DEBUG
 	cout << "methodName" << className << methodName << endl;
+#endif // DEBUG
+
 
     if (className.find("java/io/") != string::npos) {
         // simulando println ou print
@@ -4041,7 +4044,19 @@ void ExecutionEngine::i_invokevirtual() {
         Frame *newFrame = new Frame(instance, classRuntime, methodName, methodDescriptor, args);
 		if (newFrame->pc == -1) {
 			topFrame->pc += 3;
+			delete newFrame;
 			return;
+		}
+		if (newFrame->isSync) {
+			if (instance->lockCounter >0 && instance->lockOwner != thread) {
+				Thread::addCurrentThreadToBlockingQueue(instance);
+				topFrame->setOperandStackFromBackup(operandStackBackup);
+				delete newFrame;
+				return;
+			}else {
+				instance->lockCounter++;
+				instance->lockOwner = thread;
+			}
 		}
         // se a stack frame mudou, é porque teve <clinit> adicionado, então terminar a execução da instrução para eles serem executados.
         if (thread->getTopFrame() != topFrame) {
@@ -4083,7 +4098,10 @@ void ExecutionEngine::i_invokespecial() {
 
     string methodName = getFormattedConstant(constantPool, methodNameAndType.name_index);
     string methodDescriptor = getFormattedConstant(constantPool, methodNameAndType.descriptor_index);
-        cout<< "方法名: "<< className << methodName <<endl;
+#ifdef DEBUG
+	cout << "方法名: " << className << methodName << endl;
+#endif // DEBUG
+
     // casos especiais
     if ((className == "java/lang/Object" || className == "java/lang/String") && methodName == "<init>") {
         if (className == "java/lang/String") {
@@ -4140,7 +4158,22 @@ void ExecutionEngine::i_invokespecial() {
         ClassRuntime *classRuntime = methodArea.loadClassNamed(className);
         
         Frame *newFrame = new Frame(instance, classRuntime, methodName, methodDescriptor, args);
-
+		if (newFrame->pc == -1) {
+			topFrame->pc += 3;
+			delete newFrame;
+			return;
+		}
+		if (newFrame->isSync) {
+			if (instance->lockCounter >0 && instance->lockOwner != thread) {
+				Thread::addCurrentThreadToBlockingQueue(instance);
+				delete newFrame;
+				return;
+			}
+			else {
+				instance->lockCounter++;
+				instance->lockOwner = thread;
+			}
+		}
         // se a stack frame mudou, é porque teve <clinit> adicionado, então terminar a execução da instrução para eles serem executados.
         if (thread->getTopFrame() != topFrame) {
             topFrame->setOperandStackFromBackup(operandStackBackup);
@@ -4223,7 +4256,23 @@ void ExecutionEngine::i_invokestatic() {
         MethodArea &methodArea = MethodArea::getInstance();
         ClassRuntime *classRuntime = methodArea.loadClassNamed(className);
         Frame *newFrame = new Frame(classRuntime, methodName, methodDescriptor, args);
-
+		ClassInstance* instance = newFrame->getObject();
+		if (newFrame->pc == -1) {
+			topFrame->pc += 3;
+			delete newFrame;
+			return;
+		}
+		if (newFrame->isSync) {
+			if (instance->lockCounter >0 && instance->lockOwner != thread) {
+				Thread::addCurrentThreadToBlockingQueue(instance);
+				delete newFrame;
+				return;
+			}
+			else {
+				instance->lockCounter++;
+				instance->lockOwner = thread;
+			}
+		}
         // se a stack frame mudou, é porque teve <clinit> adicionado, então terminar a execução da instrução para eles serem executados.
         if (thread->getTopFrame() != topFrame) {
             topFrame->setOperandStackFromBackup(operandStackBackup);
@@ -4310,7 +4359,22 @@ void ExecutionEngine::i_invokeinterface() {
         methodArea.loadClassNamed(className); // carregando a interface (caso ainda não foi carregada).
         
         Frame *newFrame = new Frame(instance, instance->getClassRuntime(), methodName, methodDescriptor, args);
-
+		if (newFrame->pc == -1) {
+			topFrame->pc += 3;
+			delete newFrame;
+			return;
+		}
+		if (newFrame->isSync) {
+			if (instance->lockCounter >0 && instance->lockOwner != thread) {
+				Thread::addCurrentThreadToBlockingQueue(instance);
+				delete newFrame;
+				return;
+			}
+			else {
+				instance->lockCounter++;
+				instance->lockOwner = thread;
+			}
+		}
         // se a stack frame mudou, é porque teve <clinit> adicionado, então terminar a execução da instrução para eles serem executados.
         if (thread->getTopFrame() != topFrame) {
             topFrame->setOperandStackFromBackup(operandStackBackup);
@@ -4663,7 +4727,8 @@ void ExecutionEngine::i_monitorenter() {
 	assert(value.type = ValueType::REFERENCE);
 	ClassInstance* object = (ClassInstance*)value.data.object;
 	if (object->lockCounter >0 && object->lockOwner != thread) {
-			Thread::addCurrentThreadToBlockingQueue(object);
+		topFrame->pushIntoOperandStack(value);
+		Thread::addCurrentThreadToBlockingQueue(object);
 	}else{
 		object->lockCounter++;
 		object->lockOwner = thread;

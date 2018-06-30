@@ -14,6 +14,9 @@ using namespace std;
 class Frame {
     
 public:
+	bool isSync;
+	bool isStatic;
+	bool isNative;
     /**
      * @brief Construtor utilizado quando o frame está associado a um método de instância.
      * @param object O objeto que contém o método do frame que será criado.

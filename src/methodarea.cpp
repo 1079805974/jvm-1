@@ -52,7 +52,10 @@ void MethodArea::load_java_lang_Class() {
 }
 
 ClassRuntime* MethodArea::loadClassNamed(const string &className) {
+#ifdef DEBUG
 	std::cout << "load class" << className << std::endl;
+#endif // DEBUG
+
     // se a classe já tiver sido carregada, retorna-la
     if (_classes.count(className) > 0) {
         return getClassNamed(className);

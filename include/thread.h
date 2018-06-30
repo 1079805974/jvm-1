@@ -7,6 +7,7 @@
 #include "vmstack.h"
 #include "frame.h"
 
+class ClassInstance;
 class Thread {
 public:
     static const int NEW = 0;
@@ -31,6 +32,7 @@ public:
 	void setPC(int pc);
 	void addFrame(Frame* frame);
 	bool destroyTopFrame();
+	void releaseLock();
 	Frame* getTopFrame();
 	static void addCurrentThreadToBlockingQueue(ClassInstance*);
 	int size();
