@@ -57,255 +57,270 @@ include CMakeFiles/jvm.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/jvm.dir/flags.make
 
-CMakeFiles/jvm.dir/src/main.cpp.o: CMakeFiles/jvm.dir/flags.make
-CMakeFiles/jvm.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/jvm.dir/src/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/main.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/main.cpp
+CMakeFiles/jvm.dir/src/arrayobject.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/arrayobject.cpp.o: ../src/arrayobject.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/jvm.dir/src/arrayobject.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/arrayobject.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/arrayobject.cpp
 
-CMakeFiles/jvm.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/main.cpp > CMakeFiles/jvm.dir/src/main.cpp.i
+CMakeFiles/jvm.dir/src/arrayobject.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/arrayobject.cpp.i"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/arrayobject.cpp > CMakeFiles/jvm.dir/src/arrayobject.cpp.i
 
-CMakeFiles/jvm.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/main.cpp -o CMakeFiles/jvm.dir/src/main.cpp.s
+CMakeFiles/jvm.dir/src/arrayobject.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/arrayobject.cpp.s"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/arrayobject.cpp -o CMakeFiles/jvm.dir/src/arrayobject.cpp.s
 
-CMakeFiles/jvm.dir/src/thread.cpp.o: CMakeFiles/jvm.dir/flags.make
-CMakeFiles/jvm.dir/src/thread.cpp.o: ../src/thread.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/jvm.dir/src/thread.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/thread.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/thread.cpp
+CMakeFiles/jvm.dir/src/classinstance.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../src/classinstance.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/jvm.dir/src/classinstance.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/classinstance.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classinstance.cpp
 
-CMakeFiles/jvm.dir/src/thread.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/thread.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/thread.cpp > CMakeFiles/jvm.dir/src/thread.cpp.i
+CMakeFiles/jvm.dir/src/classinstance.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/classinstance.cpp.i"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/classinstance.cpp > CMakeFiles/jvm.dir/src/classinstance.cpp.i
 
-CMakeFiles/jvm.dir/src/thread.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/thread.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/thread.cpp -o CMakeFiles/jvm.dir/src/thread.cpp.s
+CMakeFiles/jvm.dir/src/classinstance.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/classinstance.cpp.s"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/classinstance.cpp -o CMakeFiles/jvm.dir/src/classinstance.cpp.s
 
 CMakeFiles/jvm.dir/src/classloader.cpp.o: CMakeFiles/jvm.dir/flags.make
 CMakeFiles/jvm.dir/src/classloader.cpp.o: ../src/classloader.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/jvm.dir/src/classloader.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/classloader.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classloader.cpp
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/classloader.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classloader.cpp
 
 CMakeFiles/jvm.dir/src/classloader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/classloader.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/classloader.cpp > CMakeFiles/jvm.dir/src/classloader.cpp.i
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/classloader.cpp > CMakeFiles/jvm.dir/src/classloader.cpp.i
 
 CMakeFiles/jvm.dir/src/classloader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/classloader.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/classloader.cpp -o CMakeFiles/jvm.dir/src/classloader.cpp.s
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/classloader.cpp -o CMakeFiles/jvm.dir/src/classloader.cpp.s
+
+CMakeFiles/jvm.dir/src/classruntime.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../src/classruntime.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/jvm.dir/src/classruntime.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/classruntime.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classruntime.cpp
+
+CMakeFiles/jvm.dir/src/classruntime.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/classruntime.cpp.i"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/classruntime.cpp > CMakeFiles/jvm.dir/src/classruntime.cpp.i
+
+CMakeFiles/jvm.dir/src/classruntime.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/classruntime.cpp.s"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/classruntime.cpp -o CMakeFiles/jvm.dir/src/classruntime.cpp.s
 
 CMakeFiles/jvm.dir/src/classviewer.cpp.o: CMakeFiles/jvm.dir/flags.make
 CMakeFiles/jvm.dir/src/classviewer.cpp.o: ../src/classviewer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/jvm.dir/src/classviewer.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/classviewer.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classviewer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/jvm.dir/src/classviewer.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/classviewer.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classviewer.cpp
 
 CMakeFiles/jvm.dir/src/classviewer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/classviewer.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/classviewer.cpp > CMakeFiles/jvm.dir/src/classviewer.cpp.i
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/classviewer.cpp > CMakeFiles/jvm.dir/src/classviewer.cpp.i
 
 CMakeFiles/jvm.dir/src/classviewer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/classviewer.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/classviewer.cpp -o CMakeFiles/jvm.dir/src/classviewer.cpp.s
-
-CMakeFiles/jvm.dir/src/utils.cpp.o: CMakeFiles/jvm.dir/flags.make
-CMakeFiles/jvm.dir/src/utils.cpp.o: ../src/utils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/jvm.dir/src/utils.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/utils.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/utils.cpp
-
-CMakeFiles/jvm.dir/src/utils.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/utils.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/utils.cpp > CMakeFiles/jvm.dir/src/utils.cpp.i
-
-CMakeFiles/jvm.dir/src/utils.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/utils.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/utils.cpp -o CMakeFiles/jvm.dir/src/utils.cpp.s
-
-CMakeFiles/jvm.dir/src/methodarea.cpp.o: CMakeFiles/jvm.dir/flags.make
-CMakeFiles/jvm.dir/src/methodarea.cpp.o: ../src/methodarea.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/jvm.dir/src/methodarea.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/methodarea.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/methodarea.cpp
-
-CMakeFiles/jvm.dir/src/methodarea.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/methodarea.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/methodarea.cpp > CMakeFiles/jvm.dir/src/methodarea.cpp.i
-
-CMakeFiles/jvm.dir/src/methodarea.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/methodarea.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/methodarea.cpp -o CMakeFiles/jvm.dir/src/methodarea.cpp.s
-
-CMakeFiles/jvm.dir/src/heap.cpp.o: CMakeFiles/jvm.dir/flags.make
-CMakeFiles/jvm.dir/src/heap.cpp.o: ../src/heap.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/jvm.dir/src/heap.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/heap.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/heap.cpp
-
-CMakeFiles/jvm.dir/src/heap.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/heap.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/heap.cpp > CMakeFiles/jvm.dir/src/heap.cpp.i
-
-CMakeFiles/jvm.dir/src/heap.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/heap.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/heap.cpp -o CMakeFiles/jvm.dir/src/heap.cpp.s
-
-CMakeFiles/jvm.dir/src/vmstack.cpp.o: CMakeFiles/jvm.dir/flags.make
-CMakeFiles/jvm.dir/src/vmstack.cpp.o: ../src/vmstack.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/jvm.dir/src/vmstack.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/vmstack.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/vmstack.cpp
-
-CMakeFiles/jvm.dir/src/vmstack.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/vmstack.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/vmstack.cpp > CMakeFiles/jvm.dir/src/vmstack.cpp.i
-
-CMakeFiles/jvm.dir/src/vmstack.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/vmstack.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/vmstack.cpp -o CMakeFiles/jvm.dir/src/vmstack.cpp.s
-
-CMakeFiles/jvm.dir/src/frame.cpp.o: CMakeFiles/jvm.dir/flags.make
-CMakeFiles/jvm.dir/src/frame.cpp.o: ../src/frame.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/jvm.dir/src/frame.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/frame.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/frame.cpp
-
-CMakeFiles/jvm.dir/src/frame.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/frame.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/frame.cpp > CMakeFiles/jvm.dir/src/frame.cpp.i
-
-CMakeFiles/jvm.dir/src/frame.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/frame.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/frame.cpp -o CMakeFiles/jvm.dir/src/frame.cpp.s
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/classviewer.cpp -o CMakeFiles/jvm.dir/src/classviewer.cpp.s
 
 CMakeFiles/jvm.dir/src/executionengine.cpp.o: CMakeFiles/jvm.dir/flags.make
 CMakeFiles/jvm.dir/src/executionengine.cpp.o: ../src/executionengine.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/jvm.dir/src/executionengine.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/executionengine.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/executionengine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/jvm.dir/src/executionengine.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/executionengine.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/executionengine.cpp
 
 CMakeFiles/jvm.dir/src/executionengine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/executionengine.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/executionengine.cpp > CMakeFiles/jvm.dir/src/executionengine.cpp.i
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/executionengine.cpp > CMakeFiles/jvm.dir/src/executionengine.cpp.i
 
 CMakeFiles/jvm.dir/src/executionengine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/executionengine.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/executionengine.cpp -o CMakeFiles/jvm.dir/src/executionengine.cpp.s
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/executionengine.cpp -o CMakeFiles/jvm.dir/src/executionengine.cpp.s
+
+CMakeFiles/jvm.dir/src/frame.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/frame.cpp.o: ../src/frame.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/jvm.dir/src/frame.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/frame.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/frame.cpp
+
+CMakeFiles/jvm.dir/src/frame.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/frame.cpp.i"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/frame.cpp > CMakeFiles/jvm.dir/src/frame.cpp.i
+
+CMakeFiles/jvm.dir/src/frame.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/frame.cpp.s"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/frame.cpp -o CMakeFiles/jvm.dir/src/frame.cpp.s
+
+CMakeFiles/jvm.dir/src/heap.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/heap.cpp.o: ../src/heap.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/jvm.dir/src/heap.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/heap.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/heap.cpp
+
+CMakeFiles/jvm.dir/src/heap.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/heap.cpp.i"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/heap.cpp > CMakeFiles/jvm.dir/src/heap.cpp.i
+
+CMakeFiles/jvm.dir/src/heap.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/heap.cpp.s"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/heap.cpp -o CMakeFiles/jvm.dir/src/heap.cpp.s
+
+CMakeFiles/jvm.dir/src/main.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/jvm.dir/src/main.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/main.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/main.cpp
+
+CMakeFiles/jvm.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/main.cpp.i"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/main.cpp > CMakeFiles/jvm.dir/src/main.cpp.i
+
+CMakeFiles/jvm.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/main.cpp.s"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/main.cpp -o CMakeFiles/jvm.dir/src/main.cpp.s
+
+CMakeFiles/jvm.dir/src/methodarea.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/methodarea.cpp.o: ../src/methodarea.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/jvm.dir/src/methodarea.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/methodarea.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/methodarea.cpp
+
+CMakeFiles/jvm.dir/src/methodarea.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/methodarea.cpp.i"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/methodarea.cpp > CMakeFiles/jvm.dir/src/methodarea.cpp.i
+
+CMakeFiles/jvm.dir/src/methodarea.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/methodarea.cpp.s"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/methodarea.cpp -o CMakeFiles/jvm.dir/src/methodarea.cpp.s
 
 CMakeFiles/jvm.dir/src/stringobject.cpp.o: CMakeFiles/jvm.dir/flags.make
 CMakeFiles/jvm.dir/src/stringobject.cpp.o: ../src/stringobject.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/jvm.dir/src/stringobject.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/stringobject.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/stringobject.cpp
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/stringobject.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/stringobject.cpp
 
 CMakeFiles/jvm.dir/src/stringobject.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/stringobject.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/stringobject.cpp > CMakeFiles/jvm.dir/src/stringobject.cpp.i
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/stringobject.cpp > CMakeFiles/jvm.dir/src/stringobject.cpp.i
 
 CMakeFiles/jvm.dir/src/stringobject.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/stringobject.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/stringobject.cpp -o CMakeFiles/jvm.dir/src/stringobject.cpp.s
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/stringobject.cpp -o CMakeFiles/jvm.dir/src/stringobject.cpp.s
 
-CMakeFiles/jvm.dir/src/arrayobject.cpp.o: CMakeFiles/jvm.dir/flags.make
-CMakeFiles/jvm.dir/src/arrayobject.cpp.o: ../src/arrayobject.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/jvm.dir/src/arrayobject.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/arrayobject.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/arrayobject.cpp
+CMakeFiles/jvm.dir/src/thread.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/thread.cpp.o: ../src/thread.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/jvm.dir/src/thread.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/thread.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/thread.cpp
 
-CMakeFiles/jvm.dir/src/arrayobject.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/arrayobject.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/arrayobject.cpp > CMakeFiles/jvm.dir/src/arrayobject.cpp.i
+CMakeFiles/jvm.dir/src/thread.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/thread.cpp.i"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/thread.cpp > CMakeFiles/jvm.dir/src/thread.cpp.i
 
-CMakeFiles/jvm.dir/src/arrayobject.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/arrayobject.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/arrayobject.cpp -o CMakeFiles/jvm.dir/src/arrayobject.cpp.s
+CMakeFiles/jvm.dir/src/thread.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/thread.cpp.s"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/thread.cpp -o CMakeFiles/jvm.dir/src/thread.cpp.s
 
-CMakeFiles/jvm.dir/src/classinstance.cpp.o: CMakeFiles/jvm.dir/flags.make
-CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../src/classinstance.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/jvm.dir/src/classinstance.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/classinstance.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classinstance.cpp
+CMakeFiles/jvm.dir/src/utils.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/utils.cpp.o: ../src/utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/jvm.dir/src/utils.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/utils.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/utils.cpp
 
-CMakeFiles/jvm.dir/src/classinstance.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/classinstance.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/classinstance.cpp > CMakeFiles/jvm.dir/src/classinstance.cpp.i
+CMakeFiles/jvm.dir/src/utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/utils.cpp.i"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/utils.cpp > CMakeFiles/jvm.dir/src/utils.cpp.i
 
-CMakeFiles/jvm.dir/src/classinstance.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/classinstance.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/classinstance.cpp -o CMakeFiles/jvm.dir/src/classinstance.cpp.s
+CMakeFiles/jvm.dir/src/utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/utils.cpp.s"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/utils.cpp -o CMakeFiles/jvm.dir/src/utils.cpp.s
 
-CMakeFiles/jvm.dir/src/classruntime.cpp.o: CMakeFiles/jvm.dir/flags.make
-CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../src/classruntime.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/jvm.dir/src/classruntime.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/classruntime.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classruntime.cpp
+CMakeFiles/jvm.dir/src/vmstack.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/vmstack.cpp.o: ../src/vmstack.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/jvm.dir/src/vmstack.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/vmstack.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/vmstack.cpp
 
-CMakeFiles/jvm.dir/src/classruntime.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/classruntime.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/classruntime.cpp > CMakeFiles/jvm.dir/src/classruntime.cpp.i
+CMakeFiles/jvm.dir/src/vmstack.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/vmstack.cpp.i"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/vmstack.cpp > CMakeFiles/jvm.dir/src/vmstack.cpp.i
 
-CMakeFiles/jvm.dir/src/classruntime.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/classruntime.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/classruntime.cpp -o CMakeFiles/jvm.dir/src/classruntime.cpp.s
+CMakeFiles/jvm.dir/src/vmstack.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/vmstack.cpp.s"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/vmstack.cpp -o CMakeFiles/jvm.dir/src/vmstack.cpp.s
+
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: CMakeFiles/jvm.dir/flags.make
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../src/native/java_lang_object.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_object.cpp
+
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.i"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_object.cpp > CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.i
+
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.s"
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_object.cpp -o CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.s
 
 CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: CMakeFiles/jvm.dir/flags.make
 CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../src/native/java_lang_thread.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp
 
 CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp > CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.i
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp > CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.i
 
 CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp -o CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.s
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp -o CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.s
 
 CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: CMakeFiles/jvm.dir/flags.make
 CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../src/native/nativeinterface.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o"
+	/usr/local/bin/g++-8  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp
 
 CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp > CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.i
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp > CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.i
 
 CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp -o CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.s
+	/usr/local/bin/g++-8 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp -o CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.s
 
 # Object files for target jvm
 jvm_OBJECTS = \
-"CMakeFiles/jvm.dir/src/main.cpp.o" \
-"CMakeFiles/jvm.dir/src/thread.cpp.o" \
-"CMakeFiles/jvm.dir/src/classloader.cpp.o" \
-"CMakeFiles/jvm.dir/src/classviewer.cpp.o" \
-"CMakeFiles/jvm.dir/src/utils.cpp.o" \
-"CMakeFiles/jvm.dir/src/methodarea.cpp.o" \
-"CMakeFiles/jvm.dir/src/heap.cpp.o" \
-"CMakeFiles/jvm.dir/src/vmstack.cpp.o" \
-"CMakeFiles/jvm.dir/src/frame.cpp.o" \
-"CMakeFiles/jvm.dir/src/executionengine.cpp.o" \
-"CMakeFiles/jvm.dir/src/stringobject.cpp.o" \
 "CMakeFiles/jvm.dir/src/arrayobject.cpp.o" \
 "CMakeFiles/jvm.dir/src/classinstance.cpp.o" \
+"CMakeFiles/jvm.dir/src/classloader.cpp.o" \
 "CMakeFiles/jvm.dir/src/classruntime.cpp.o" \
+"CMakeFiles/jvm.dir/src/classviewer.cpp.o" \
+"CMakeFiles/jvm.dir/src/executionengine.cpp.o" \
+"CMakeFiles/jvm.dir/src/frame.cpp.o" \
+"CMakeFiles/jvm.dir/src/heap.cpp.o" \
+"CMakeFiles/jvm.dir/src/main.cpp.o" \
+"CMakeFiles/jvm.dir/src/methodarea.cpp.o" \
+"CMakeFiles/jvm.dir/src/stringobject.cpp.o" \
+"CMakeFiles/jvm.dir/src/thread.cpp.o" \
+"CMakeFiles/jvm.dir/src/utils.cpp.o" \
+"CMakeFiles/jvm.dir/src/vmstack.cpp.o" \
+"CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o" \
 "CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o" \
 "CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o"
 
 # External object files for target jvm
 jvm_EXTERNAL_OBJECTS =
 
-jvm: CMakeFiles/jvm.dir/src/main.cpp.o
-jvm: CMakeFiles/jvm.dir/src/thread.cpp.o
-jvm: CMakeFiles/jvm.dir/src/classloader.cpp.o
-jvm: CMakeFiles/jvm.dir/src/classviewer.cpp.o
-jvm: CMakeFiles/jvm.dir/src/utils.cpp.o
-jvm: CMakeFiles/jvm.dir/src/methodarea.cpp.o
-jvm: CMakeFiles/jvm.dir/src/heap.cpp.o
-jvm: CMakeFiles/jvm.dir/src/vmstack.cpp.o
-jvm: CMakeFiles/jvm.dir/src/frame.cpp.o
-jvm: CMakeFiles/jvm.dir/src/executionengine.cpp.o
-jvm: CMakeFiles/jvm.dir/src/stringobject.cpp.o
 jvm: CMakeFiles/jvm.dir/src/arrayobject.cpp.o
 jvm: CMakeFiles/jvm.dir/src/classinstance.cpp.o
+jvm: CMakeFiles/jvm.dir/src/classloader.cpp.o
 jvm: CMakeFiles/jvm.dir/src/classruntime.cpp.o
+jvm: CMakeFiles/jvm.dir/src/classviewer.cpp.o
+jvm: CMakeFiles/jvm.dir/src/executionengine.cpp.o
+jvm: CMakeFiles/jvm.dir/src/frame.cpp.o
+jvm: CMakeFiles/jvm.dir/src/heap.cpp.o
+jvm: CMakeFiles/jvm.dir/src/main.cpp.o
+jvm: CMakeFiles/jvm.dir/src/methodarea.cpp.o
+jvm: CMakeFiles/jvm.dir/src/stringobject.cpp.o
+jvm: CMakeFiles/jvm.dir/src/thread.cpp.o
+jvm: CMakeFiles/jvm.dir/src/utils.cpp.o
+jvm: CMakeFiles/jvm.dir/src/vmstack.cpp.o
+jvm: CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o
 jvm: CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o
 jvm: CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o
 jvm: CMakeFiles/jvm.dir/build.make
 jvm: CMakeFiles/jvm.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable jvm"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable jvm"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/jvm.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -91,3 +91,5 @@ xcuserdata
 *.moved-aside
 *.xcuserstate
 
+build/CMakeFiles/*
+build/CMakeFiles

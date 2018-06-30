@@ -1,0 +1,87 @@
+[
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/arrayobject.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/arrayobject.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/arrayobject.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/classinstance.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classinstance.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/classinstance.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/classloader.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classloader.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/classloader.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/classruntime.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classruntime.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/classruntime.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/classviewer.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/classviewer.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/classviewer.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/executionengine.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/executionengine.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/executionengine.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/frame.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/frame.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/frame.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/heap.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/heap.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/heap.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/main.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/main.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/main.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/methodarea.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/methodarea.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/methodarea.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/stringobject.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/stringobject.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/stringobject.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/thread.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/thread.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/thread.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/utils.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/utils.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/utils.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/vmstack.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/vmstack.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/vmstack.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_object.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_object.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/native/java_lang_thread.cpp"
+},
+{
+  "directory": "/Users/jingruili/IdeaProjects/jvm-1/build",
+  "command": "/usr/local/bin/g++-8   -I/Users/jingruili/IdeaProjects/jvm-1/src -I/Users/jingruili/IdeaProjects/jvm-1/include -I/Users/jingruili/IdeaProjects/jvm-1/include/native  -g   -std=c++14 -o CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o -c /Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp",
+  "file": "/Users/jingruili/IdeaProjects/jvm-1/src/native/nativeinterface.cpp"
+}
+]

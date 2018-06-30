@@ -11,11 +11,14 @@ CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/classinstance.h
 CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/classloader.h
 CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/classruntime.h
 CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/classviewer.h
+CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/frame.h
 CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/heap.h
 CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/methodarea.h
 CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/object.h
 CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/stringobject.h
+CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/thread.h
 CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/tipos.h
+CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../include/vmstack.h
 CMakeFiles/jvm.dir/src/classinstance.cpp.o: ../src/classinstance.cpp
 
 CMakeFiles/jvm.dir/src/classloader.cpp.o: ../include/classloader.h
@@ -23,11 +26,16 @@ CMakeFiles/jvm.dir/src/classloader.cpp.o: ../include/tipos.h
 CMakeFiles/jvm.dir/src/classloader.cpp.o: ../include/utils.h
 CMakeFiles/jvm.dir/src/classloader.cpp.o: ../src/classloader.cpp
 
+CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../include/classinstance.h
 CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../include/classloader.h
 CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../include/classruntime.h
 CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../include/classviewer.h
+CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../include/frame.h
 CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../include/methodarea.h
+CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../include/object.h
+CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../include/thread.h
 CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../include/tipos.h
+CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../include/vmstack.h
 CMakeFiles/jvm.dir/src/classruntime.cpp.o: ../src/classruntime.cpp
 
 CMakeFiles/jvm.dir/src/classviewer.cpp.o: ../include/classviewer.h
@@ -42,6 +50,7 @@ CMakeFiles/jvm.dir/src/executionengine.cpp.o: ../include/classruntime.h
 CMakeFiles/jvm.dir/src/executionengine.cpp.o: ../include/classviewer.h
 CMakeFiles/jvm.dir/src/executionengine.cpp.o: ../include/executionengine.h
 CMakeFiles/jvm.dir/src/executionengine.cpp.o: ../include/frame.h
+CMakeFiles/jvm.dir/src/executionengine.cpp.o: ../include/heap.h
 CMakeFiles/jvm.dir/src/executionengine.cpp.o: ../include/methodarea.h
 CMakeFiles/jvm.dir/src/executionengine.cpp.o: ../include/object.h
 CMakeFiles/jvm.dir/src/executionengine.cpp.o: ../include/stringobject.h
@@ -58,7 +67,6 @@ CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/frame.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/methodarea.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/native/nativeinterface.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/object.h
-CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/thread.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/tipos.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/utils.h
 CMakeFiles/jvm.dir/src/frame.cpp.o: ../include/vmstack.h
@@ -95,9 +103,24 @@ CMakeFiles/jvm.dir/src/methodarea.cpp.o: ../include/tipos.h
 CMakeFiles/jvm.dir/src/methodarea.cpp.o: ../include/vmstack.h
 CMakeFiles/jvm.dir/src/methodarea.cpp.o: ../src/methodarea.cpp
 
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../include/classinstance.h
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../include/classloader.h
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../include/classruntime.h
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../include/frame.h
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../include/methodarea.h
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../include/native/java_lang_object.h
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../include/native/nativeinterface.h
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../include/object.h
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../include/thread.h
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../include/tipos.h
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../include/vmstack.h
+CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o: ../src/native/java_lang_object.cpp
+
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/arrayobject.h
 CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/classinstance.h
 CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/classloader.h
 CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/classruntime.h
+CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/executionengine.h
 CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/frame.h
 CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/methodarea.h
 CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/native/java_lang_thread.h
@@ -109,8 +132,7 @@ CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../include/vmstack.h
 CMakeFiles/jvm.dir/src/native/java_lang_thread.cpp.o: ../src/native/java_lang_thread.cpp
 
 CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/classinstance.h
-CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/classloader.h
-CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/classruntime.h
+CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/native/java_lang_object.h
 CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/native/java_lang_thread.h
 CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/native/nativeinterface.h
 CMakeFiles/jvm.dir/src/native/nativeinterface.cpp.o: ../include/object.h
