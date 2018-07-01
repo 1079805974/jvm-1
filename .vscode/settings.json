@@ -35,5 +35,6 @@
         "unordered_map": "cpp",
         "__locale": "cpp",
         "array": "cpp"
-    }
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }

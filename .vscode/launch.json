@@ -8,16 +8,18 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/jvm",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "windows": {
+                "program": "${workspaceFolder}/cygwin/jvm",
                 "MIMode": "gdb",
                 "miDebuggerPath": "C:/cygwin64/bin/gdb.exe",
-                
+                // "sourceFileMap": {
+                //     "/cygdrive/c/C++Projects/jvm-1/src": "/cygdrive/c/C++Projects/jvm-1/src"
+                // }
             },
             "linux": {
                 "MIMode": "gdb",
@@ -25,6 +27,7 @@
             },
             "osx": {
                 "MIMode": "lldb",
+                "program": "${workspaceFolder}/cygwin/jvm",
             },
             "setupCommands": [
                 {
