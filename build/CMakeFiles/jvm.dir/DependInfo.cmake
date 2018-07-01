@@ -22,7 +22,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/jingruili/IdeaProjects/jvm-1/src/utils.cpp" "/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/jvm.dir/src/utils.cpp.o"
   "/Users/jingruili/IdeaProjects/jvm-1/src/vmstack.cpp" "/Users/jingruili/IdeaProjects/jvm-1/build/CMakeFiles/jvm.dir/src/vmstack.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_CXX_COMPILER_ID "Clang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
