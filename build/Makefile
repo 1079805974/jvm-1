@@ -393,6 +393,33 @@ src/methodarea.cpp.s:
 	$(MAKE) -f CMakeFiles/jvm.dir/build.make CMakeFiles/jvm.dir/src/methodarea.cpp.s
 .PHONY : src/methodarea.cpp.s
 
+src/native/java_lang_object.o: src/native/java_lang_object.cpp.o
+
+.PHONY : src/native/java_lang_object.o
+
+# target to build an object file
+src/native/java_lang_object.cpp.o:
+	$(MAKE) -f CMakeFiles/jvm.dir/build.make CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.o
+.PHONY : src/native/java_lang_object.cpp.o
+
+src/native/java_lang_object.i: src/native/java_lang_object.cpp.i
+
+.PHONY : src/native/java_lang_object.i
+
+# target to preprocess a source file
+src/native/java_lang_object.cpp.i:
+	$(MAKE) -f CMakeFiles/jvm.dir/build.make CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.i
+.PHONY : src/native/java_lang_object.cpp.i
+
+src/native/java_lang_object.s: src/native/java_lang_object.cpp.s
+
+.PHONY : src/native/java_lang_object.s
+
+# target to generate assembly for a file
+src/native/java_lang_object.cpp.s:
+	$(MAKE) -f CMakeFiles/jvm.dir/build.make CMakeFiles/jvm.dir/src/native/java_lang_object.cpp.s
+.PHONY : src/native/java_lang_object.cpp.s
+
 src/native/java_lang_thread.o: src/native/java_lang_thread.cpp.o
 
 .PHONY : src/native/java_lang_thread.o
@@ -594,6 +621,9 @@ help:
 	@echo "... src/methodarea.o"
 	@echo "... src/methodarea.i"
 	@echo "... src/methodarea.s"
+	@echo "... src/native/java_lang_object.o"
+	@echo "... src/native/java_lang_object.i"
+	@echo "... src/native/java_lang_object.s"
 	@echo "... src/native/java_lang_thread.o"
 	@echo "... src/native/java_lang_thread.i"
 	@echo "... src/native/java_lang_thread.s"
