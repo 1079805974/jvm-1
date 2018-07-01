@@ -72,7 +72,7 @@ void ExecutionEngine::run(){
             Frame *topFrame = thread->getTopFrame();
             u1 *code = topFrame->getCode(topFrame->pc);
 #ifdef DEBUG
-			cout << "线程:" << thread->pid << " 执行" << instructions[code[0]] << endl;
+			cout << "thread:" << thread->pid << " exec " << instructions[code[0]] << endl;
 #endif // DEBUG
 
 			(*this.*_instructionFunctions[code[0]])();

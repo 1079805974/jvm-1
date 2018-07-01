@@ -27,7 +27,7 @@ static map<string, void*> methods = {
 
 
 void JVM_StartThread(ClassInstance *threadInstance) {
-	Thread* thread = new Thread(2);
+	Thread* thread = new Thread();
 	vector<Value> args;
 	Value obj;
 	ClassRuntime *runtime = threadInstance->getClassRuntime();

@@ -4,9 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "echo",
+            "label": "build2",
             "type": "shell",
-            "command": "g++"
+            "command": "cmake .. && make"
         }
     ]
 }

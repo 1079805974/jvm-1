@@ -6,6 +6,8 @@ add_definitions(-std=c++14)
 
 add_definitions(-D cerr=cout)
 
+add_definitions(-D DEBUG=1)
+
 project (jvm)
 
 AUX_SOURCE_DIRECTORY(src DIR_SRCS)

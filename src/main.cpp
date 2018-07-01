@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
 	const char *file_className = argv[1];
 	const char *file_output = (argc < 3) ? NULL : argv[2];
 
-	file_className = "SyncTest5";
+	file_className = "MutiThread";
     // Carregamento da classe de entrada.
     MethodArea &methodArea = MethodArea::getInstance();
 	methodArea.loadClassNamed("java/lang/Object");
