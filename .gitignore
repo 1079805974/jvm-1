@@ -90,4 +90,4 @@ xcuserdata
 *.xccheckout
 *.moved-aside
 *.xcuserstate
-
+build/*
