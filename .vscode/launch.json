@@ -24,7 +24,7 @@
             },
             "osx": {
                 "MIMode": "lldb",
-                "program": "${workspaceFolder}/cygwin/jvm",
+                "program": "${workspaceFolder}/build/jvm",
             },
             "setupCommands": [
                 {
