@@ -17,9 +17,6 @@
                 "program": "${workspaceFolder}/cygwin/jvm",
                 "MIMode": "gdb",
                 "miDebuggerPath": "C:/cygwin64/bin/gdb.exe",
-                // "sourceFileMap": {
-                //     "/cygdrive/c/C++Projects/jvm-1/src": "/cygdrive/c/C++Projects/jvm-1/src"
-                // }
             },
             "linux": {
                 "MIMode": "gdb",
