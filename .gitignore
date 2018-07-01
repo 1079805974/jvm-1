@@ -90,5 +90,7 @@ xcuserdata
 *.xccheckout
 *.moved-aside
 *.xcuserstate
+build
+cygwin
 build/*
 cygwin/*
