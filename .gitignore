@@ -91,3 +91,4 @@ xcuserdata
 *.moved-aside
 *.xcuserstate
 build/*
+cygwin/*
