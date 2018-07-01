@@ -1,0 +1,3 @@
+/cygdrive/c/C++Projects/jvm-1/cygwin/CMakeFiles/edit_cache.dir
+/cygdrive/c/C++Projects/jvm-1/cygwin/CMakeFiles/jvm.dir
+/cygdrive/c/C++Projects/jvm-1/cygwin/CMakeFiles/rebuild_cache.dir
